@@ -1,10 +1,10 @@
-import {Button} from "react-bootstrap";
-import {BUILDING_STATUS_IN_CREATED, OWNER_NEW_BUILDING_ORDER_ROUTE} from "../../constants";
+import {BUILDER_TAKE_ORDER_ROUTE, BUILDING_STATUS_IN_CREATED, OWNER_NEW_BUILDING_ORDER_ROUTE} from "../../constants";
 import BootstrapTable from "react-bootstrap-table-next";
 import React from "react";
 import {useHistory} from "react-router-dom";
+import {Button} from "react-bootstrap";
 
-export const Building = () => {
+export const Orders = () => {
     const history = useHistory();
 
     const columns = [{
@@ -29,8 +29,8 @@ export const Building = () => {
         <div>
             <div className="d-grid gap-2">
                 <Button variant="primary" size="lg" onClick={() => {
-                    history.push(OWNER_NEW_BUILDING_ORDER_ROUTE)
-                }}>Добавить заказ на строительство</Button>
+                    history.push(BUILDER_TAKE_ORDER_ROUTE)
+                }}>Рассмотреть заказ</Button>
             </div>
             <BootstrapTable keyField='id' data={products} columns={columns}/>
         </div>

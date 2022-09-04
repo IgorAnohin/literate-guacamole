@@ -1,11 +1,12 @@
 import {Route, Switch} from "react-router-dom";
 import {
     HOME_ROUTE,
-    BUILDER_BUILDING_ROUTE, BUILDER_NEW_BUILDING_ROUTE, BUILDER_TOOL_ORDER_ROUTE
+    BUILDER_BUILDING_ROUTE, BUILDER_NEW_BUILDING_ROUTE, BUILDER_TAKE_ORDER_ROUTE
 } from "../../constants";
 import React from "react";
 import {Nav, Navbar} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
+import {Orders} from "./orders";
 
 
 const BuilderHeader = () => {
@@ -48,11 +49,11 @@ export const Builder = () => {
                 <Route path={BUILDER_BUILDING_ROUTE}>
                     LOL2
                 </Route>
-                <Route path={BUILDER_TOOL_ORDER_ROUTE}>
+                <Route path={BUILDER_TAKE_ORDER_ROUTE}>
                     LOL3
                 </Route>
                 <Route path={HOME_ROUTE}>
-                    LOL4
+                    <Orders/>
                 </Route>
             </Switch>
         </div>

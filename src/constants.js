@@ -47,4 +47,4 @@ export const OWNER_RESOURCES_ROUTE = RESOURCES_ROUTE;
 // Builder routes
 export const BUILDER_BUILDING_ROUTE = `${HOME_ROUTE}/buildings`;
 export const BUILDER_NEW_BUILDING_ROUTE = `${BUILDER_BUILDING_ROUTE}/new`;
-export const BUILDER_TOOL_ORDER_ROUTE = `${HOME_ROUTE}/order`;
+export const BUILDER_TAKE_ORDER_ROUTE = `${HOME_ROUTE}/order`;
