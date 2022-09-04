@@ -1,3 +1,5 @@
+export const DEBUG = true;
+
 export const ADMIN_ROLE = "admin";
 export const OWNER_ROLE = "owner";
 export const BUILDER_ROLE = "builder";

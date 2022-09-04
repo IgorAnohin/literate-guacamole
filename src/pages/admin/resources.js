@@ -1,10 +1,10 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import BootstrapTable from "react-bootstrap-table-next";
-// import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit';
+import {getResources} from "../../services/resources";
 
+const {SearchBar} = Search;
 
-const { SearchBar } = Search;
 
 export const Resources = () => {
 
@@ -20,26 +20,27 @@ export const Resources = () => {
         text: 'Тип',
         sort: true,
     }];
-    const products = [
-        {id: 1, name: "Песок", amount: "12", type: "Ресурс"},
-        {id: 2, name: "Капитолий", amount: "11", type: "Здание"},
-        {id: 3, name: "Жмых", amount: "1", type: "Рекрутёр"},
-    ];
+
+    const [resources, setResources] = useState([])
+
+    useEffect(() => {
+        getResources().then((newResources) => setResources(newResources))
+    }, [])
 
     return <ToolkitProvider
         keyField="id"
-        data={ products }
-        columns={ columns }
+        data={resources}
+        columns={columns}
         search
     >
         {
             props => (
                 <div>
                     <h3>Поиск по ресурсам:</h3>
-                    <SearchBar { ...props.searchProps } srText=""/>
-                    <hr />
+                    <SearchBar {...props.searchProps} srText=""/>
+                    <hr/>
                     <BootstrapTable
-                        { ...props.baseProps }
+                        {...props.baseProps}
                     />
                 </div>
             )

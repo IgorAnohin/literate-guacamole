@@ -4,7 +4,9 @@ import {ADMIN_ROLE, NEW_USER_ROUTE, ROLES, roleToReadable} from "../../constants
 import cellEditFactory, {Type} from "react-bootstrap-table2-editor";
 import {Button} from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {getResources} from "../../services/resources";
+import {getUsers, updateUser} from "../../services/users";
 
 function deleteUserFormatter(cell, row, rowIndex, formatExtraData) {
     return (
@@ -25,11 +27,6 @@ export const AdminUsers = () => {
     const history = useHistory();
 
     const roleOptions = ROLES.map((role) => {
-        const data = {
-            value: role,
-            label: roleToReadable[role],
-        };
-        console.log(data, roleToReadable);
         return {
             value: role,
             label: roleToReadable[role],
@@ -52,6 +49,9 @@ export const AdminUsers = () => {
         },
         validator: (newValue, row, column) => {
             console.log("New value");
+
+            updateUser().then(r => {})
+
             return true;
         },
     }, {
@@ -59,10 +59,17 @@ export const AdminUsers = () => {
         text: "Удалить пользователя",
         sort: false,
         formatter: deleteUserFormatter,
-        attrs: {width: 50, class: "EditRow"},
+        attrs: {width: 50},
         editable: false,
     },];
-    const products = [{id: "123", "email": "123", role: ADMIN_ROLE}];
+
+
+    const [users, setUsers] = useState([])
+
+    useEffect(() => {
+        getUsers().then((newUsers) => setUsers(newUsers))
+    }, [])
+
 
     return (
         <div>
@@ -71,7 +78,7 @@ export const AdminUsers = () => {
                     history.push(NEW_USER_ROUTE)
                 }}>Добавить нового пользователя</Button>
             </div>
-            <BootstrapTable keyField='id' data={products} columns={columns}
+            <BootstrapTable keyField='id' data={users} columns={columns}
                             cellEdit={cellEditFactory({
                                 mode: 'click', blurToSave: true
                             })}/>

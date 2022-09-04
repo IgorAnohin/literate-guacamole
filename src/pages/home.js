@@ -14,9 +14,9 @@ import {Builder} from "./builder/main";
 
 export const Home = () => {
     // const role = getRole();
-    // const role = ADMIN_ROLE;
+    const role = ADMIN_ROLE;
     // const role = OWNER_ROLE;
-    const role = BUILDER_ROLE;
+    // const role = BUILDER_ROLE;
 
     switch (role) {
         case ADMIN_ROLE:

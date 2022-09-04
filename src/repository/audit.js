@@ -1,3 +1,3 @@
-export const createAudit = async (startDate, endDate, resourceTypes, token) => {
+export const createAuditRequest = async (startDate, endDate, resourceTypes, token) => {
 
 }

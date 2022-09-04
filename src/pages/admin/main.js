@@ -8,6 +8,7 @@ import {AdminUsers} from "./users";
 import {NewUser} from "./new_user";
 import {Audit} from "./audit";
 import {Resources} from "./resources";
+import {logout} from "../../services/auth";
 
 
 const AdminHeader = () => {
@@ -31,7 +32,7 @@ const AdminHeader = () => {
                 </Nav>
                 <Nav>
                     <Nav.Link onClick={() => {
-                        console.log("HERE")
+                        logout().then()
                     }}>Выйти</Nav.Link>
                 </Nav>
 

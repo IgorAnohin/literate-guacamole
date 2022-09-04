@@ -1,6 +1,7 @@
-import {LOGIN_URL} from './api_paths';
+import {LOGIN_URL, LOGOUT_URL} from './api_paths';
 
-export const loginUser = async (name, password) => {
+
+export const loginRequest = async (name, password) => {
     try {
         const response = await fetch(LOGIN_URL, {
             method: 'POST',
@@ -16,5 +17,21 @@ export const loginUser = async (name, password) => {
     } catch (err) {
         console.log(err);
         return null;
+    }
+};
+
+
+export const logoutRequest = async (token) => {
+    try {
+        await fetch(LOGOUT_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+        return true;
+    } catch (err) {
+        console.log(err);
+        return false;
     }
 };

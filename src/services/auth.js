@@ -1,10 +1,17 @@
-import { loginUser } from '../repository/auth';
+import {loginRequest, logoutRequest} from '../repository/auth';
+import {ADMIN_ROLE, DEBUG} from "../constants";
 
 
 export const login = async (email, password, navigate) => {
-    // const userToken = await loginUser(email, password);
-    const userToken = "123";
-    const userRole = "admin";
+    let userData;
+    if (DEBUG) {
+        userData = {token: "123", role: ADMIN_ROLE}
+    } else {
+        userData = await loginRequest(email, password);
+    }
+
+    const userToken = userData.token;
+    const userRole = userData.role;
 
     if (userToken == null) {
         console.log("error");
@@ -19,26 +26,13 @@ export const login = async (email, password, navigate) => {
     return userToken;
 }
 
+export const logout = async () => {
+    const userToken = getToken();
+    const success = await logoutRequest(userToken);
+    if (success) {
+        sessionStorage.removeItem('token');
+    }
+}
+
 export const getToken = () => sessionStorage.getItem('token');
 export const getRole = () => sessionStorage.getItem('role');
-
-
-// export const userToken = () => {
-//     const getToken = () => {
-//         const tokenString = sessionStorage.getItem('token');
-//         const userToken = JSON.parse(tokenString);
-//         return userToken?.token
-//     };
-//
-//     const [token, setToken] = useState(getToken());
-//
-//     const saveToken = userToken => {
-//         sessionStorage.setItem('token', JSON.stringify(userToken));
-//         setToken(userToken.token);
-//     };
-//
-//     return {
-//         setToken: saveToken,
-//         token
-//     }
-// }

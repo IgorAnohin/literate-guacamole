@@ -1,18 +1,19 @@
-export const getRole = async (token) => {
+export const getRoleRequest = async (token) => {
 
 }
 
-export const getUsers = async (token) => {
+export const getUsersRequest = async (token) => {
 
 }
 
-export const registerUser = async (email, password, role, token) => {
+export const createUserRequest = async (email, password, role, token) => {
+    // returns new user ID
 }
 
-export const deleteUser = async (userId, token) => {
+export const deleteUserRequest = async (userId, token) => {
 
 }
 
-export const updateUser = async (updatedFieldName, updatedFieldValue, token) => {
+export const updateUserRequest = async (userId, updatedFieldName, newValue, token) => {
 }
 

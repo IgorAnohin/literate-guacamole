@@ -1,17 +1,15 @@
 import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
-import {createUser} from "../../services/users";
 import {Button, Card, Col, Container, Form, Image, Row} from "react-bootstrap";
-import {ROLES, roleToReadable} from "../../constants";
 import {BookHalf, Building, PersonBadge, SdCardFill} from 'react-bootstrap-icons';
+import {createAudit} from "../../services/audit";
 
-const Resource = ({name, icon}) => {
+const Resource = ({id, name, icon}) => {
     return (
         <div className="border" style={{padding: 10}}>
             <Row>
                 <Col md="auto">
                     {icon}
-                    {/*<Image height="24px" width="24px" src="../Vector.png"/>*/}
                 </Col>
                 <Col>
                     <div>
@@ -21,7 +19,7 @@ const Resource = ({name, icon}) => {
                 <Col lg="1" style={{paddingLeft: 80}}>
                     <Form.Check style={{width: 0, margin: 0, paddingRight: 0, paddingLeft: 0}}
                                 type="switch"
-                                id="disabled-custom-switch"
+                                id={id}
                     />
                 </Col>
             </Row>
@@ -41,10 +39,11 @@ export const Audit = () => {
 
         const form = event.currentTarget;
         event.preventDefault();
+
         if (form.checkValidity() === false) {
             event.stopPropagation();
         } else {
-            createUser(form.user_email.value, form.user_password.value, form.user_role.value, history).then((userToken) => {
+            createAudit(form.audit_start.value, form.audit_end.value, form.user_role.value, history).then((userToken) => {
                 if (userToken == null) {
                     // ToDo: show toast with an error
                 }
@@ -52,10 +51,7 @@ export const Audit = () => {
         }
 
         setValidated(true);
-
     };
-
-    const [isSelectValid, validateSelect] = useState(false);
 
     return (
         <Container>
@@ -93,18 +89,18 @@ export const Audit = () => {
                     </div>
                     <Row>
                         <Col>
-                            <Resource name="Ресурсы" icon={<SdCardFill/>}/>
+                            <Resource id="resources" name="Ресурсы" icon={<SdCardFill/>}/>
                         </Col>
                         <Col>
-                            <Resource name="Рекруты" icon={<PersonBadge/>}/>
+                            <Resource id="recruts" name="Рекруты" icon={<PersonBadge/>}/>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                            <Resource name="Заклинания" icon={<BookHalf/>}/>
+                            <Resource id="spells" name="Заклинания" icon={<BookHalf/>}/>
                         </Col>
                         <Col>
-                            <Resource name="Здания" icon={<Building/>}/>
+                            <Resource id="buildings" name="Здания" icon={<Building/>}/>
                         </Col>
                     </Row>
                 </Form.Group>

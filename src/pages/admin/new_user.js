@@ -18,9 +18,6 @@ export const NewUser = () => {
             event.stopPropagation();
         } else {
             createUser(form.user_email.value, form.user_password.value, form.user_role.value, history).then((userToken) => {
-                if (userToken == null) {
-                    // ToDo: show toast with an error
-                }
             });
         }
 
