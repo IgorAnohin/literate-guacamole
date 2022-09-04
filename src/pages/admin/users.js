@@ -6,7 +6,7 @@ import {Button} from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 import React from "react";
 
-function rankFormatter(cell, row, rowIndex, formatExtraData) {
+function deleteUserFormatter(cell, row, rowIndex, formatExtraData) {
     return (
         < div
             style={{
@@ -58,7 +58,7 @@ export const AdminUsers = () => {
         dataField: "edit",
         text: "Удалить пользователя",
         sort: false,
-        formatter: rankFormatter,
+        formatter: deleteUserFormatter,
         attrs: {width: 50, class: "EditRow"},
         editable: false,
     },];
