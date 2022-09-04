@@ -1,16 +1,18 @@
-import {Route, Switch, useRouteMatch} from "react-router-dom";
-import {HOME_ROUTE, AUDIT_ROUTE, NEW_USER_ROUTE, RESOURCES_ROUTE, USERS_ROUTE} from "../../constants";
+import {Route, Switch} from "react-router-dom";
+import {
+    HOME_ROUTE,
+    OWNER_RESOURCES_ROUTE, OWNER_RECRUITMENT_ROUTE, OWNER_BUILDING_ROUTE, OWNER_NEW_BUILDING_ORDER_ROUTE
+} from "../../constants";
 import React from "react";
 import {Nav, Navbar} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
-import {AdminHome} from "./home";
-import {AdminUsers} from "./users";
-import {NewUser} from "./new_user";
-import {Audit} from "./audit";
-import {Resources} from "./resources";
+import {OwnerHome} from "./home";
+import {Resources} from "../admin/resources";
+import {Building} from "./building";
+import {NewBuildingOrder} from "./new_building_order";
 
 
-const AdminHeader = () => {
+const OwnerHeader = () => {
     return (
         <Navbar bg="light" expand="lg">
             <LinkContainer to="/">
@@ -19,13 +21,13 @@ const AdminHeader = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
-                    <LinkContainer to={USERS_ROUTE}>
-                        <Nav.Link>Пользователи</Nav.Link>
+                    <LinkContainer to={OWNER_BUILDING_ROUTE}>
+                        <Nav.Link>Строительство</Nav.Link>
                     </LinkContainer>
-                    <LinkContainer to={AUDIT_ROUTE}>
-                        <Nav.Link>Сбор аудитных данных</Nav.Link>
+                    <LinkContainer to={OWNER_RECRUITMENT_ROUTE}>
+                        <Nav.Link>Рекруты</Nav.Link>
                     </LinkContainer>
-                    <LinkContainer to={RESOURCES_ROUTE}>
+                    <LinkContainer to={OWNER_RESOURCES_ROUTE}>
                         <Nav.Link>Активы замка</Nav.Link>
                     </LinkContainer>
                 </Nav>
@@ -41,28 +43,26 @@ const AdminHeader = () => {
 }
 
 
-
-
-export const Admin = () => {
+export const Owner = () => {
     return (
         <div>
-            <AdminHeader/>
+            <OwnerHeader/>
 
             <Switch>
-                <Route path={NEW_USER_ROUTE}>
-                    <NewUser/>
+                <Route path={OWNER_NEW_BUILDING_ORDER_ROUTE}>
+                    <NewBuildingOrder/>
                 </Route>
-                <Route path={USERS_ROUTE}>
-                    <AdminUsers/>
+                <Route path={OWNER_BUILDING_ROUTE}>
+                    <Building/>
                 </Route>
-                <Route path={AUDIT_ROUTE}>
-                    <Audit/>
+                <Route path={OWNER_RECRUITMENT_ROUTE}>
+                    LOL
                 </Route>
-                <Route path={RESOURCES_ROUTE}>
+                <Route path={OWNER_RESOURCES_ROUTE}>
                     <Resources/>
                 </Route>
                 <Route path={HOME_ROUTE}>
-                    <AdminHome/>
+                    <OwnerHome/>
                 </Route>
             </Switch>
         </div>
