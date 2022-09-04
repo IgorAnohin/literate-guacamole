@@ -6,6 +6,8 @@ import {LinkContainer} from "react-router-bootstrap";
 import {AdminHome} from "./home";
 import {AdminUsers} from "./users";
 import {NewUser} from "./new_user";
+import {Audit} from "./audit";
+import {Resources} from "./resources";
 
 
 const AdminHeader = () => {
@@ -54,10 +56,10 @@ export const Admin = () => {
                     <AdminUsers/>
                 </Route>
                 <Route path={AUDIT_ROUTE}>
-                    <h3>AUDIT.</h3>
+                    <Audit/>
                 </Route>
                 <Route path={RESOURCES_ROUTE}>
-                    <h3>RESOURCES.</h3>
+                    <Resources/>
                 </Route>
                 <Route path={ADMIN_HOME_ROUTE}>
                     <AdminHome/>

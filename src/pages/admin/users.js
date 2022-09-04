@@ -35,7 +35,6 @@ export const AdminUsers = () => {
             label: roleToReadable[role],
         };
     });
-    console.log(roleOptions);
 
     const columns = [{
         dataField: 'id',
