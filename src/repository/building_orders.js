@@ -1,11 +1,11 @@
-export const getBuildingOrders = async (token) => {
+export const getBuildingOrdersRequest = async (token) => {
 
 }
 
-export const createBuildingOrder = async (toBeginningQueue, buildingId, comment, token) => {
+export const createBuildingOrderRequest = async (toBeginningQueue, buildingId, comment, token) => {
 
 }
 
-export const changeBuildingOrderState = async (newStatus, orderId, token) => {
+export const changeBuildingOrderStateRequest = async (newStatus, orderId, token) => {
 
 }

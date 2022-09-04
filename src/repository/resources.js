@@ -2,14 +2,14 @@ export const getResourcesRequest = async (token) => {
 
 }
 
-export const getBuildings = async (token) => {
+export const getBuildingsRequest = async (token) => {
 
 }
 
-export const getBuildingById = async (buildingId, token) => {
+export const getBuildingByIdRequest = async (buildingId, token) => {
 
 }
 
-export const createNewBuilding = async () => {
+export const createNewBuildingRequest = async () => {
 
 }

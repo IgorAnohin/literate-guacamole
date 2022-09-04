@@ -1,4 +1,4 @@
-import {getResourcesRequest} from "../repository/resources";
+import {getBuildingsRequest, getResourcesRequest} from "../repository/resources";
 import {getToken} from "./auth";
 import {DEBUG} from "../constants";
 
@@ -18,4 +18,20 @@ export const getResources = async () => {
     }
 
     return data.resources;
+}
+
+export const getBuildings = async () => {
+    let data;
+
+    if (DEBUG) {
+        data = [
+            {id: 2, name: "Капитолий", type: "Здание"},
+            {id: 4, name: "Замок", type: "Здание"},
+            {id: 6, name: "Стены", type: "Здание"},
+        ];
+    } else {
+        data = await getBuildingsRequest(getToken());
+    }
+
+    return data
 }

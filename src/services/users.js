@@ -1,6 +1,14 @@
-import {ADMIN_ROLE, DEBUG} from "../constants";
-import {createUserRequest, getUsersRequest, updateUserRequest} from "../repository/user";
+import {ADMIN_ROLE, BUILDER_ROLE, DEBUG, OWNER_ROLE} from "../constants";
+import {createUserRequest, getRoleRequest, getUsersRequest, updateUserRequest} from "../repository/user";
 import {getToken} from "./auth";
+
+export const getUserRole = async () => {
+    if (DEBUG) {
+        return OWNER_ROLE;
+    } else {
+        return await getRoleRequest(getToken());
+    }
+}
 
 export const getUsers = async () => {
     let data;
@@ -8,8 +16,8 @@ export const getUsers = async () => {
         data = {
             users: [
                 {id: 1, "email": "1", role: ADMIN_ROLE},
-                {id: 2, "email": "12", role: ADMIN_ROLE},
-                {id: 3, "email": "123", role: ADMIN_ROLE},
+                {id: 2, "email": "12", role: BUILDER_ROLE},
+                {id: 3, "email": "123", role: OWNER_ROLE},
                 {id: 4, "email": "2", role: ADMIN_ROLE},
             ]
         };

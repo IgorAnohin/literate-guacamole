@@ -35,4 +35,3 @@ export const logout = async () => {
 }
 
 export const getToken = () => sessionStorage.getItem('token');
-export const getRole = () => sessionStorage.getItem('role');

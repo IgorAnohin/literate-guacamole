@@ -4,21 +4,24 @@ import {
 } from "../constants";
 
 
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import {Admin} from "./admin/main";
 import {Owner} from "./owner/main";
 import {Builder} from "./builder/main";
+import {getUserRole} from "../services/users";
 
 
 export const Home = () => {
-    // const role = getRole();
-    const role = ADMIN_ROLE;
-    // const role = OWNER_ROLE;
-    // const role = BUILDER_ROLE;
+    const [userRole, setUserRole] = useState();
+    useEffect(() => {
+            getUserRole().then((role) => setUserRole(role))
+        },
+        []
+    )
 
-    switch (role) {
+    switch (userRole) {
         case ADMIN_ROLE:
             return <Admin/>;
         case OWNER_ROLE:
@@ -30,7 +33,7 @@ export const Home = () => {
         case WIZARD_ROLE:
             return <h2>:(</h2>;
         default:
-            return <h2>:(((((((</h2>;
+            return <h2></h2>;
     }
 }
 

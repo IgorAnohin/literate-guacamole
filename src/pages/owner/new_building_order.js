@@ -1,14 +1,23 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Button, Container, Form, InputGroup, Tabs} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
 import {createUser} from "../../services/users";
 import { ROLES, roleToReadable} from "../../constants";
 import {Tab} from "bootstrap";
+import {getBuildings} from "../../services/resources";
+import {createBuildingOrder} from "../../services/building_orders";
 
 export const NewBuildingOrder = () => {
 
     const [validated, setValidated] = useState(false);
     const history = useHistory();
+
+    const [buildings, setBuildings] = useState([]);
+
+    useEffect(() => {
+        getBuildings().then((newBuildings) => setBuildings(newBuildings));
+    }, [])
+
 
     const handleSubmit = (event) => {
 
@@ -17,7 +26,7 @@ export const NewBuildingOrder = () => {
         if (form.checkValidity() === false) {
             event.stopPropagation();
         } else {
-            createUser(form.user_email.value, form.user_password.value, form.user_role.value, history).then((userToken) => {
+            createBuildingOrder(form.building.value, form.building.value, form.building.value, history).then((userToken) => {
                 if (userToken == null) {
                     // ToDo: show toast with an error
                 }
@@ -45,13 +54,25 @@ export const NewBuildingOrder = () => {
 
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">
+                    {/*<Form.Group md="4" controlId="building">*/}
+                    {/*    <Form.Label>Строение</Form.Label>*/}
+                    {/*    <Form.Control*/}
+                    {/*        required*/}
+                    {/*    />*/}
+                    {/*    <Form.Control.Feedback type="invalid">*/}
+                    {/*        Пожалуйста, введите корректное название строения*/}
+                    {/*    </Form.Control.Feedback>*/}
+                    {/*</Form.Group>*/}
                     <Form.Group md="4" controlId="building">
-                        <Form.Label>Строение</Form.Label>
-                        <Form.Control
-                            required
-                        />
+                        <Form.Label>Здание</Form.Label>
+                        <Form.Select isValid={isSelectValid} onChange={(event) => {
+                            validateSelect(ROLES.includes(event.target.value));
+                        }} size="lg" aria-label="Default select example">
+                            {buildings.map((building) => <option value={building.id}>{building.name}</option>)}
+                        </Form.Select>
+
                         <Form.Control.Feedback type="invalid">
-                            Пожалуйста, введите корректное название строения
+                            Пожалуйста, Выберите роль
                         </Form.Control.Feedback>
                     </Form.Group>
                     <InputGroup>
