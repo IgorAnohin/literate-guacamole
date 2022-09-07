@@ -1,9 +1,40 @@
-export const getBuildingOrdersRequest = async (token) => {
+import {ASSETS, BUILD_ORDERS, BUILD_ORDERS_CREATE, LOGIN_URL} from "./api_paths";
+import axios from "axios";
 
+export const getBuildingOrdersRequest = async (token) => {
+    try {
+        const response = await axios.get(BUILD_ORDERS, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                }
+            },
+        )
+        return response.data;
+    } catch (err) {
+        console.log(err);
+        return null;
+    }
 }
 
 export const createBuildingOrderRequest = async (toBeginningQueue, buildingId, comment, token) => {
-
+    try {
+        const response = await axios.post(BUILD_ORDERS_CREATE, {
+                "assetDefId": buildingId,
+                "comment": comment,
+                "pushFront": toBeginningQueue,
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                }
+            },
+        )
+        return response.data;
+    } catch (err) {
+        console.log(err);
+        return [];
+    }
 }
 
 export const changeBuildingOrderStateRequest = async (newStatus, orderId, token) => {

@@ -15,7 +15,16 @@ import {getToken} from "./services/auth";
 
 export default class App extends React.Component {
     render() {
-        console.log("HERE");
+        // fetch("http://localhost:4242/api/asset-defs", {
+        //     method: 'GET',
+        //     headers: {
+        //         // 'Access-Control-Allow-Origin': BASE_URL,
+        //         // 'Access-Control-Allow-Credentials': 'true',
+        //
+        //         'Content-Type': 'application/json',
+        //         'Authorization': `Bearer `,
+        //     },
+        // }).then(res => {console.log(res)}).catch((err) => {console.log("Error" + err)});
 
         return (
             <Router>

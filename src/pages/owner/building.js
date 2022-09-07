@@ -12,7 +12,7 @@ export const Building = () => {
         dataField: 'name',
         text: 'Здание'
     }, {
-        dataField: 'place',
+        dataField: 'ordinal',
         text: 'Место в очереди строительство'
     }, {
         dataField: 'status',

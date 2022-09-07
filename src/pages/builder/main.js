@@ -7,6 +7,7 @@ import React from "react";
 import {Nav, Navbar} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
 import {Orders} from "./orders";
+import {TakeOrder} from "./take_order";
 
 
 const BuilderHeader = () => {
@@ -50,7 +51,7 @@ export const Builder = () => {
                     LOL2
                 </Route>
                 <Route path={BUILDER_TAKE_ORDER_ROUTE}>
-                    LOL3
+                    <TakeOrder/>
                 </Route>
                 <Route path={HOME_ROUTE}>
                     <Orders/>

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Button, Container, Form, InputGroup, Tabs} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
 import {createUser} from "../../services/users";
-import { ROLES, roleToReadable} from "../../constants";
+import {ROLES, roleToReadable} from "../../constants";
 import {Tab} from "bootstrap";
 import {getBuildings} from "../../services/resources";
 import {createBuildingOrder} from "../../services/building_orders";
@@ -19,6 +19,9 @@ export const NewBuildingOrder = () => {
     }, [])
 
 
+    let comment = "";
+    let toBeginningQueue = false;
+
     const handleSubmit = (event) => {
 
         const form = event.currentTarget;
@@ -26,10 +29,7 @@ export const NewBuildingOrder = () => {
         if (form.checkValidity() === false) {
             event.stopPropagation();
         } else {
-            createBuildingOrder(form.building.value, form.building.value, form.building.value, history).then((userToken) => {
-                if (userToken == null) {
-                    // ToDo: show toast with an error
-                }
+            createBuildingOrder(toBeginningQueue, form.buildingSelector.value, comment, history).then((userToken) => {
             });
         }
 
@@ -44,9 +44,11 @@ export const NewBuildingOrder = () => {
             <h1 className="header">Новый заказ на строительство</h1>
             <Tabs
                 defaultActiveKey="profile"
-                id="fill-tab-example"
                 className="mb-3"
                 fill
+                onSelect={e => {
+                    toBeginningQueue = e === "home";
+                }}
             >
                 <Tab eventKey="home" title="В начало очереди"/>
                 <Tab eventKey="profile" title="В конец очереди"/>
@@ -54,30 +56,25 @@ export const NewBuildingOrder = () => {
 
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">
-                    {/*<Form.Group md="4" controlId="building">*/}
-                    {/*    <Form.Label>Строение</Form.Label>*/}
-                    {/*    <Form.Control*/}
-                    {/*        required*/}
-                    {/*    />*/}
-                    {/*    <Form.Control.Feedback type="invalid">*/}
-                    {/*        Пожалуйста, введите корректное название строения*/}
-                    {/*    </Form.Control.Feedback>*/}
-                    {/*</Form.Group>*/}
-                    <Form.Group md="4" controlId="building">
+                    <Form.Group md="4" controlId="buildingSelector">
                         <Form.Label>Здание</Form.Label>
                         <Form.Select isValid={isSelectValid} onChange={(event) => {
                             validateSelect(ROLES.includes(event.target.value));
                         }} size="lg" aria-label="Default select example">
-                            {buildings.map((building) => <option value={building.id}>{building.name}</option>)}
+                            {
+                                buildings.map((building) => {
+                                    return (<option key={building.id} value={building.id}>{building.name}</option>);
+                                })
+                            }
                         </Form.Select>
 
                         <Form.Control.Feedback type="invalid">
                             Пожалуйста, Выберите роль
                         </Form.Control.Feedback>
                     </Form.Group>
-                    <InputGroup>
+                    <InputGroup controlId="commentSection">
                         <InputGroup.Text>Комментарий</InputGroup.Text>
-                        <Form.Control as="textarea" aria-label="Комментарий" />
+                        <Form.Control as="textarea" aria-label="Комментарий" onChange={e => comment = e.target.value}/>
                     </InputGroup>
                 </Form.Group>
 

@@ -18,10 +18,12 @@ export const roleToReadable = {
     [WIZARD_ROLE]: "Волшебник",
 }
 
-export const BUILDING_STATUS_IN_CREATED = "created";
-export const BUILDING_STATUS_IN_REJECTED = "rejected";
-export const BUILDING_STATUS_IN_PROGRESS = "in_progress";
-export const BUILDING_STATUS_IN_FINISHED = "finished";
+export const ASSET_BUILDING = "Здание";
+
+export const BUILDING_STATUS_IN_CREATED = "CREATED";
+export const BUILDING_STATUS_IN_REJECTED = "REJECTED";
+export const BUILDING_STATUS_IN_PROGRESS = "IN_PROGRESS";
+export const BUILDING_STATUS_IN_FINISHED = "FINISHED";
 
 export const buildingStatusToReadable = {
     [BUILDING_STATUS_IN_CREATED]: "Создан",
