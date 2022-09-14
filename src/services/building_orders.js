@@ -1,6 +1,7 @@
 import {BUILDING_STATUS_IN_CREATED, buildingStatusToReadable, DEBUG} from "../constants";
 import {createBuildingOrderRequest, getBuildingOrdersRequest} from "../repository/building_orders";
 import {getToken} from "./auth";
+import {getBuildingByIdRequest} from "../repository/resources";
 
 export const getBuildingOrders = async () => {
     if (!DEBUG) {
@@ -20,7 +21,6 @@ export const getBuildingOrders = async () => {
 
         return data
     }
-
 }
 
 export const createBuildingOrder = async (toBeginningQueue, buildingId, comment, historyRouter) => {
@@ -33,6 +33,21 @@ export const createBuildingOrder = async (toBeginningQueue, buildingId, comment,
 
 }
 
-export const getClosestBuildingOrder = async () => {
+export const getBuildingOrderById = async (orderId) => {
+    const orders = await getBuildingOrders();
 
+
+    let order = null;
+    for (let i = 0; i < orders.length; i++) {
+        console.log(orders[i].id, orderId, orders[i].id === orderId);
+        if (orders[i].id === orderId) {
+            order = orders[i];
+        }
+    }
+
+    const building = await getBuildingByIdRequest(order.assetDef.id, getToken());
+    return {
+        order: order,
+        building: building,
+    }
 }

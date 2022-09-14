@@ -15,6 +15,9 @@ export const Orders = () => {
         dataField: 'ordinal',
         text: 'Место в очереди строительство'
     }, {
+        dataField: 'comment',
+        text: 'Комментарий'
+    }, {
         dataField: 'status',
         text: 'Статус',
     },];
@@ -26,11 +29,13 @@ export const Orders = () => {
         []
     );
 
+    const firstBuildingId = buildings.length > 0 ? buildings[0].id : "";
+
     return (
         <div>
             <div className="d-grid gap-2">
                 <Button variant="primary" size="lg" onClick={() => {
-                    history.push(BUILDER_TAKE_ORDER_ROUTE)
+                    history.push(`${BUILDER_TAKE_ORDER_ROUTE}/${firstBuildingId}`)
                 }}>Взять заказ на строительство</Button>
             </div>
             <BootstrapTable keyField='id' data={buildings} columns={columns}/>

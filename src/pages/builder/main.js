@@ -56,7 +56,7 @@ export const Builder = ({setToken}) => {
                 <Route path={BUILDER_BUILDING_ROUTE}>
                     LOL2
                 </Route>
-                <Route path={BUILDER_TAKE_ORDER_ROUTE}>
+                <Route path={`${BUILDER_TAKE_ORDER_ROUTE}/:orderId`}>
                     <TakeOrder/>
                 </Route>
                 <Route path={HOME_ROUTE}>
