@@ -6,23 +6,29 @@ import {login} from "../services/auth";
 import {useHistory} from "react-router-dom";
 
 
-export const Login = () => {
+export const Login = ({setToken}) => {
     const [validated, setValidated] = useState(false);
     const history = useHistory();
-
 
     const handleSubmit = (event) => {
 
         const form = event.currentTarget;
+        event.preventDefault();
         if (form.checkValidity() === false) {
-            event.preventDefault();
             event.stopPropagation();
         } else {
-            login(form.login_email.value, form.login_password.value, history).then((userToken) => {
+            login(form.login_email.value, form.login_password.value).then((userToken) => {
                 if (userToken == null) {
-                    // ToDo: show error for an user
+                    console.log("Token is null")
+                    // event.preventDefault();
+                    // event.stopPropagation();
+                } else {
                     event.preventDefault();
                     event.stopPropagation();
+                    console.log("Updating token")
+
+                    setToken(userToken);
+                    history.replace("/");
                 }
             });
         }

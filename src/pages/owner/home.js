@@ -3,7 +3,8 @@ import {useHistory} from "react-router-dom";
 import {Card, Col, Row} from "react-bootstrap";
 import React from "react";
 import {OWNER_BUILDING_ROUTE, OWNER_RECRUITMENT_ROUTE, OWNER_RESOURCES_ROUTE} from "../../constants";
-import {BookHalf, Building, PersonBadge, SdCardFill} from 'react-bootstrap-icons';
+import {BookHalf, Building, PersonBadge, BsClipboardData} from 'react-bootstrap-icons';
+
 
 export const OwnerHome = () => {
     const history = useHistory();

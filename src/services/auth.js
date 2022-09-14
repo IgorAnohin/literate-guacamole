@@ -2,24 +2,21 @@ import {loginRequest, logoutRequest} from '../repository/auth';
 import {ADMIN_ROLE, DEBUG} from "../constants";
 
 
-export const login = async (email, password, navigate) => {
+export const login = async (email, password) => {
     let userData;
     if (DEBUG) {
-        userData = {token: "123", role: ADMIN_ROLE}
+        userData = {token: "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiYWRtaW4iLCJleHAiOjE2NjMxMjYwMzcsImlhdCI6MTY2MzA5MDAzNywic2NvcGUiOiJhZG1pbiJ9.aOpDucwxPAIBSXzzowV2L3PM7ciD6rysVzF_PT3IpGBvqGhA1oeK7Je8VZMpqX-8hQ34OfPYqfkjlTVMxOfeYHL5nUEOt7ztyWs7JlP4XVTbmLldR_pOHZ7JM6u2udzkB3VLoAOCIznFFIJNLRXVE6LfiA0FPIXWkNxYViSrGEy8wsS4pXHcdH5dA0YcMVUXPCjkv7VRmDe6TpjAUmkYEGL83_loSev_wp5mh-f_0Ssgdrs8tR4XbzUaDRg1ptodj4xPVqCgjTINbkkk5m1EB6DHm12mpxk43t1Xq4aEFD-ltCUF-31siZBlYgMoGGJOF1VZs178a_UhryjWlfP0LA"}
     } else {
         userData = await loginRequest(email, password);
     }
 
     const userToken = userData.token;
-    const userRole = userData.role;
 
     if (userToken == null) {
         console.log("error");
     } else {
         console.log(`New user token ${userToken}`);
-        sessionStorage.setItem('token', userToken);
-
-        navigate.replace("/");
+        localStorage.setItem('token', userToken);
     }
 
     return userToken;
@@ -27,11 +24,12 @@ export const login = async (email, password, navigate) => {
 
 export const logout = async () => {
     const userToken = getToken();
-    const success = await logoutRequest(userToken);
+    const success = DEBUG ? true : await logoutRequest(userToken);
+
     if (success) {
-        sessionStorage.removeItem('token');
+        localStorage.removeItem('token');
     }
+    return success;
 }
 
-// export const getToken = () => sessionStorage.getItem('token');
-export const getToken = () => "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiYWRtaW5AaXRtby5ydSIsImV4cCI6MTY2MjU2Njk4MiwiaWF0IjoxNjYyNTMwOTgyLCJzY29wZSI6IndhcnJpb3IifQ.jRwgEtAxX7055R4cyeFmLzDR_H5tmk-F7jiZ0ajEFPb5EAyKzSoeaQzgfk4BcewfTEbN2u2soujYT5GVglGtxsTSSkBoSJ_TN7fX2OcjFDCPR7vDvBM_CDylnJiGp4ZFIhe9ilyTAU9UwKlqaFmhE3f_fs_ETtXn1nuCJ4PUf7pV2XaPgY4vEUyMLMyGXvTGKDCkipeaSp46cgJAsR_dlwtaWDZSSgai1gnghyEcgPRDjYzpQX-KJDAQlQwAsupwIQJbO4gMAUBX0HUV2TLUhF4Pj2h8GvLS01_hYe85XDE1yn6FZL6AWOBhhlVMXkGKGKNDirQN5Ub9qBDcl2tXbQ";
+export const getToken = () => localStorage.getItem('token');

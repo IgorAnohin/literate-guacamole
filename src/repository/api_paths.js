@@ -8,3 +8,9 @@ export const BUILD_ORDERS = `${_API_URL}/build-orders`
 export const BUILD_ORDERS_CREATE = `${_API_URL}/build-orders/create-new`
 
 export const ASSETS = `${_API_URL}/asset-defs`
+
+export const AUDIT = `${_API_URL}/audit`
+
+export const GET_ROLE = `${_API_URL}/auth/info`
+
+export const USERS = `${_API_URL}/users`

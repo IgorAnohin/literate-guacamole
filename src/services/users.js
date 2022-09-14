@@ -4,7 +4,7 @@ import {getToken} from "./auth";
 
 export const getUserRole = async () => {
     if (DEBUG) {
-        return OWNER_ROLE;
+        return ADMIN_ROLE;
     } else {
         return await getRoleRequest(getToken());
     }
@@ -12,20 +12,19 @@ export const getUserRole = async () => {
 
 export const getUsers = async () => {
     let data;
-    if (DEBUG) {
-        data = {
-            users: [
-                {id: 1, "email": "1", role: ADMIN_ROLE},
-                {id: 2, "email": "12", role: BUILDER_ROLE},
-                {id: 3, "email": "123", role: OWNER_ROLE},
-                {id: 4, "email": "2", role: ADMIN_ROLE},
-            ]
-        };
+    if (!DEBUG) {
+        data = [
+            {id: 1, "email": "1", role: ADMIN_ROLE},
+            {id: 2, "email": "12", role: BUILDER_ROLE},
+            {id: 3, "email": "123", role: OWNER_ROLE},
+            {id: 4, "email": "2", role: ADMIN_ROLE},
+        ]
+        ;
     } else {
         data = await getUsersRequest(getToken());
     }
 
-    return data.users;
+    return data;
 }
 
 export const createUser = async (email, password, role, router) => {

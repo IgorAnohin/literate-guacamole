@@ -11,7 +11,7 @@ import {Resources} from "./resources";
 import {logout} from "../../services/auth";
 
 
-const AdminHeader = () => {
+const AdminHeader = ({setToken}) => {
     return (
         <Navbar bg="light" expand="lg">
             <LinkContainer to="/">
@@ -32,7 +32,11 @@ const AdminHeader = () => {
                 </Nav>
                 <Nav>
                     <Nav.Link onClick={() => {
-                        logout().then()
+                        logout().then((success) => {
+                            if (success) {
+                                setToken(null);
+                            }
+                        }).catch(error => console.log("Error", error))
                     }}>Выйти</Nav.Link>
                 </Nav>
 
@@ -44,10 +48,10 @@ const AdminHeader = () => {
 
 
 
-export const Admin = () => {
+export const Admin = ({setToken}) => {
     return (
         <div>
-            <AdminHeader/>
+            <AdminHeader setToken={setToken}/>
 
             <Switch>
                 <Route path={NEW_USER_ROUTE}>

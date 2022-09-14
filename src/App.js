@@ -1,11 +1,11 @@
 import './App.css';
-import React from 'react';
+import React, {useState} from 'react';
 
 import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Redirect, Link,
+    Redirect,
 } from "react-router-dom";
 
 import {Login} from "./pages/login";
@@ -13,58 +13,23 @@ import {Home} from "./pages/home";
 import {getToken} from "./services/auth";
 
 
-export default class App extends React.Component {
-    render() {
-        // fetch("http://localhost:4242/api/asset-defs", {
-        //     method: 'GET',
-        //     headers: {
-        //         // 'Access-Control-Allow-Origin': BASE_URL,
-        //         // 'Access-Control-Allow-Credentials': 'true',
-        //
-        //         'Content-Type': 'application/json',
-        //         'Authorization': `Bearer `,
-        //     },
-        // }).then(res => {console.log(res)}).catch((err) => {console.log("Error" + err)});
+export const App = () => {
+    const [token, setToken] = useState(getToken())
+    console.log("Token:", token)
 
-        return (
-            <Router>
-                {/*<nav>*/}
-                {/*    <ul>*/}
-                {/*        <li>*/}
-                {/*            <Link to="/">Home</Link>*/}
-                {/*        </li>*/}
-                {/*        <li>*/}
-                {/*            <Link to="/about">About</Link>*/}
-                {/*        </li>*/}
-                {/*        <li>*/}
-                {/*            <Link to="/users">Users</Link>*/}
-                {/*        </li>*/}
-                {/*    </ul>*/}
-                {/*</nav>*/}
-
-                <Switch>
-                    <Route path="/users">
-                        <Users/>
-                    </Route>
-                    <Route path="/login">
-                        <Login/>
-                    </Route>
-                    <Route path="/home">
-                        <Home/>
-                    </Route>
-                    {/*{getToken() == null && <Redirect to="/login"/>}*/}
-                    {/*{getToken() != null && <Redirect from="/login" to="/"/>}*/}
-                    <Redirect from="/" to="/home"/>}
-                </Switch>
-            </Router>
-        );
-    }
-}
-
-function About() {
-    return <h2>About</h2>;
-}
-
-function Users() {
-    return <h2>Users</h2>;
+    return (
+        <Router>
+            <Switch>
+                {token != null && <Redirect from="/login" to="/"/>}
+                <Route path="/login">
+                    <Login setToken={setToken}/>
+                </Route>
+                {token == null && <Redirect to="/login"/>}
+                <Route path="/home">
+                    <Home setToken={setToken}/>
+                </Route>
+                <Redirect from="/" to="/home"/>}
+            </Switch>
+        </Router>
+    );
 }

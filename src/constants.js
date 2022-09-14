@@ -20,6 +20,8 @@ export const roleToReadable = {
 
 export const ASSET_BUILDING = "Здание";
 
+export const ASSET_BUILDING_EN = "BUILDING";
+
 export const BUILDING_STATUS_IN_CREATED = "CREATED";
 export const BUILDING_STATUS_IN_REJECTED = "REJECTED";
 export const BUILDING_STATUS_IN_PROGRESS = "IN_PROGRESS";

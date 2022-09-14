@@ -13,7 +13,7 @@ import {Builder} from "./builder/main";
 import {getUserRole} from "../services/users";
 
 
-export const Home = () => {
+export const Home = ({setToken}) => {
     const [userRole, setUserRole] = useState();
     useEffect(() => {
             getUserRole().then((role) => setUserRole(role))
@@ -23,11 +23,11 @@ export const Home = () => {
 
     switch (userRole) {
         case ADMIN_ROLE:
-            return <Admin/>;
+            return <Admin setToken={setToken}/>;
         case OWNER_ROLE:
-            return <Owner/>;
+            return <Owner setToken={setToken}/>;
         case BUILDER_ROLE:
-            return <Builder/>;
+            return <Builder setToken={setToken}/>;
         case WARRIOR_ROLE:
             return <h2>:(</h2>;
         case WIZARD_ROLE:

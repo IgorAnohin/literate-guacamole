@@ -31,7 +31,7 @@ export const Orders = () => {
             <div className="d-grid gap-2">
                 <Button variant="primary" size="lg" onClick={() => {
                     history.push(BUILDER_TAKE_ORDER_ROUTE)
-                }}>Рассмотреть заказ</Button>
+                }}>Взять заказ на строительство</Button>
             </div>
             <BootstrapTable keyField='id' data={buildings} columns={columns}/>
         </div>

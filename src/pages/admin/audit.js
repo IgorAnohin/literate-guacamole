@@ -3,6 +3,7 @@ import {useHistory} from "react-router-dom";
 import {Button, Card, Col, Container, Form, Image, Row} from "react-bootstrap";
 import {BookHalf, Building, PersonBadge, SdCardFill} from 'react-bootstrap-icons';
 import {createAudit} from "../../services/audit";
+import {ASSET_BUILDING_EN} from "../../constants";
 
 const Resource = ({id, name, icon}) => {
     return (
@@ -35,6 +36,17 @@ export const Audit = () => {
     const history = useHistory();
 
 
+    const downloadTxtFile = (data) => {
+        const element = document.createElement("a");
+        const file = new Blob([data], {
+            type: "text/plain"
+        });
+        element.href = URL.createObjectURL(file);
+        element.download = "audit.csv";
+        document.body.appendChild(element);
+        element.click();
+    };
+
     const handleSubmit = (event) => {
 
         const form = event.currentTarget;
@@ -43,10 +55,26 @@ export const Audit = () => {
         if (form.checkValidity() === false) {
             event.stopPropagation();
         } else {
-            createAudit(form.audit_start.value, form.audit_end.value, form.user_role.value, history).then((userToken) => {
-                if (userToken == null) {
-                    // ToDo: show toast with an error
-                }
+            console.log(form.audit_start.value);
+            console.log(form.audit_end.value);
+
+            const assetsTypes = [];
+            if (form.resources.value == "on") {
+                assetsTypes.push(ASSET_BUILDING_EN);
+            }
+            if (form.recruts.value == "on") {
+                assetsTypes.push(ASSET_BUILDING_EN);
+            }
+            if (form.spells.value == "on") {
+                assetsTypes.push(ASSET_BUILDING_EN);
+            }
+            if (form.buildings.value == "on") {
+                assetsTypes.push(ASSET_BUILDING_EN);
+            }
+
+            createAudit(form.audit_start.value, form.audit_end.value, assetsTypes, history).then((auditData) => {
+                console.log("Audit data:", auditData);
+                downloadTxtFile(auditData);
             });
         }
 
