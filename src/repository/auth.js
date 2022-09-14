@@ -9,7 +9,7 @@ export const loginRequest = async (name, password) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                name: name,
+                email: name,
                 password: password
             })
         });

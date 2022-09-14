@@ -3,7 +3,6 @@ import {GET_ROLE, USERS} from "./api_paths";
 
 export const getRoleRequest = async (token) => {
     try {
-        console.log("token", token)
         const response = await axios.get(GET_ROLE, {
                 headers: {
                     'Content-Type': 'application/json',

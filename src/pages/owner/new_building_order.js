@@ -58,9 +58,7 @@ export const NewBuildingOrder = () => {
                 <Form.Group className="mb-3">
                     <Form.Group md="4" controlId="buildingSelector">
                         <Form.Label>Здание</Form.Label>
-                        <Form.Select isValid={isSelectValid} onChange={(event) => {
-                            validateSelect(ROLES.includes(event.target.value));
-                        }} size="lg" aria-label="Default select example">
+                        <Form.Select isValid={isSelectValid} size="lg" aria-label="Default select example">
                             {
                                 buildings.map((building) => {
                                     return (<option key={building.id} value={building.id}>{building.name}</option>);
@@ -72,7 +70,7 @@ export const NewBuildingOrder = () => {
                             Пожалуйста, Выберите роль
                         </Form.Control.Feedback>
                     </Form.Group>
-                    <InputGroup controlId="commentSection">
+                    <InputGroup>
                         <InputGroup.Text>Комментарий</InputGroup.Text>
                         <Form.Control as="textarea" aria-label="Комментарий" onChange={e => comment = e.target.value}/>
                     </InputGroup>

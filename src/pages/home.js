@@ -21,6 +21,8 @@ export const Home = ({setToken}) => {
         []
     )
 
+    console.log("User role", userRole);
+
     switch (userRole) {
         case ADMIN_ROLE:
             return <Admin setToken={setToken}/>;

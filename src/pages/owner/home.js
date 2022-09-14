@@ -3,7 +3,7 @@ import {useHistory} from "react-router-dom";
 import {Card, Col, Row} from "react-bootstrap";
 import React from "react";
 import {OWNER_BUILDING_ROUTE, OWNER_RECRUITMENT_ROUTE, OWNER_RESOURCES_ROUTE} from "../../constants";
-import {BookHalf, Building, PersonBadge, BsClipboardData} from 'react-bootstrap-icons';
+import {Building, PersonBadge, CollectionFill} from 'react-bootstrap-icons';
 
 
 export const OwnerHome = () => {
@@ -39,7 +39,7 @@ export const OwnerHome = () => {
                 <Card onClick={() => {
                     history.push(OWNER_RESOURCES_ROUTE)
                 }} style={{cursor: "pointer"}}>
-                    <Card.Img variant="top" src="./Vector.png" style={{objectFit: "scale-down", maxHeight: "200px",}}/>
+                    <CollectionFill className="card-img-top" size="200" style={{textAlign: "center"}}/>
                     <Card.Body>
                         <Card.Title style={{textAlign: "center"}}>
                             Активы замка

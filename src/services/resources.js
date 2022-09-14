@@ -1,6 +1,6 @@
 import {getBuildingsRequest, getResourcesRequest} from "../repository/resources";
 import {getToken} from "./auth";
-import {ASSET_BUILDING, DEBUG} from "../constants";
+import {ASSET_BUILDING, ASSET_BUILDING_EN, DEBUG} from "../constants";
 
 export const getResources = async () => {
     let data;
@@ -23,7 +23,7 @@ export const getResources = async () => {
 export const getBuildings = async () => {
     let data;
 
-    if (DEBUG) {
+    if (!DEBUG) {
         data = [
             {
                 code: "kapitoly",
@@ -34,7 +34,7 @@ export const getBuildings = async () => {
                 img250Url: null,
                 imgOrigUrl: null,
                 name: "Капитолий",
-                type: "Здание",
+                type: ASSET_BUILDING_EN,
             },
             {
                 code: "kapitoly",
@@ -45,12 +45,12 @@ export const getBuildings = async () => {
                 img250Url: null,
                 imgOrigUrl: null,
                 name: "Замок",
-                type: "Здание",
+                type: ASSET_BUILDING_EN,
             },
         ];
     } else {
         data = await getBuildingsRequest(getToken());
     }
 
-    return data.filter((element) => element.type == ASSET_BUILDING)
+    return data.filter((element) => element.type == ASSET_BUILDING_EN)
 }

@@ -10,9 +10,10 @@ import {OwnerHome} from "./home";
 import {Resources} from "../admin/resources";
 import {Building} from "./building";
 import {NewBuildingOrder} from "./new_building_order";
+import {logout} from "../../services/auth";
 
 
-const OwnerHeader = () => {
+const OwnerHeader = ({setToken}) => {
     return (
         <Navbar bg="light" expand="lg">
             <LinkContainer to="/">
@@ -31,9 +32,14 @@ const OwnerHeader = () => {
                         <Nav.Link>Активы замка</Nav.Link>
                     </LinkContainer>
                 </Nav>
+                (Владелец замка)
                 <Nav>
                     <Nav.Link onClick={() => {
-                        console.log("HERE")
+                        logout().then((success) => {
+                            if (success) {
+                                setToken(null);
+                            }
+                        }).catch(error => console.log("Error", error))
                     }}>Выйти</Nav.Link>
                 </Nav>
 
@@ -43,10 +49,10 @@ const OwnerHeader = () => {
 }
 
 
-export const Owner = () => {
+export const Owner = ({setToken}) => {
     return (
         <div>
-            <OwnerHeader/>
+            <OwnerHeader setToken={setToken}/>
 
             <Switch>
                 <Route path={OWNER_NEW_BUILDING_ORDER_ROUTE}>

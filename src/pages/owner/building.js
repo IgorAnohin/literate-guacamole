@@ -15,6 +15,9 @@ export const Building = () => {
         dataField: 'ordinal',
         text: 'Место в очереди строительство'
     }, {
+        dataField: 'comment',
+        text: 'Комментарий'
+    }, {
         dataField: 'status',
         text: 'Статус',
     },];

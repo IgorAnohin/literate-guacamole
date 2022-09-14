@@ -30,6 +30,7 @@ const AdminHeader = ({setToken}) => {
                         <Nav.Link>Активы замка</Nav.Link>
                     </LinkContainer>
                 </Nav>
+                (Администратор)
                 <Nav>
                     <Nav.Link onClick={() => {
                         logout().then((success) => {

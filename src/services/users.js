@@ -3,11 +3,19 @@ import {createUserRequest, getRoleRequest, getUsersRequest, updateUserRequest} f
 import {getToken} from "./auth";
 
 export const getUserRole = async () => {
-    if (DEBUG) {
-        return ADMIN_ROLE;
+    let data
+    if (!DEBUG) {
+        data = {
+            "username": "admin",
+            "roles": [
+                "admin"
+            ]
+        }
     } else {
-        return await getRoleRequest(getToken());
+        data = await getRoleRequest(getToken());
     }
+
+    return data.roles[0];
 }
 
 export const getUsers = async () => {

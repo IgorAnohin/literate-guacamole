@@ -21,6 +21,9 @@ export const roleToReadable = {
 export const ASSET_BUILDING = "Здание";
 
 export const ASSET_BUILDING_EN = "BUILDING";
+export const ASSET_SPELL_EN = "SPELL";
+export const ASSET_RESOURCE_EN = "RESOURCE";
+export const ASSET_RECRUIT_EN = "RECRUIT";
 
 export const BUILDING_STATUS_IN_CREATED = "CREATED";
 export const BUILDING_STATUS_IN_REJECTED = "REJECTED";

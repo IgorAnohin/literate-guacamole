@@ -8,9 +8,10 @@ import {Nav, Navbar} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
 import {Orders} from "./orders";
 import {TakeOrder} from "./take_order";
+import {logout} from "../../services/auth";
 
 
-const BuilderHeader = () => {
+const BuilderHeader = ({setToken}) => {
     return (
         <Navbar bg="light" expand="lg">
             <LinkContainer to="/">
@@ -26,9 +27,14 @@ const BuilderHeader = () => {
                         <Nav.Link>База зданий</Nav.Link>
                     </LinkContainer>
                 </Nav>
+                (Строитель)
                 <Nav>
                     <Nav.Link onClick={() => {
-                        console.log("HERE")
+                        logout().then((success) => {
+                            if (success) {
+                                setToken(null);
+                            }
+                        }).catch(error => console.log("Error", error))
                     }}>Выйти</Nav.Link>
                 </Nav>
 
@@ -38,10 +44,10 @@ const BuilderHeader = () => {
 }
 
 
-export const Builder = () => {
+export const Builder = ({setToken}) => {
     return (
         <div>
-            <BuilderHeader/>
+            <BuilderHeader setToken={setToken}/>
 
             <Switch>
                 <Route path={BUILDER_NEW_BUILDING_ROUTE}>

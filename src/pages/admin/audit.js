@@ -3,7 +3,7 @@ import {useHistory} from "react-router-dom";
 import {Button, Card, Col, Container, Form, Image, Row} from "react-bootstrap";
 import {BookHalf, Building, PersonBadge, SdCardFill} from 'react-bootstrap-icons';
 import {createAudit} from "../../services/audit";
-import {ASSET_BUILDING_EN} from "../../constants";
+import {ASSET_BUILDING_EN, ASSET_RECRUIT_EN, ASSET_RESOURCE_EN, ASSET_SPELL_EN} from "../../constants";
 
 const Resource = ({id, name, icon}) => {
     return (
@@ -60,13 +60,13 @@ export const Audit = () => {
 
             const assetsTypes = [];
             if (form.resources.value == "on") {
-                assetsTypes.push(ASSET_BUILDING_EN);
+                assetsTypes.push(ASSET_RESOURCE_EN);
             }
             if (form.recruts.value == "on") {
-                assetsTypes.push(ASSET_BUILDING_EN);
+                assetsTypes.push(ASSET_RECRUIT_EN);
             }
             if (form.spells.value == "on") {
-                assetsTypes.push(ASSET_BUILDING_EN);
+                assetsTypes.push(ASSET_SPELL_EN);
             }
             if (form.buildings.value == "on") {
                 assetsTypes.push(ASSET_BUILDING_EN);
