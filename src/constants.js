@@ -26,13 +26,13 @@ export const ASSET_RESOURCE_EN = "RESOURCE";
 export const ASSET_RECRUIT_EN = "RECRUIT";
 
 export const BUILDING_STATUS_IN_CREATED = "CREATED";
-export const BUILDING_STATUS_IN_REJECTED = "REJECTED";
+export const BUILDING_STATUS_IN_REFUSED = "REFUSED";
 export const BUILDING_STATUS_IN_PROGRESS = "IN_PROGRESS";
 export const BUILDING_STATUS_IN_FINISHED = "FINISHED";
 
 export const buildingStatusToReadable = {
     [BUILDING_STATUS_IN_CREATED]: "Создан",
-    [BUILDING_STATUS_IN_REJECTED]: "Отклонён",
+    [BUILDING_STATUS_IN_REFUSED]: "Отклонён",
     [BUILDING_STATUS_IN_PROGRESS]: "В процессе",
     [BUILDING_STATUS_IN_FINISHED]: "Завершён",
 }

@@ -5,6 +5,13 @@ import {BookHalf, Building, PersonBadge, SdCardFill} from 'react-bootstrap-icons
 import {createAudit} from "../../services/audit";
 import {ASSET_BUILDING_EN, ASSET_RECRUIT_EN, ASSET_RESOURCE_EN, ASSET_SPELL_EN} from "../../constants";
 
+
+var spell_checked = false;
+var recrut_checked = false;
+var building_checked = false;
+var resources_checked = false;
+
+
 const Resource = ({id, name, icon}) => {
     return (
         <div className="border" style={{padding: 10}}>
@@ -21,6 +28,19 @@ const Resource = ({id, name, icon}) => {
                     <Form.Check style={{width: 0, margin: 0, paddingRight: 0, paddingLeft: 0}}
                                 type="switch"
                                 id={id}
+                                onChange={(e) => {
+
+                                    if (id == "resources") {
+                                        spell_checked = !spell_checked;
+                                    } else if (id == "recruts") {
+                                        recrut_checked = !recrut_checked;
+                                    } else if (id == "spells") {
+                                        building_checked = !building_checked;
+                                    } else if (id == "buildings") {
+                                        resources_checked = !resources_checked;
+                                    }
+
+                                }}
                     />
                 </Col>
             </Row>
@@ -55,20 +75,22 @@ export const Audit = () => {
         if (form.checkValidity() === false) {
             event.stopPropagation();
         } else {
-            console.log(form.audit_start.value);
-            console.log(form.audit_end.value);
 
             const assetsTypes = [];
-            if (form.resources.value == "on") {
+            console.log(spell_checked)
+            if (spell_checked) {
                 assetsTypes.push(ASSET_RESOURCE_EN);
             }
-            if (form.recruts.value == "on") {
+            console.log(recrut_checked)
+            if (recrut_checked) {
                 assetsTypes.push(ASSET_RECRUIT_EN);
             }
-            if (form.spells.value == "on") {
+            console.log(building_checked)
+            if (building_checked) {
                 assetsTypes.push(ASSET_SPELL_EN);
             }
-            if (form.buildings.value == "on") {
+            console.log(resources_checked)
+            if (resources_checked) {
                 assetsTypes.push(ASSET_BUILDING_EN);
             }
 

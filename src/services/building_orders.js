@@ -1,5 +1,9 @@
 import {BUILDING_STATUS_IN_CREATED, buildingStatusToReadable, DEBUG} from "../constants";
-import {createBuildingOrderRequest, getBuildingOrdersRequest} from "../repository/building_orders";
+import {
+    changeBuildingOrderStateRequest,
+    createBuildingOrderRequest,
+    getBuildingOrdersRequest
+} from "../repository/building_orders";
 import {getToken} from "./auth";
 import {getBuildingByIdRequest} from "../repository/resources";
 
@@ -50,4 +54,13 @@ export const getBuildingOrderById = async (orderId) => {
         order: order,
         building: building,
     }
+}
+
+
+export const dismissBuildingOrder = async (orderId) => {
+    await changeBuildingOrderStateRequest("REFUSED", orderId, getToken());
+}
+
+export const acceptBuildingOrder = async (orderId) => {
+    await changeBuildingOrderStateRequest("IN_PROGRESS", orderId, getToken());
 }

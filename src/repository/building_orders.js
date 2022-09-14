@@ -1,4 +1,4 @@
-import {ASSETS, BUILD_ORDERS, BUILD_ORDERS_CREATE, LOGIN_URL} from "./api_paths";
+import {ASSETS, BUILD_ORDERS, BUILD_ORDERS_CHANGE_STATUS, BUILD_ORDERS_CREATE, LOGIN_URL} from "./api_paths";
 import axios from "axios";
 
 export const getBuildingOrdersRequest = async (token) => {
@@ -38,5 +38,19 @@ export const createBuildingOrderRequest = async (toBeginningQueue, buildingId, c
 }
 
 export const changeBuildingOrderStateRequest = async (newStatus, orderId, token) => {
-
+    try {
+        const response = await axios.post(BUILD_ORDERS_CHANGE_STATUS(orderId), {
+                status: newStatus,
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                }
+            },
+        )
+        return response.data;
+    } catch (err) {
+        console.log(err);
+        return [];
+    }
 }

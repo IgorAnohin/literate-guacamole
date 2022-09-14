@@ -1,7 +1,29 @@
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
-import {getBuildingOrderById} from "../../services/building_orders";
-import {Button, Card, Col, Container, Image, Row} from "react-bootstrap";
+import {useHistory, useParams} from "react-router-dom";
+import {acceptBuildingOrder, dismissBuildingOrder, getBuildingOrderById} from "../../services/building_orders";
+import {Button, Card, Col, Container, Form, Image, Row} from "react-bootstrap";
+import {HOME_ROUTE} from "../../constants";
+
+
+const Resource = ({text, icon}) => {
+    return (
+        <div className="border" style={{padding: 10}}>
+            <Row>
+                <Col md="auto">
+                    <Image src={icon} height="48px" width="48px"/>
+                </Col>
+                <Col>
+                    <Container style={{paddingTop: "10px"}}>
+                        {text}
+                    </Container>
+                </Col>
+            </Row>
+
+        </div>
+
+    );
+
+}
 
 export const TakeOrder = () => {
 
@@ -19,6 +41,8 @@ export const TakeOrder = () => {
         []
     );
 
+    const history = useHistory();
+
     console.log("order", order);
 
     return (
@@ -28,18 +52,30 @@ export const TakeOrder = () => {
             </Row>
 
             <Row>
-                <Col>
+                <Col style={{display: "flex"}} className="justify-content-center">
                     <Image src={order.building.imgOrigUrl} rounded/>
                 </Col>
                 <Col>
                     <Container>
                         <Row>
-                            <Col>1 of 2</Col>
-                            <Col>2 of 2</Col>
+                            <Col>
+                                <Resource text={1000}
+                                          icon={"https://cdn.iconscout.com/icon/free/png-256/stone-12-449919.png"}/>
+                            </Col>
+                            <Col>
+                                <Resource text={2000}
+                                          icon={"https://toppng.com/uploads/preview/gold-icon-png-11552723744f0vj8surrx.png"}/>
+                            </Col>
                         </Row>
                         <Row>
-                            <Col>1 of 2</Col>
-                            <Col>2 of 2</Col>
+                            <Col>
+                                <Resource text={3000}
+                                          icon={"https://cdn-icons-png.flaticon.com/512/2701/2701763.png"}/>
+                            </Col>
+                            <Col>
+                                <Resource text={4000}
+                                          icon={"https://cdn-icons-png.flaticon.com/512/222/222436.png"}/>
+                            </Col>
                         </Row>
                     </Container>
                 </Col>
@@ -54,14 +90,22 @@ export const TakeOrder = () => {
             <Row>
                 <Col>
                     <div className="d-grid gap-2">
-                        <Button variant="secondary" size="lg">
+                        <Button variant="secondary" size="lg" onClick={event => {
+                            dismissBuildingOrder(orderId).then(() => {
+                                history.replace(HOME_ROUTE)
+                            });
+                        }}>
                             Отклонить
                         </Button>
                     </div>
                 </Col>
                 <Col>
                     <div className="d-grid gap-2">
-                        <Button variant="primary" size="lg">Взять в работу</Button>
+                        <Button variant="primary" size="lg" onClick={event => {
+                            acceptBuildingOrder(orderId).then(() => {
+                                history.replace(HOME_ROUTE)
+                            });
+                        }}>Взять в работу</Button>
                     </div>
                 </Col>
             </Row>

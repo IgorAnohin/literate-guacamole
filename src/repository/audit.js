@@ -6,6 +6,7 @@ export const createAuditRequest = async (startDate, endDate, resourceTypes, toke
         const response = await axios.post(AUDIT, {
                 startDate: startDate,
                 endDate: endDate,
+                assetDefTypes: resourceTypes,
             }, {
                 headers: {
                     'Content-Type': 'application/json',
