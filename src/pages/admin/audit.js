@@ -3,7 +3,7 @@ import {useHistory} from "react-router-dom";
 import {Button, Card, Col, Container, Form, Image, Row} from "react-bootstrap";
 import {BookHalf, Building, PersonBadge, SdCardFill} from 'react-bootstrap-icons';
 import {createAudit} from "../../services/audit";
-import {ASSET_BUILDING_EN, ASSET_RECRUIT_EN, ASSET_RESOURCE_EN, ASSET_SPELL_EN} from "../../constants";
+import {BUILDING_ASSET, RECRUIT_ASSET, RESOURCE_ASSET, SPELL_ASSET} from "../../constants";
 
 
 var spell_checked = false;
@@ -79,19 +79,19 @@ export const Audit = () => {
             const assetsTypes = [];
             console.log(spell_checked)
             if (spell_checked) {
-                assetsTypes.push(ASSET_RESOURCE_EN);
+                assetsTypes.push(RESOURCE_ASSET);
             }
             console.log(recrut_checked)
             if (recrut_checked) {
-                assetsTypes.push(ASSET_RECRUIT_EN);
+                assetsTypes.push(RECRUIT_ASSET);
             }
             console.log(building_checked)
             if (building_checked) {
-                assetsTypes.push(ASSET_SPELL_EN);
+                assetsTypes.push(SPELL_ASSET);
             }
             console.log(resources_checked)
             if (resources_checked) {
-                assetsTypes.push(ASSET_BUILDING_EN);
+                assetsTypes.push(BUILDING_ASSET);
             }
 
             createAudit(form.audit_start.value, form.audit_end.value, assetsTypes, history).then((auditData) => {

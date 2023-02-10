@@ -1,5 +1,5 @@
 import axios from "axios";
-import {GET_ROLE, USERS} from "./api_paths";
+import {GET_ROLE, GET_USER, USERS} from "./api_paths";
 
 export const getRoleRequest = async (token) => {
     try {
@@ -15,7 +15,22 @@ export const getRoleRequest = async (token) => {
         console.log(err);
         return [];
     }
+}
 
+export const getUserRequest = async (userId, token) => {
+    try {
+        const response = await axios.get(GET_USER(userId), {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                }
+            },
+        )
+        return response.data;
+    } catch (err) {
+        console.log(err);
+        return {};
+    }
 }
 
 export const getUsersRequest = async (token) => {
@@ -34,7 +49,11 @@ export const getUsersRequest = async (token) => {
     }
 }
 
-export const createUserRequest = async (email, password, role, token) => {
+export const uploadAvatarRequest = async (image, token) => {
+    // returns image URL
+}
+
+export const createUserRequest = async (email, password, role, avatarUrl, token) => {
     // returns new user ID
 }
 

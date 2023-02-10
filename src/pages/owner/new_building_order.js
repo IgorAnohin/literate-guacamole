@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {Button, Container, Form, InputGroup, Tabs} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
-import {createUser} from "../../services/users";
-import {ROLES, roleToReadable} from "../../constants";
 import {Tab} from "bootstrap";
-import {getBuildings} from "../../services/resources";
+import {getBuildings} from "../../services/assets";
 import {createBuildingOrder} from "../../services/building_orders";
 
 export const NewBuildingOrder = () => {

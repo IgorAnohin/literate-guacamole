@@ -5,10 +5,10 @@ import {
     getBuildingOrdersRequest
 } from "../repository/building_orders";
 import {getToken} from "./auth";
-import {getBuildingByIdRequest} from "../repository/resources";
+import {getBuildingByIdRequest} from "../repository/assets";
 
 export const getBuildingOrders = async () => {
-    if (!DEBUG) {
+    if (DEBUG) {
         return [
             {id: 1, name: "Капитолий", ordinal: 1, status: BUILDING_STATUS_IN_CREATED, comment: "123"},
             {id: 2, name: "Капитолий 2", ordinal: 2, status: BUILDING_STATUS_IN_CREATED, comment: "@@@"},
@@ -28,7 +28,7 @@ export const getBuildingOrders = async () => {
 }
 
 export const createBuildingOrder = async (toBeginningQueue, buildingId, comment, historyRouter) => {
-    if (!DEBUG) {
+    if (DEBUG) {
         historyRouter.go(-1);
     } else {
         await createBuildingOrderRequest(toBeginningQueue, buildingId, comment, getToken());

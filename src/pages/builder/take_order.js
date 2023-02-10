@@ -43,8 +43,6 @@ export const TakeOrder = () => {
 
     const history = useHistory();
 
-    console.log("order", order);
-
     return (
         (order != null && <Container fluid>
             <Row>

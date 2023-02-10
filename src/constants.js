@@ -18,12 +18,10 @@ export const roleToReadable = {
     [WIZARD_ROLE]: "Волшебник",
 }
 
-export const ASSET_BUILDING = "Здание";
-
-export const ASSET_BUILDING_EN = "BUILDING";
-export const ASSET_SPELL_EN = "SPELL";
-export const ASSET_RESOURCE_EN = "RESOURCE";
-export const ASSET_RECRUIT_EN = "RECRUIT";
+export const BUILDING_ASSET = "BUILDING";
+export const SPELL_ASSET = "SPELL";
+export const RESOURCE_ASSET = "RESOURCE";
+export const RECRUIT_ASSET = "RECRUIT";
 
 export const BUILDING_STATUS_IN_CREATED = "CREATED";
 export const BUILDING_STATUS_IN_REFUSED = "REFUSED";
@@ -44,14 +42,18 @@ export const HOME_ROUTE = "/home";
 // Admin routes
 export const USERS_ROUTE = `${HOME_ROUTE}/users`;
 export const NEW_USER_ROUTE = `${HOME_ROUTE}/users/new`;
+export const EDIT_USER_ROUTE = (userId) => `${HOME_ROUTE}/users/info/${userId}`;
 export const AUDIT_ROUTE = `${HOME_ROUTE}/audit`;
-export const RESOURCES_ROUTE = `${HOME_ROUTE}/resources`;
+export const ASSETS_ROUTE = `${HOME_ROUTE}/assets`;
+export const ASSET_DEFINITIONS_ROUTE = `${HOME_ROUTE}/asset_definitions`;
+export const NEW_ASSET_DEFINITIONS_ROUTE = `${HOME_ROUTE}/asset_definitions/new`;
+export const EDIT_ASSET_DEFINITIONS_ROUTE = (assetDefId) => `${HOME_ROUTE}/asset_definitions/info/${assetDefId}`;
 
 // Owner routes
 export const OWNER_BUILDING_ROUTE = `${HOME_ROUTE}/building`;
 export const OWNER_NEW_BUILDING_ORDER_ROUTE = `${OWNER_BUILDING_ROUTE}/new`;
 export const OWNER_RECRUITMENT_ROUTE = `${HOME_ROUTE}/recruitment`;
-export const OWNER_RESOURCES_ROUTE = RESOURCES_ROUTE;
+export const OWNER_ASSETS_ROUTE = ASSETS_ROUTE;
 
 // Builder routes
 export const BUILDER_BUILDING_ROUTE = `${HOME_ROUTE}/buildings`;

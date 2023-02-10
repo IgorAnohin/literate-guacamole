@@ -3,7 +3,7 @@ import {createAuditRequest} from "../repository/audit";
 import {DEBUG} from "../constants";
 
 export const createAudit = async (startDateTime, endDateTime, resourcesList) => {
-    if (!DEBUG) {
+    if (DEBUG) {
         return "assetDefCode,assetDefId,assetDefName,assetDefType,auditDate,code,creationDate,description,id,name,quantity,revision\n" +
             "tavern,2,Таверна,BUILDING,2022-09-14T03:55:44,,\"2022-09-14T03:55:44.402959\",,1,,1,57\n" +
             "tavern,2,Таверна,BUILDING,2022-09-14T04:25:53,,\"2022-09-14T04:25:53.534239\",,3,,1,102\n" +

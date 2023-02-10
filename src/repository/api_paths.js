@@ -17,3 +17,5 @@ export const ASSETS = `${_API_URL}/asset-defs`
 export const AUDIT = `${_API_URL}/audit`
 
 export const USERS = `${_API_URL}/users`
+export const GET_USER = (userId) => `${USERS}/${userId}`;
+

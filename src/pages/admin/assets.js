@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit';
-import {getResources} from "../../services/resources";
+import {getResources} from "../../services/assets";
 
 const {SearchBar} = Search;
 
 
-export const Resources = () => {
+export const Assets = () => {
 
     const columns = [{
         dataField: 'name',

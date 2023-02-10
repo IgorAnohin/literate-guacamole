@@ -8,8 +8,8 @@ import {
     Redirect,
 } from "react-router-dom";
 
-import {Login} from "./pages/login";
-import {Home} from "./pages/home";
+import {LoginPage} from "./pages/login";
+import {HomePage} from "./pages/home";
 import {getToken} from "./services/auth";
 
 
@@ -22,11 +22,11 @@ export const App = () => {
             <Switch>
                 {token != null && <Redirect from="/login" to="/"/>}
                 <Route path="/login">
-                    <Login setToken={setToken}/>
+                    <LoginPage setToken={setToken}/>
                 </Route>
                 {token == null && <Redirect to="/login"/>}
                 <Route path="/home">
-                    <Home setToken={setToken}/>
+                    <HomePage setToken={setToken}/>
                 </Route>
                 <Redirect from="/" to="/home"/>}
             </Switch>

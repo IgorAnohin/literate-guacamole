@@ -15,6 +15,7 @@ export const loginRequest = async (name, password) => {
         });
         return response.json();
     } catch (err) {
+        console.log("Unable to login:");
         console.log(err);
         return null;
     }
@@ -31,6 +32,7 @@ export const logoutRequest = async (token) => {
         });
         return true;
     } catch (err) {
+        console.log("Unable to logout:");
         console.log(err);
         return false;
     }

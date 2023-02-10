@@ -1,5 +1,13 @@
-import {Route, Switch, useRouteMatch} from "react-router-dom";
-import {HOME_ROUTE, AUDIT_ROUTE, NEW_USER_ROUTE, RESOURCES_ROUTE, USERS_ROUTE} from "../../constants";
+import {Route, Switch} from "react-router-dom";
+import {
+    HOME_ROUTE,
+    AUDIT_ROUTE,
+    NEW_USER_ROUTE,
+    ASSETS_ROUTE,
+    USERS_ROUTE,
+    EDIT_USER_ROUTE,
+    ASSET_DEFINITIONS_ROUTE
+} from "../../constants";
 import React from "react";
 import {Nav, Navbar} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
@@ -7,8 +15,10 @@ import {AdminHome} from "./home";
 import {AdminUsers} from "./users";
 import {NewUser} from "./new_user";
 import {Audit} from "./audit";
-import {Resources} from "./resources";
+import {Assets} from "./assets";
 import {logout} from "../../services/auth";
+import {EditUser} from "./edit_user";
+import {AssetDefinitions} from "./asset_definitions";
 
 
 const AdminHeader = ({setToken}) => {
@@ -26,8 +36,11 @@ const AdminHeader = ({setToken}) => {
                     <LinkContainer to={AUDIT_ROUTE}>
                         <Nav.Link>Сбор аудитных данных</Nav.Link>
                     </LinkContainer>
-                    <LinkContainer to={RESOURCES_ROUTE}>
+                    <LinkContainer to={ASSETS_ROUTE}>
                         <Nav.Link>Активы замка</Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer to={ASSET_DEFINITIONS_ROUTE}>
+                        <Nav.Link>Определения активов</Nav.Link>
                     </LinkContainer>
                 </Nav>
                 (Администратор)
@@ -55,6 +68,9 @@ export const Admin = ({setToken}) => {
             <AdminHeader setToken={setToken}/>
 
             <Switch>
+                <Route path={EDIT_USER_ROUTE(":userId")}>
+                    <EditUser/>
+                </Route>
                 <Route path={NEW_USER_ROUTE}>
                     <NewUser/>
                 </Route>
@@ -64,8 +80,11 @@ export const Admin = ({setToken}) => {
                 <Route path={AUDIT_ROUTE}>
                     <Audit/>
                 </Route>
-                <Route path={RESOURCES_ROUTE}>
-                    <Resources/>
+                <Route path={ASSETS_ROUTE}>
+                    <Assets/>
+                </Route>
+                <Route path={ASSET_DEFINITIONS_ROUTE}>
+                    <AssetDefinitions/>
                 </Route>
                 <Route path={HOME_ROUTE}>
                     <AdminHome/>

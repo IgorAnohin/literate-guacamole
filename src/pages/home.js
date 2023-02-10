@@ -13,8 +13,8 @@ import {Builder} from "./builder/main";
 import {getUserRole} from "../services/users";
 
 
-export const Home = ({setToken}) => {
-    const [userRole, setUserRole] = useState();
+export const HomePage = ({setToken}) => {
+    const [userRole, setUserRole] = useState(null);
     useEffect(() => {
             getUserRole().then((role) => setUserRole(role))
         },

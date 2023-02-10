@@ -6,7 +6,7 @@ import {login} from "../services/auth";
 import {useHistory} from "react-router-dom";
 
 
-export const Login = ({setToken}) => {
+export const LoginPage = ({setToken}) => {
     const [validated, setValidated] = useState(false);
     const history = useHistory();
 
@@ -19,7 +19,8 @@ export const Login = ({setToken}) => {
         } else {
             login(form.login_email.value, form.login_password.value).then((userToken) => {
                 if (userToken == null) {
-                    console.log("Token is null")
+                    console.log("Token is null.");
+                    // ToDo: add FlashBar error
                     // event.preventDefault();
                     // event.stopPropagation();
                 } else {

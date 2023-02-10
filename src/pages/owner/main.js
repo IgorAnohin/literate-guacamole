@@ -1,13 +1,13 @@
 import {Route, Switch} from "react-router-dom";
 import {
     HOME_ROUTE,
-    OWNER_RESOURCES_ROUTE, OWNER_RECRUITMENT_ROUTE, OWNER_BUILDING_ROUTE, OWNER_NEW_BUILDING_ORDER_ROUTE
+    OWNER_ASSETS_ROUTE, OWNER_RECRUITMENT_ROUTE, OWNER_BUILDING_ROUTE, OWNER_NEW_BUILDING_ORDER_ROUTE
 } from "../../constants";
 import React from "react";
 import {Nav, Navbar} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
 import {OwnerHome} from "./home";
-import {Resources} from "../admin/resources";
+import {Assets} from "../admin/assets";
 import {Building} from "./building";
 import {NewBuildingOrder} from "./new_building_order";
 import {logout} from "../../services/auth";
@@ -28,7 +28,7 @@ const OwnerHeader = ({setToken}) => {
                     <LinkContainer to={OWNER_RECRUITMENT_ROUTE}>
                         <Nav.Link>Рекруты</Nav.Link>
                     </LinkContainer>
-                    <LinkContainer to={OWNER_RESOURCES_ROUTE}>
+                    <LinkContainer to={OWNER_ASSETS_ROUTE}>
                         <Nav.Link>Активы замка</Nav.Link>
                     </LinkContainer>
                 </Nav>
@@ -64,8 +64,8 @@ export const Owner = ({setToken}) => {
                 <Route path={OWNER_RECRUITMENT_ROUTE}>
                     LOL
                 </Route>
-                <Route path={OWNER_RESOURCES_ROUTE}>
-                    <Resources/>
+                <Route path={OWNER_ASSETS_ROUTE}>
+                    <Assets/>
                 </Route>
                 <Route path={HOME_ROUTE}>
                     <OwnerHome/>
