@@ -3,27 +3,7 @@ import {useHistory, useParams} from "react-router-dom";
 import {acceptBuildingOrder, dismissBuildingOrder, getBuildingOrderById} from "../../services/building_orders";
 import {Button, Card, Col, Container, Form, Image, Row} from "react-bootstrap";
 import {HOME_ROUTE} from "../../constants";
-
-
-const Resource = ({text, icon}) => {
-    return (
-        <div className="border" style={{padding: 10}}>
-            <Row>
-                <Col md="auto">
-                    <Image src={icon} height="48px" width="48px"/>
-                </Col>
-                <Col>
-                    <Container style={{paddingTop: "10px"}}>
-                        {text}
-                    </Container>
-                </Col>
-            </Row>
-
-        </div>
-
-    );
-
-}
+import {Resource} from "../../widgets/ResourceWidget";
 
 export const TakeOrder = () => {
 

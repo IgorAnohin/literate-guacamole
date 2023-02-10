@@ -1,28 +1,34 @@
 import {useHistory} from "react-router-dom";
-import {EDIT_USER_ROUTE, NEW_ASSET_DEFINITIONS_ROUTE, NEW_USER_ROUTE} from "../../constants";
+import {EDIT_USER_ROUTE, NEW_USER_ROUTE} from "../../../constants";
 import {Button} from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 import React, {useEffect, useState} from "react";
-import {getUsers} from "../../services/users";
+import {getUsers} from "../../../services/users";
 
 
-export const AssetDefinitions = () => {
+export const AdminUsers = () => {
 
     const history = useHistory();
 
     const columns = [{
         dataField: 'name',
-        text: 'Наименование',
+        text: 'Пользователь',
     }, {
-        dataField: 'category',
-        text: 'Категория'
+        dataField: 'email',
+        text: 'Почта'
+    }, {
+        dataField: 'role',
+        text: 'Роль',
+    }, {
+        dataField: 'last_enter',
+        text: 'Последний вход',
     }];
 
 
     const [users, setUsers] = useState([])
 
     useEffect(() => {
-        getAssetDefs().then((newUsers) => setUsers(newUsers))
+        getUsers().then((newUsers) => setUsers(newUsers))
     }, [])
 
     const tableRowEvents = {
@@ -36,8 +42,8 @@ export const AssetDefinitions = () => {
         <div>
             <div className="d-grid gap-2">
                 <Button variant="primary" size="lg" onClick={() => {
-                    history.push(NEW_ASSET_DEFINITIONS_ROUTE)
-                }}>Добавить определение актива</Button>
+                    history.push(NEW_USER_ROUTE)
+                }}>Добавить нового пользователя</Button>
             </div>
             <BootstrapTable classes={"table-hover"} keyField='name' data={users} columns={columns}
                             rowEvents={ tableRowEvents }
@@ -45,3 +51,4 @@ export const AssetDefinitions = () => {
         </div>
     );
 }
+

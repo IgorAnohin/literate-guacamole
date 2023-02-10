@@ -6,19 +6,21 @@ import {
     ASSETS_ROUTE,
     USERS_ROUTE,
     EDIT_USER_ROUTE,
-    ASSET_DEFINITIONS_ROUTE
+    ASSET_DEFINITIONS_ROUTE, NEW_ASSET_DEFINITIONS_ROUTE, EDIT_ASSET_DEFINITIONS_ROUTE
 } from "../../constants";
 import React from "react";
 import {Nav, Navbar} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
 import {AdminHome} from "./home";
-import {AdminUsers} from "./users";
-import {NewUser} from "./new_user";
+import {AdminUsers} from "./users/users";
+import {NewUser} from "./users/new_user";
 import {Audit} from "./audit";
 import {Assets} from "./assets";
 import {logout} from "../../services/auth";
-import {EditUser} from "./edit_user";
-import {AssetDefinitions} from "./asset_definitions";
+import {EditUser} from "./users/edit_user";
+import {AssetDefinitions} from "./assetDefs/asset_definitions";
+import {NewAssetDefinition} from "./assetDefs/new_asset_definition";
+import {EditAssetDefinition} from "./assetDefs/edit_asset_definition";
 
 
 const AdminHeader = ({setToken}) => {
@@ -82,6 +84,12 @@ export const Admin = ({setToken}) => {
                 </Route>
                 <Route path={ASSETS_ROUTE}>
                     <Assets/>
+                </Route>
+                <Route path={EDIT_ASSET_DEFINITIONS_ROUTE(":assetDefinitionId")}>
+                    <EditAssetDefinition/>
+                </Route>
+                <Route path={NEW_ASSET_DEFINITIONS_ROUTE}>
+                    <NewAssetDefinition/>
                 </Route>
                 <Route path={ASSET_DEFINITIONS_ROUTE}>
                     <AssetDefinitions/>
