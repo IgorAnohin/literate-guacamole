@@ -1,4 +1,9 @@
-import {changeAssetAmountRequest, getBuildingsRequest, getResourcesRequest} from "../repository/assets";
+import {
+    changeAssetAmountRequest, createAssetRequest,
+    getBuildingsRequest,
+    getRecruitsRequest,
+    getResourcesRequest, removeAssetRequest
+} from "../repository/assets";
 import {getToken} from "./auth";
 import {BUILDING_ASSET, DEBUG} from "../constants";
 
@@ -32,6 +37,16 @@ export const changeAssetAmount = async (assetId, newAmount) => {
     return true;
 }
 
+export const removeAsset = async (assetId) => {
+    if (DEBUG) {
+        // Do nothing in debug
+    } else {
+        await removeAssetRequest(assetId, getToken());
+    }
+
+    return true;
+}
+
 export const getResources = async () => {
     let data;
 
@@ -49,6 +64,38 @@ export const getResources = async () => {
 
     return data.resources;
 }
+
+
+export const createAsset = async (assetDefId) => {
+    let data;
+
+    if (DEBUG) {
+    } else {
+        data = await createAssetRequest(assetDefId, getToken());
+    }
+
+    return data.resources;
+}
+
+
+export const getRecruits = async () => {
+    let data;
+
+    if (DEBUG) {
+        data = {
+            resources: [
+                {id: 1, name: "Крестьянин", fraction: "Орден Порядка", level: "1", amount: "12", image: MOCK_ASSET_URL},
+                {id: 2, name: "Михаил", fraction: "Лесной Союз", level: "2", amount: "11", image: MOCK_ASSET_URL},
+                {id: 3, name: "Гремлин-вредитель", fraction: "Академия волшебства", level: "3",  amount: "1", image: MOCK_ASSET_URL},
+            ]
+        };
+    } else {
+        data = await getRecruitsRequest(getToken());
+    }
+
+    return data.resources;
+}
+
 
 export const getBuildings = async () => {
     let data;

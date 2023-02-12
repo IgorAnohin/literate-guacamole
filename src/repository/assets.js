@@ -6,7 +6,19 @@ export const getResourcesRequest = async (token) => {
 
 }
 
+export const getRecruitsRequest = async (token) => {
+
+}
+
 export const changeAssetAmountRequest = async (assetId, newAmount, token) => {
+
+}
+
+export const removeAssetRequest = async (assetId, token) => {
+
+}
+
+export const createAssetRequest = async (assetId, token) => {
 
 }
 

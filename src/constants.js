@@ -93,3 +93,6 @@ export const OWNER_ASSETS_ROUTE = ASSETS_ROUTE;
 export const BUILDER_BUILDING_ROUTE = `${HOME_ROUTE}/buildings`;
 export const BUILDER_NEW_BUILDING_ROUTE = `${BUILDER_BUILDING_ROUTE}/new`;
 export const BUILDER_TAKE_ORDER_ROUTE = `${HOME_ROUTE}/order`;
+
+// Warrior routes
+export const WARRIOR_NEW_RECRUIT_ROUTE = `${HOME_ROUTE}/recruits/new`;

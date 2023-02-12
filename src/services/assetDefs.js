@@ -100,6 +100,25 @@ export const updateAssetDef = async (assetDefId, name, type, description, costs,
 }
 
 
+export const getRecruitAssetDefs = async () => {
+    let data;
+
+    if (DEBUG) {
+        data = {
+            assetDefs: [
+                {id: 1, name: "Крестьянин", fraction: "Орден Порядка", level: "1", image: MOCK_ASSET_DEF_URL},
+                {id: 2, name: "Михаил", fraction: "Лесной Союз", level: "2",  image: MOCK_ASSET_DEF_URL},
+                {id: 3, name: "Гремлин-вредитель", fraction: "Академия волшебства", level: "3",  image: MOCK_ASSET_DEF_URL},
+            ]
+        };
+    } else {
+        data = await getAssetDefsRequest(getToken());
+    }
+
+    return data.assetDefs;
+}
+
+
 export const getResourcesAssetDefs = async () => {
     let data;
 
