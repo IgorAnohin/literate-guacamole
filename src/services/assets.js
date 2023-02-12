@@ -1,8 +1,10 @@
-import {getBuildingsRequest, getResourcesRequest} from "../repository/assets";
+import {changeAssetAmountRequest, getBuildingsRequest, getResourcesRequest} from "../repository/assets";
 import {getToken} from "./auth";
 import {BUILDING_ASSET, DEBUG} from "../constants";
 
-export const getResources = async () => {
+const MOCK_ASSET_URL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKsn55rXnt0jZLwjkk8CotD0LG0IEZgil3S4gXx15Q-Q&s";
+
+export const getAssets = async () => {
     let data;
 
     if (DEBUG) {
@@ -11,6 +13,34 @@ export const getResources = async () => {
                 {id: 1, name: "Песок", amount: "12", type: "Ресурс"},
                 {id: 2, name: "Капитолий", amount: "11", type: "Здание"},
                 {id: 3, name: "Жмых", amount: "1", type: "Рекрутёр"},
+            ]
+        };
+    } else {
+        data = await getResourcesRequest(getToken());
+    }
+
+    return data.resources;
+}
+
+export const changeAssetAmount = async (assetId, newAmount) => {
+    if (DEBUG) {
+        // Do nothing in debug
+    } else {
+        await changeAssetAmountRequest(assetId, newAmount, getToken());
+    }
+
+    return true;
+}
+
+export const getResources = async () => {
+    let data;
+
+    if (DEBUG) {
+        data = {
+            resources: [
+                {id: 1, name: "Песок", amount: "12", image: MOCK_ASSET_URL},
+                {id: 2, name: "Капитолий", amount: "11", image: MOCK_ASSET_URL},
+                {id: 3, name: "Жмых", amount: "1", image: MOCK_ASSET_URL},
             ]
         };
     } else {

@@ -1,6 +1,6 @@
 import {
     ADMIN_ROLE, BUILDER_ROLE,
-    OWNER_ROLE, WARRIOR_ROLE, WIZARD_ROLE,
+    OWNER_ROLE, PAYMASTER_ROLE, WARRIOR_ROLE, WIZARD_ROLE,
 } from "../constants";
 
 
@@ -11,6 +11,7 @@ import {Admin} from "./admin/main";
 import {Owner} from "./owner/main";
 import {Builder} from "./builder/main";
 import {getUserRole} from "../services/users";
+import {Paymaster} from "./paymaster/main";
 
 
 export const HomePage = ({setToken}) => {
@@ -28,6 +29,8 @@ export const HomePage = ({setToken}) => {
             return <Admin setToken={setToken}/>;
         case OWNER_ROLE:
             return <Owner setToken={setToken}/>;
+        case PAYMASTER_ROLE:
+            return <Paymaster setToken={setToken}/>;
         case BUILDER_ROLE:
             return <Builder setToken={setToken}/>;
         case WARRIOR_ROLE:

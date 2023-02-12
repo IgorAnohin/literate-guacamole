@@ -6,6 +6,11 @@ export const getResourcesRequest = async (token) => {
 
 }
 
+export const changeAssetAmountRequest = async (assetId, newAmount, token) => {
+
+}
+
+
 export const getBuildingsRequest = async (token) => {
     try {
         const response = await axios.get(ASSETS, {

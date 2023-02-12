@@ -3,11 +3,12 @@ export const DEBUG = true;
 export const ADMIN_ROLE = "admin";
 export const OWNER_ROLE = "owner";
 export const BUILDER_ROLE = "builder";
+export const PAYMASTER_ROLE = "paymaster";
 export const WARRIOR_ROLE = "warrior";
 export const WIZARD_ROLE = "wizard";
 
 export const ROLES = [
-    ADMIN_ROLE, OWNER_ROLE, BUILDER_ROLE, WARRIOR_ROLE, WIZARD_ROLE
+    ADMIN_ROLE, OWNER_ROLE, BUILDER_ROLE, WARRIOR_ROLE, PAYMASTER_ROLE, WIZARD_ROLE
 ];
 
 export const roleToReadable = {
@@ -15,6 +16,7 @@ export const roleToReadable = {
     [OWNER_ROLE]: "Владелец замка",
     [BUILDER_ROLE]: "Строитель",
     [WARRIOR_ROLE]: "Генерал казарм",
+    [PAYMASTER_ROLE]: "Казначей",
     [WIZARD_ROLE]: "Волшебник",
 }
 
