@@ -7,17 +7,17 @@ export const AdminHome = () => {
     return (
         <Row xs={1} md={3} className="g-3">
             <Col>
-                <PageCardWidget pageRoute={USERS_ROUTE} imageSrc="./Vector.png" text="Управление пользователями"/>
+                <PageCardWidget pageRoute={USERS_ROUTE} imageSrc="/Vector.png" text="Управление пользователями"/>
             </Col>
             <Col>
-                <PageCardWidget pageRoute={AUDIT_ROUTE} imageSrc="./Vector.png"
+                <PageCardWidget pageRoute={AUDIT_ROUTE} imageSrc="/Vector.png"
                                 text="Сбор аудитных данных по истории изменения активов"/>
             </Col>
             <Col>
-                <PageCardWidget pageRoute={ADMIN_RESOURCES_ROUTE} imageSrc="./Vector.png" text="Активы замка"/>
+                <PageCardWidget pageRoute={ADMIN_RESOURCES_ROUTE} imageSrc="/Vector.png" text="Активы замка"/>
             </Col>
             <Col>
-                <PageCardWidget pageRoute={ASSET_DEFINITIONS_ROUTE} imageSrc="./Vector.png" text="Определения активов"/>
+                <PageCardWidget pageRoute={ASSET_DEFINITIONS_ROUTE} imageSrc="/Vector.png" text="Определения активов"/>
             </Col>
         </Row>
     );
