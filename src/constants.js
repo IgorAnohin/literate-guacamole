@@ -80,21 +80,22 @@ export const EDIT_USER_ROUTE = (userId) => `${HOME_ROUTE}/users/info/${userId}`;
 export const AUDIT_ROUTE = `${HOME_ROUTE}/audit`;
 export const ADMIN_RESOURCES_ROUTE = `${HOME_ROUTE}/resources`;
 export const ADMIN_SPELLS_ROUTE = `${HOME_ROUTE}/spells`;
+export const ADMIN_BUILDINGS_ROUTE = `${HOME_ROUTE}/buildings`;
 export const ADMIN_RECRUITS_ROUTE = `${HOME_ROUTE}/recruits`;
 export const ASSET_DEFINITIONS_ROUTE = `${HOME_ROUTE}/asset_definitions`;
 export const NEW_ASSET_DEFINITIONS_ROUTE = `${HOME_ROUTE}/asset_definitions/new`;
 export const EDIT_ASSET_DEFINITIONS_ROUTE = (assetDefId) => `${HOME_ROUTE}/asset_definitions/info/${assetDefId}`;
 
 // Owner routes
-export const OWNER_BUILDING_ROUTE = `${HOME_ROUTE}/building`;
-export const OWNER_NEW_BUILDING_ORDER_ROUTE = `${OWNER_BUILDING_ROUTE}/new`;
+export const OWNER_BUILDING_ORDERS_ROUTE = `${HOME_ROUTE}/building`;
+export const OWNER_NEW_BUILDING_ORDER_ROUTE = `${OWNER_BUILDING_ORDERS_ROUTE}/new`;
 export const OWNER_RESOURCES_ROUTE = ADMIN_RESOURCES_ROUTE;
 export const OWNER_SPELLS_ROUTE = ADMIN_SPELLS_ROUTE;
+export const OWNER_BUILDINGS_ROUTE = ADMIN_BUILDINGS_ROUTE;
 export const OWNER_RECRUITS_ROUTE = ADMIN_RECRUITS_ROUTE;
 
 // Builder routes
-export const BUILDER_BUILDING_ROUTE = `${HOME_ROUTE}/buildings`;
-export const BUILDER_NEW_BUILDING_ROUTE = `${BUILDER_BUILDING_ROUTE}/new`;
+export const BUILDER_BUILDINGS_ROUTE = `${HOME_ROUTE}/buildings`;
 export const BUILDER_TAKE_ORDER_ROUTE = `${HOME_ROUTE}/order`;
 
 // Warrior routes

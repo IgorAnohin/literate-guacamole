@@ -29,12 +29,12 @@ export const getBuildingOrders = async () => {
 
 export const createBuildingOrder = async (toBeginningQueue, buildingId, comment, historyRouter) => {
     if (DEBUG) {
-        historyRouter.go(-1);
+        // Do nothing in Debug
     } else {
         await createBuildingOrderRequest(toBeginningQueue, buildingId, comment, getToken());
-        historyRouter.go(-1);
     }
 
+    historyRouter.go(-1);
 }
 
 export const getBuildingOrderById = async (orderId) => {
@@ -54,6 +54,12 @@ export const getBuildingOrderById = async (orderId) => {
         order: order,
         building: building,
     }
+}
+
+export const increaseBuildingOrderPriority = async (orderId) => {
+}
+
+export const decreaseBuildingOrderPriority = async (orderId) => {
 }
 
 

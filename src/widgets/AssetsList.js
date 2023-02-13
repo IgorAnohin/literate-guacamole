@@ -1,20 +1,24 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import {changeAssetAmount, removeAsset} from "../services/assets";
 import BootstrapTable from "react-bootstrap-table-next";
 import {Button, Col, Form, Modal, Row} from "react-bootstrap";
 
 
-const ChangeValueDialog = ({showModal, hideModal, confirmModal, message, minValue, initialValue}) => {
+const ChangeValueDialog = ({showModal, hideModal, confirmModal, message, maxValue, initialValue}) => {
 
     const [validated, setValidated] = useState(false);
+    const formRef = useRef();
+
+    console.log("Max value", maxValue);
 
     const handleSubmit = (event) => {
-        const form = event.currentTarget;
+        const form = formRef.current;
         event.preventDefault();
+
         if (form.checkValidity() === false) {
             event.stopPropagation();
         } else {
-            confirmModal();
+            confirmModal(form.newValue.value);
         }
 
         setValidated(true);
@@ -27,12 +31,13 @@ const ChangeValueDialog = ({showModal, hideModal, confirmModal, message, minValu
             </Modal.Header>
             <Modal.Body>
                 <div className="alert alert-info">{message}</div>
-                <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                <Form ref={formRef} noValidate validated={validated}>
                     <Form.Group md="4" controlId="newValue">
                         <Form.Control
                             type="number"
                             defaultValue={initialValue}
-                            min={minValue}
+                            max={maxValue}
+                            min={0}
                         />
                     </Form.Group>
                 </Form>
@@ -58,6 +63,8 @@ export class AssetsTable extends React.Component {
             columns: props.columns,
 
             changeAmountAvailable: props.changeAmountAvailable,
+            onlyDecrease: props.onlyDecrease == null ? false : props.onlyDecrease,
+
             removeAvailable: props.removeAvailable,
 
             selectedRow: null,
@@ -137,7 +144,7 @@ export class AssetsTable extends React.Component {
                     }}
                     hideModal={this.hideEditModal}
                     message="Укажите новое количество актива"
-                    minValue={0}
+                    maxValue={this.state.onlyDecrease && !!this.state.selectedRow ? this.state.selectedRow.amount : 100000}
                     initialValue={!!this.state.selectedRow ? this.state.selectedRow.amount : 0}
                 />
             </div>

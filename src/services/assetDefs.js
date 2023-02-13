@@ -154,3 +154,38 @@ export const getResourcesAssetDefs = async () => {
 
     return data.assetDefs;
 }
+
+export const getBuildingAssetDefs = async () => {
+    let data;
+
+    if (DEBUG) {
+        data = [
+            {
+                code: "kapitoly",
+                description: "Капитолий Капитолий",
+                id: 1,
+                img75Url: null,
+                img130Url: null,
+                img250Url: null,
+                imgOrigUrl: null,
+                name: "Капитолий",
+                type: BUILDING_ASSET,
+            },
+            {
+                code: "kapitoly",
+                description: "Капитолий Капитолий",
+                id: 22,
+                img75Url: null,
+                img130Url: null,
+                img250Url: null,
+                imgOrigUrl: null,
+                name: "Замок",
+                type: BUILDING_ASSET,
+            },
+        ];
+    } else {
+        data = await getAssetDefsRequest(getToken());
+    }
+
+    return data.filter((element) => element.type == BUILDING_ASSET)
+}

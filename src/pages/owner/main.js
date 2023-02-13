@@ -2,20 +2,22 @@ import {Route, Switch} from "react-router-dom";
 import {
     HOME_ROUTE,
     OWNER_RESOURCES_ROUTE,
-    OWNER_BUILDING_ROUTE,
+    OWNER_BUILDING_ORDERS_ROUTE,
     OWNER_NEW_BUILDING_ORDER_ROUTE,
-    OWNER_RECRUITS_ROUTE, OWNER_SPELLS_ROUTE
+    OWNER_RECRUITS_ROUTE, OWNER_SPELLS_ROUTE, OWNER_BUILDINGS_ROUTE
 } from "../../constants";
 import React from "react";
 import {Nav, Navbar} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
 import {OwnerHome} from "./home";
 import {Resources} from "../admin_owner_common/resources";
-import {Building} from "./building";
+import {BuildingOrders} from "./building_orders";
 import {NewBuildingOrder} from "./new_building_order";
 import {logout} from "../../services/auth";
 import {SpellsList} from "../../widgets/SpellsList";
 import {RecruitsList} from "../../widgets/RecruitsList";
+import {ResourcesList} from "../../widgets/ResourcesList";
+import {BuildingsList} from "../../widgets/BuildingsList";
 
 
 const OwnerHeader = ({setToken}) => {
@@ -27,7 +29,7 @@ const OwnerHeader = ({setToken}) => {
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
-                    <LinkContainer to={OWNER_BUILDING_ROUTE}>
+                    <LinkContainer to={OWNER_BUILDING_ORDERS_ROUTE}>
                         <Nav.Link>Строительство</Nav.Link>
                     </LinkContainer>
                     <LinkContainer to={OWNER_RECRUITS_ROUTE}>
@@ -37,7 +39,10 @@ const OwnerHeader = ({setToken}) => {
                         <Nav.Link>Ресурсы</Nav.Link>
                     </LinkContainer>
                     <LinkContainer to={OWNER_SPELLS_ROUTE}>
-                        <Nav.Link>зкалинания</Nav.Link>
+                        <Nav.Link>Заклинания</Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer to={OWNER_BUILDINGS_ROUTE}>
+                        <Nav.Link>Здания</Nav.Link>
                     </LinkContainer>
                 </Nav>
                 (Владелец замка)
@@ -66,14 +71,17 @@ export const Owner = ({setToken}) => {
                 <Route path={OWNER_NEW_BUILDING_ORDER_ROUTE}>
                     <NewBuildingOrder/>
                 </Route>
-                <Route path={OWNER_BUILDING_ROUTE}>
-                    <Building/>
+                <Route path={OWNER_BUILDING_ORDERS_ROUTE}>
+                    <BuildingOrders/>
                 </Route>
                 <Route path={OWNER_RECRUITS_ROUTE}>
                     <RecruitsList changeAmountAvailable={false} removeAvailable={false}/>
                 </Route>
                 <Route path={OWNER_RESOURCES_ROUTE}>
-                    <Resources/>
+                    <ResourcesList changeAmountAvailable={true} onlyDecrease={true}/>
+                </Route>
+                <Route path={OWNER_BUILDINGS_ROUTE}>
+                    <BuildingsList/>
                 </Route>
                 <Route path={OWNER_SPELLS_ROUTE}>
                     <SpellsList changeAmountAvailable={false} removeAvailable={false}/>

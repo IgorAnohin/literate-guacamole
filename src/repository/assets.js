@@ -41,7 +41,6 @@ export const getBuildingsRequest = async (token) => {
         console.log(err);
         return [];
     }
-
 }
 
 export const getBuildingByIdRequest = async (buildingId, token) => {

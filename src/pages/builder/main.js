@@ -1,7 +1,7 @@
 import {Route, Switch} from "react-router-dom";
 import {
     HOME_ROUTE,
-    BUILDER_BUILDING_ROUTE, BUILDER_NEW_BUILDING_ROUTE, BUILDER_TAKE_ORDER_ROUTE
+    BUILDER_BUILDINGS_ROUTE, BUILDER_NEW_BUILDING_ROUTE, BUILDER_TAKE_ORDER_ROUTE
 } from "../../constants";
 import React from "react";
 import {Nav, Navbar} from "react-bootstrap";
@@ -9,6 +9,7 @@ import {LinkContainer} from "react-router-bootstrap";
 import {Orders} from "./orders";
 import {TakeOrder} from "./take_order";
 import {logout} from "../../services/auth";
+import {BuildingsList} from "../../widgets/BuildingsList";
 
 
 const BuilderHeader = ({setToken}) => {
@@ -23,7 +24,7 @@ const BuilderHeader = ({setToken}) => {
                     <LinkContainer to={HOME_ROUTE}>
                         <Nav.Link>Заказы</Nav.Link>
                     </LinkContainer>
-                    <LinkContainer to={BUILDER_BUILDING_ROUTE}>
+                    <LinkContainer to={BUILDER_BUILDINGS_ROUTE}>
                         <Nav.Link>База зданий</Nav.Link>
                     </LinkContainer>
                 </Nav>
@@ -50,11 +51,8 @@ export const Builder = ({setToken}) => {
             <BuilderHeader setToken={setToken}/>
 
             <Switch>
-                <Route path={BUILDER_NEW_BUILDING_ROUTE}>
-                    LOL1
-                </Route>
-                <Route path={BUILDER_BUILDING_ROUTE}>
-                    LOL2
+                <Route path={BUILDER_BUILDINGS_ROUTE}>
+                    <BuildingsList/>
                 </Route>
                 <Route path={`${BUILDER_TAKE_ORDER_ROUTE}/:orderId`}>
                     <TakeOrder/>

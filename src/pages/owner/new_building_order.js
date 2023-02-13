@@ -2,8 +2,8 @@ import React, {useEffect, useState} from "react";
 import {Button, Container, Form, InputGroup, Tabs} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
 import {Tab} from "bootstrap";
-import {getBuildings} from "../../services/assets";
 import {createBuildingOrder} from "../../services/building_orders";
+import {getBuildingAssetDefs} from "../../services/assetDefs";
 
 export const NewBuildingOrder = () => {
 
@@ -13,7 +13,7 @@ export const NewBuildingOrder = () => {
     const [buildings, setBuildings] = useState([]);
 
     useEffect(() => {
-        getBuildings().then((newBuildings) => setBuildings(newBuildings));
+        getBuildingAssetDefs().then((newBuildings) => setBuildings(newBuildings));
     }, [])
 
 

@@ -3,8 +3,8 @@ import {useHistory} from "react-router-dom";
 import {Card, Col, Row} from "react-bootstrap";
 import React from "react";
 import {
-    OWNER_BUILDING_ROUTE,
-    OWNER_RECRUITMENT_ROUTE, OWNER_RECRUITS_ROUTE,
+    OWNER_BUILDING_ORDERS_ROUTE, OWNER_BUILDINGS_ROUTE,
+    OWNER_RECRUITS_ROUTE,
     OWNER_RESOURCES_ROUTE,
     OWNER_SPELLS_ROUTE
 } from "../../constants";
@@ -18,7 +18,7 @@ export const OwnerHome = () => {
         <Row xs={1} md={3} className="g-3">
             <Col>
                 <Card onClick={() => {
-                    history.push(OWNER_BUILDING_ROUTE)
+                    history.push(OWNER_BUILDING_ORDERS_ROUTE)
                 }} style={{cursor: "pointer"}}>
                     <Building className="card-img-top" size="200" style={{textAlign: "center"}}/>
                     <Card.Body>
@@ -60,6 +60,18 @@ export const OwnerHome = () => {
                     <Card.Body>
                         <Card.Title style={{textAlign: "center"}}>
                             Заклинания
+                        </Card.Title>
+                    </Card.Body>
+                </Card>
+            </Col>
+            <Col>
+                <Card onClick={() => {
+                    history.push(OWNER_BUILDINGS_ROUTE)
+                }} style={{cursor: "pointer"}}>
+                    <CollectionFill className="card-img-top" size="200" style={{textAlign: "center"}}/>
+                    <Card.Body>
+                        <Card.Title style={{textAlign: "center"}}>
+                            Здания
                         </Card.Title>
                     </Card.Body>
                 </Card>

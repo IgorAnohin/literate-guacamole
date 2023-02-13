@@ -16,7 +16,7 @@ export const getUserRole = async () => {
         data = {
             "username": "admin",
             "roles": [
-                OWNER_ROLE
+                BUILDER_ROLE
             ]
         }
     } else {

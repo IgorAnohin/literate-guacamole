@@ -39,7 +39,7 @@ export const Paymaster = ({setToken}) => {
 
             <Switch>
                 <Route path={HOME_ROUTE}>
-                    <ResourcesList changeAmountAvailable={true} removeAvailable={false}/>
+                    <ResourcesList changeAmountAvailable={true}/>
                 </Route>
             </Switch>
         </div>

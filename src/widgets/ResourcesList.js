@@ -3,7 +3,7 @@ import {getResources} from "../services/assets";
 import {AssetsTable} from "./AssetsList";
 import {imageFormatter} from "./image_formatter";
 
-export const ResourcesList = ({changeAmountAvailable, removeAvailable}) => {
+export const ResourcesList = ({changeAmountAvailable,  onlyDecrease = false}) => {
     const [data, setData] = useState(null);
 
     useEffect(() => {
@@ -26,7 +26,9 @@ export const ResourcesList = ({changeAmountAvailable, removeAvailable}) => {
         <div>
             {data && <AssetsTable data={data} columns={columns}
                                   changeAmountAvailable={changeAmountAvailable}
-                                  removeAvailable={removeAvailable}/>}
+                                  removeAvailable={false}
+                                  onlyDecrease={onlyDecrease}
+            />}
         </div>
     );
 }
