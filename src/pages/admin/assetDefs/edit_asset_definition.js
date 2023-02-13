@@ -15,9 +15,7 @@ import {
     STONE_RESOURCE,
     WOOD_RESOURCE
 } from "../../../constants";
-import {createAssetDef, getAssetDef, updateAssetDef} from "../../../services/assetDefs";
-import {Resource} from "../../../widgets/ResourceWidget";
-import {createUser, getUser} from "../../../services/users";
+import {getAssetDef, updateAssetDef} from "../../../services/assetDefs";
 
 const ChangeConfirmation = ({showModal, hideModal, confirmModal, message}) => {
     return (

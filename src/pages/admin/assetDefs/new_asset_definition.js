@@ -193,9 +193,31 @@ export const NewAssetDefinition = () => {
 
                 </Row>
 
-                {assetDefType === BUILDING_ASSET && <ResourcesGrid availableResources={BUILDING_ASSET_RESOURCES}/>}
-                {assetDefType === SPELL_ASSET && <ResourcesGrid availableResources={SPELL_ASSET_RESOURCES}/>}
-                {assetDefType === RECRUIT_ASSET && <ResourcesGrid availableResources={RECRUIT_ASSET_RESOURCES}/>}
+                {assetDefType === BUILDING_ASSET && <div>
+                    <ResourcesGrid availableResources={BUILDING_ASSET_RESOURCES}/>
+                </div>}
+                {assetDefType === SPELL_ASSET && <div>
+                    <Form.Group md="4" controlId="asset_def_spell_magic_school">
+                        <Form.Label>Школа магии</Form.Label>
+                        <Form.Control required/>
+                    </Form.Group>
+                    <Form.Group md="4" controlId="asset_def_spell_level">
+                        <Form.Label>Уровень</Form.Label>
+                        <Form.Control required type="number" min={0} defaultValue={0}/>
+                    </Form.Group>
+                    <ResourcesGrid availableResources={SPELL_ASSET_RESOURCES}/>
+                </div>}
+                {assetDefType === RECRUIT_ASSET && <div>
+                    <Form.Group md="4" controlId="asset_def_recruit_fraction">
+                        <Form.Label>Фракция</Form.Label>
+                        <Form.Control required/>
+                    </Form.Group>
+                    <Form.Group md="4" controlId="asset_def_recruit_level">
+                        <Form.Label>Уровень</Form.Label>
+                        <Form.Control required type="number" min={0} defaultValue={0}/>
+                    </Form.Group>
+                    <ResourcesGrid availableResources={RECRUIT_ASSET_RESOURCES}/>
+                </div>}
 
                 <div style={{height: "30px"}}/>
 
