@@ -119,6 +119,25 @@ export const getRecruitAssetDefs = async () => {
 }
 
 
+export const getSpellAssetDefs = async () => {
+    let data;
+
+    if (DEBUG) {
+        data = {
+            assetDefs: [
+                {id: 1, name: "Волшебная стрела", magic_school: "Огонь", level: "1", image: MOCK_ASSET_DEF_URL},
+                {id: 2, name: "Землетрясение", magic_school: "Земля", level: "1", image: MOCK_ASSET_DEF_URL},
+                {id: 3, name: "Цепная молния", magic_school: "Воздух", level: "1", image: MOCK_ASSET_DEF_URL},
+            ]
+        };
+    } else {
+        data = await getAssetDefsRequest(getToken());
+    }
+
+    return data.assetDefs;
+}
+
+
 export const getResourcesAssetDefs = async () => {
     let data;
 

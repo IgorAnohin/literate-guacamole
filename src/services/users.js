@@ -1,4 +1,4 @@
-import {ADMIN_ROLE, BUILDER_ROLE, DEBUG, OWNER_ROLE, PAYMASTER_ROLE, WARRIOR_ROLE} from "../constants";
+import {ADMIN_ROLE, BUILDER_ROLE, DEBUG, OWNER_ROLE, PAYMASTER_ROLE, WARRIOR_ROLE, WIZARD_ROLE} from "../constants";
 import {
     createUserRequest, deleteUserRequest,
     getRoleRequest, getUserRequest,
@@ -16,7 +16,7 @@ export const getUserRole = async () => {
         data = {
             "username": "admin",
             "roles": [
-                WARRIOR_ROLE
+                OWNER_ROLE
             ]
         }
     } else {

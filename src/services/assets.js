@@ -2,7 +2,7 @@ import {
     changeAssetAmountRequest, createAssetRequest,
     getBuildingsRequest,
     getRecruitsRequest,
-    getResourcesRequest, removeAssetRequest
+    getResourcesRequest, getSpellsRequest, removeAssetRequest
 } from "../repository/assets";
 import {getToken} from "./auth";
 import {BUILDING_ASSET, DEBUG} from "../constants";
@@ -73,8 +73,6 @@ export const createAsset = async (assetDefId) => {
     } else {
         data = await createAssetRequest(assetDefId, getToken());
     }
-
-    return data.resources;
 }
 
 
@@ -91,6 +89,25 @@ export const getRecruits = async () => {
         };
     } else {
         data = await getRecruitsRequest(getToken());
+    }
+
+    return data.resources;
+}
+
+
+export const getSpells = async () => {
+    let data;
+
+    if (DEBUG) {
+        data = {
+            resources: [
+                {id: 1, name: "Волшебная стрела", magic_school: "Огонь", level: "1", image: MOCK_ASSET_URL},
+                {id: 2, name: "Землетрясение", magic_school: "Земля", level: "1", image: MOCK_ASSET_URL},
+                {id: 3, name: "Цепная молния", magic_school: "Воздух", level: "1", image: MOCK_ASSET_URL},
+            ]
+        };
+    } else {
+        data = await getSpellsRequest(getToken());
     }
 
     return data.resources;

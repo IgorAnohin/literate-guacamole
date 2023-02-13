@@ -1,9 +1,10 @@
 import {Button, Col, Container, Image, Row} from "react-bootstrap";
 import React, {useEffect, useState} from "react";
-import {createAsset} from "../../services/assets";
+import {changeAssetAmount, createAsset, getRecruits, removeAsset} from "../../services/assets";
+import {WARRIOR_NEW_RECRUIT_ROUTE} from "../../constants";
 import BootstrapTable from "react-bootstrap-table-next";
-import {getRecruitAssetDefs} from "../../services/assetDefs";
 import {useHistory} from "react-router-dom";
+import {getRecruitAssetDefs, getSpellAssetDefs} from "../../services/assetDefs";
 
 function imageFormatter(cell, row) {
     return <Container>
@@ -16,20 +17,21 @@ function imageFormatter(cell, row) {
 }
 
 
-export const NewRecruit = () => {
+export const NewSpell = () => {
     const [data, setData] = useState(null);
-    const history = useHistory();
 
     useEffect(() => {
-        getRecruitAssetDefs().then((data) => setData(data))
+        getSpellAssetDefs().then((data) => setData(data))
     }, [])
+
+    const history = useHistory();
 
     const columns = [{
         dataField: 'name',
         text: 'Наименоавние',
     }, {
-        dataField: 'fraction',
-        text: 'Фракция',
+        dataField: 'magic_school',
+        text: 'Школа магии',
     }, {
         dataField: 'level',
         text: 'Уровень',
@@ -41,13 +43,13 @@ export const NewRecruit = () => {
 
     return (
         <div>
-            {data && <RecruitDefsList data={data} columns={columns} history={history}/>}
+            {data && <SpellDefsList data={data} history={history} columns={columns}/>}
         </div>
     );
 }
 
 
-class RecruitDefsList extends React.Component {
+class SpellDefsList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {

@@ -3,7 +3,7 @@ import {
     HOME_ROUTE,
     AUDIT_ROUTE,
     NEW_USER_ROUTE,
-    ASSETS_ROUTE,
+    ADMIN_RESOURCES_ROUTE,
     USERS_ROUTE,
     EDIT_USER_ROUTE,
     ASSET_DEFINITIONS_ROUTE, NEW_ASSET_DEFINITIONS_ROUTE, EDIT_ASSET_DEFINITIONS_ROUTE
@@ -15,7 +15,7 @@ import {AdminHome} from "./home";
 import {AdminUsers} from "./users/users";
 import {NewUser} from "./users/new_user";
 import {Audit} from "./audit";
-import {Assets} from "./assets";
+import {Resources} from "../admin_owner_common/resources";
 import {logout} from "../../services/auth";
 import {EditUser} from "./users/edit_user";
 import {AssetDefinitions} from "./assetDefs/asset_definitions";
@@ -38,7 +38,7 @@ const AdminHeader = ({setToken}) => {
                     <LinkContainer to={AUDIT_ROUTE}>
                         <Nav.Link>Сбор аудитных данных</Nav.Link>
                     </LinkContainer>
-                    <LinkContainer to={ASSETS_ROUTE}>
+                    <LinkContainer to={ADMIN_RESOURCES_ROUTE}>
                         <Nav.Link>Активы замка</Nav.Link>
                     </LinkContainer>
                     <LinkContainer to={ASSET_DEFINITIONS_ROUTE}>
@@ -82,8 +82,8 @@ export const Admin = ({setToken}) => {
                 <Route path={AUDIT_ROUTE}>
                     <Audit/>
                 </Route>
-                <Route path={ASSETS_ROUTE}>
-                    <Assets/>
+                <Route path={ADMIN_RESOURCES_ROUTE}>
+                    <Resources/>
                 </Route>
                 <Route path={EDIT_ASSET_DEFINITIONS_ROUTE(":assetDefinitionId")}>
                     <EditAssetDefinition/>

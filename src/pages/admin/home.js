@@ -1,6 +1,6 @@
 import {Col, Row} from "react-bootstrap";
 import React from "react";
-import {AUDIT_ROUTE, ASSETS_ROUTE, USERS_ROUTE, ASSET_DEFINITIONS_ROUTE} from "../../constants";
+import {AUDIT_ROUTE, ADMIN_RESOURCES_ROUTE, USERS_ROUTE, ASSET_DEFINITIONS_ROUTE} from "../../constants";
 import {PageCardWidget} from "../../widgets/PageCardWidget";
 
 export const AdminHome = () => {
@@ -14,7 +14,7 @@ export const AdminHome = () => {
                                 text="Сбор аудитных данных по истории изменения активов"/>
             </Col>
             <Col>
-                <PageCardWidget pageRoute={ASSETS_ROUTE} imageSrc="./Vector.png" text="Активы замка"/>
+                <PageCardWidget pageRoute={ADMIN_RESOURCES_ROUTE} imageSrc="./Vector.png" text="Активы замка"/>
             </Col>
             <Col>
                 <PageCardWidget pageRoute={ASSET_DEFINITIONS_ROUTE} imageSrc="./Vector.png" text="Определения активов"/>

@@ -1,13 +1,14 @@
 import {Route, Switch} from "react-router-dom";
-import {HOME_ROUTE} from "../../constants";
+import {HOME_ROUTE, WARRIOR_NEW_RECRUIT_ROUTE, WIZARD_NEW_SPELL_ROUTE} from "../../constants";
 import React from "react";
 import {Nav, Navbar} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
+import {PaymasterHome, WarriorHome, WizardHome} from "./home";
 import {logout} from "../../services/auth";
-import {ResourcesList} from "../../widgets/ResourcesList";
+import {NewRecruit, NewSpell} from "./new_spell";
 
 
-const PaymasterHeader = ({setToken}) => {
+const WizardHeader = ({setToken}) => {
     return (
         <Navbar bg="light" expand="lg">
             <LinkContainer to="/">
@@ -15,7 +16,7 @@ const PaymasterHeader = ({setToken}) => {
             </LinkContainer>
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav">
-                (Казначей)
+                (Глава гильдии магов)
                 <Nav>
                     <Nav.Link onClick={() => {
                         logout().then((success) => {
@@ -32,14 +33,17 @@ const PaymasterHeader = ({setToken}) => {
 }
 
 
-export const Paymaster = ({setToken}) => {
+export const Wizard = ({setToken}) => {
     return (
         <div>
-            <PaymasterHeader setToken={setToken}/>
+            <WizardHeader setToken={setToken}/>
 
             <Switch>
+                <Route path={WIZARD_NEW_SPELL_ROUTE}>
+                    <NewSpell/>
+                </Route>
                 <Route path={HOME_ROUTE}>
-                    <ResourcesList changeAmountAvailable={true} removeAvailable={false}/>
+                    <WizardHome/>
                 </Route>
             </Switch>
         </div>

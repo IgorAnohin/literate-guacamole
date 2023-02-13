@@ -6,7 +6,7 @@ import {getAssets} from "../../services/assets";
 const {SearchBar} = Search;
 
 
-export const Assets = () => {
+export const Resources = () => {
 
     const columns = [{
         dataField: 'name',

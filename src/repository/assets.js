@@ -10,6 +10,10 @@ export const getRecruitsRequest = async (token) => {
 
 }
 
+export const getSpellsRequest = async (token) => {
+
+}
+
 export const changeAssetAmountRequest = async (assetId, newAmount, token) => {
 
 }

@@ -1,16 +1,21 @@
 import {Route, Switch} from "react-router-dom";
 import {
     HOME_ROUTE,
-    OWNER_ASSETS_ROUTE, OWNER_RECRUITMENT_ROUTE, OWNER_BUILDING_ROUTE, OWNER_NEW_BUILDING_ORDER_ROUTE
+    OWNER_RESOURCES_ROUTE,
+    OWNER_BUILDING_ROUTE,
+    OWNER_NEW_BUILDING_ORDER_ROUTE,
+    OWNER_RECRUITS_ROUTE, OWNER_SPELLS_ROUTE
 } from "../../constants";
 import React from "react";
 import {Nav, Navbar} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
 import {OwnerHome} from "./home";
-import {Assets} from "../admin/assets";
+import {Resources} from "../admin_owner_common/resources";
 import {Building} from "./building";
 import {NewBuildingOrder} from "./new_building_order";
 import {logout} from "../../services/auth";
+import {SpellsList} from "../../widgets/SpellsList";
+import {RecruitsList} from "../../widgets/RecruitsList";
 
 
 const OwnerHeader = ({setToken}) => {
@@ -25,11 +30,14 @@ const OwnerHeader = ({setToken}) => {
                     <LinkContainer to={OWNER_BUILDING_ROUTE}>
                         <Nav.Link>Строительство</Nav.Link>
                     </LinkContainer>
-                    <LinkContainer to={OWNER_RECRUITMENT_ROUTE}>
+                    <LinkContainer to={OWNER_RECRUITS_ROUTE}>
                         <Nav.Link>Рекруты</Nav.Link>
                     </LinkContainer>
-                    <LinkContainer to={OWNER_ASSETS_ROUTE}>
-                        <Nav.Link>Активы замка</Nav.Link>
+                    <LinkContainer to={OWNER_RESOURCES_ROUTE}>
+                        <Nav.Link>Ресурсы</Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer to={OWNER_SPELLS_ROUTE}>
+                        <Nav.Link>зкалинания</Nav.Link>
                     </LinkContainer>
                 </Nav>
                 (Владелец замка)
@@ -61,11 +69,14 @@ export const Owner = ({setToken}) => {
                 <Route path={OWNER_BUILDING_ROUTE}>
                     <Building/>
                 </Route>
-                <Route path={OWNER_RECRUITMENT_ROUTE}>
-                    LOL
+                <Route path={OWNER_RECRUITS_ROUTE}>
+                    <RecruitsList changeAmountAvailable={false} removeAvailable={false}/>
                 </Route>
-                <Route path={OWNER_ASSETS_ROUTE}>
-                    <Assets/>
+                <Route path={OWNER_RESOURCES_ROUTE}>
+                    <Resources/>
+                </Route>
+                <Route path={OWNER_SPELLS_ROUTE}>
+                    <SpellsList changeAmountAvailable={false} removeAvailable={false}/>
                 </Route>
                 <Route path={HOME_ROUTE}>
                     <OwnerHome/>

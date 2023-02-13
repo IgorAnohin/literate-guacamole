@@ -2,7 +2,12 @@
 import {useHistory} from "react-router-dom";
 import {Card, Col, Row} from "react-bootstrap";
 import React from "react";
-import {OWNER_BUILDING_ROUTE, OWNER_RECRUITMENT_ROUTE, OWNER_ASSETS_ROUTE} from "../../constants";
+import {
+    OWNER_BUILDING_ROUTE,
+    OWNER_RECRUITMENT_ROUTE, OWNER_RECRUITS_ROUTE,
+    OWNER_RESOURCES_ROUTE,
+    OWNER_SPELLS_ROUTE
+} from "../../constants";
 import {Building, PersonBadge, CollectionFill} from 'react-bootstrap-icons';
 
 
@@ -25,7 +30,7 @@ export const OwnerHome = () => {
             </Col>
             <Col>
                 <Card onClick={() => {
-                    history.push(OWNER_RECRUITMENT_ROUTE)
+                    history.push(OWNER_RECRUITS_ROUTE)
                 }} style={{cursor: "pointer"}}>
                     <PersonBadge className="card-img-top" size="200" style={{textAlign: "center"}}/>
                     <Card.Body>
@@ -37,12 +42,24 @@ export const OwnerHome = () => {
             </Col>
             <Col>
                 <Card onClick={() => {
-                    history.push(OWNER_ASSETS_ROUTE)
+                    history.push(OWNER_RESOURCES_ROUTE)
                 }} style={{cursor: "pointer"}}>
                     <CollectionFill className="card-img-top" size="200" style={{textAlign: "center"}}/>
                     <Card.Body>
                         <Card.Title style={{textAlign: "center"}}>
-                            Активы замка
+                            Ресурсы
+                        </Card.Title>
+                    </Card.Body>
+                </Card>
+            </Col>
+            <Col>
+                <Card onClick={() => {
+                    history.push(OWNER_SPELLS_ROUTE)
+                }} style={{cursor: "pointer"}}>
+                    <CollectionFill className="card-img-top" size="200" style={{textAlign: "center"}}/>
+                    <Card.Body>
+                        <Card.Title style={{textAlign: "center"}}>
+                            Заклинания
                         </Card.Title>
                     </Card.Body>
                 </Card>
