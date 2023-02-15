@@ -9,7 +9,12 @@ import {
     RESOURCE_ASSET,
     STONE_RESOURCE
 } from "../constants";
-import {createAssetDefRequest, getAssetDefRequest, getAssetDefsRequest} from "../repository/assetDefs";
+import {
+    createAssetDefRequest,
+    getAssetDefRequest,
+    getAssetDefsRequest,
+    updateAssetDefRequest
+} from "../repository/assetDefs";
 import {uploadAvatarRequest} from "../repository/files";
 
 
@@ -90,7 +95,7 @@ export const updateAssetDef = async (assetDefId, name, type, description, costs,
     if (DEBUG) {
         data = "123";
     } else {
-        data = await createAssetDefRequest(assetDefId, name, type, description, imageUrl, costs, getToken());
+        data = await updateAssetDefRequest(assetDefId, name, type, description, imageUrl, costs, getToken());
     }
 
     const newAsetDefId = data;

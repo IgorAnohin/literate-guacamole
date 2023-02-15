@@ -42,7 +42,7 @@ export const createAssetDefRequest = async (name, type, description, imageUrl, c
             'description': description,
             'imgOrigUrl': imageUrl,
         }
-        const response = await axios.post(USERS, data, {
+        const response = await axios.post(ASSET_DEFS, data, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
@@ -57,7 +57,26 @@ export const createAssetDefRequest = async (name, type, description, imageUrl, c
 }
 
 export const updateAssetDefRequest = async (assetDefId, name, type, description, imageUrl, costs, token) => {
-
+    try {
+        const data = {
+            'type': type,
+            'name': name,
+            'description': description,
+            'imgOrigUrl': imageUrl,
+            'cost': costs,
+        }
+        const response = await axios.patch(`${ASSET_DEFS}/${assetDefId}`, data, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                }
+            },
+        )
+        return response.data.id;
+    } catch (err) {
+        console.log(err);
+        return [];
+    }
 }
 
 

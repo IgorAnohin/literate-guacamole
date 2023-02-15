@@ -1,18 +1,17 @@
 import axios from "axios";
 import {FILES} from "./api_paths";
 
-export const uploadAvatarRequest = async (imagePath, token) => {
+export const uploadAvatarRequest = async (image, token) => {
     // returns image URL
     try {
         const form = new FormData();
 
-        const imageFile = new File(["efghi"], "imagePath")
-        form.append('file', imageFile);
+        form.append('file', image);
 
         const response = await axios.post(FILES, form, {
             headers: {
                 "Content-Type": "multipart/form-data",
-                "Content-Length": imageFile.size,
+                "Content-Length": image.size,
                 'Authorization': `Bearer ${token}`,
             },
         })

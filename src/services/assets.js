@@ -13,18 +13,16 @@ export const getAssets = async () => {
     let data;
 
     if (DEBUG) {
-        data = {
-            resources: [
-                {id: 1, name: "Песок", amount: "12", type: "Ресурс"},
-                {id: 2, name: "Капитолий", amount: "11", type: "Здание"},
-                {id: 3, name: "Жмых", amount: "1", type: "Рекрутёр"},
-            ]
-        };
+        data = [
+            {id: 1, name: "Песок", amount: "12", type: "Ресурс"},
+            {id: 2, name: "Капитолий", amount: "11", type: "Здание"},
+            {id: 3, name: "Жмых", amount: "1", type: "Рекрутёр"},
+        ];
     } else {
         data = await getResourcesRequest(getToken());
     }
 
-    return data.resources;
+    return data;
 }
 
 export const changeAssetAmount = async (assetId, newAmount) => {

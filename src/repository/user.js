@@ -73,9 +73,32 @@ export const createUserRequest = async (username, email, password, role, avatarU
 }
 
 export const deleteUserRequest = async (userId, token) => {
-
+    try {
+        const response = await axios.delete(`${USERS}/${userId}`, {
+                headers: {'Authorization': `Bearer ${token}`}
+            },
+        )
+        return response.data.id;
+    } catch (err) {
+        console.log(err);
+        return [];
+    }
 }
 
 export const updateUserRequest = async (userId, updatedFieldName, newValue, token) => {
+    try {
+        const data = {updatedFieldName: newValue}
+        const response = await axios.patch(`${USERS}/${userId}`, data, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                }
+            },
+        )
+        return response.data.id;
+    } catch (err) {
+        console.log(err);
+        return [];
+    }
 }
 

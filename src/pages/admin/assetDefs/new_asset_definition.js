@@ -76,7 +76,7 @@ export const NewAssetDefinition = () => {
                 form.asset_def_type.value,
                 form.asset_def_description.value,
                 costs,
-                form.asset_def_image.value,
+                selectedFile,
                 history
             ).then((userToken) => {
             });
