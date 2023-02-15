@@ -45,13 +45,14 @@ export const getAssetDef = async (assetDefId) => {
             id: 1,
             name: "Капитолий",
             description: "Test description",
-            image: MOCK_ASSET_DEF_URL,
+            imgOrigUrl: MOCK_ASSET_DEF_URL,
             type: BUILDING_ASSET,
             cost: [{name: STONE_RESOURCE.toLowerCase(), count: 10}, {name: GOLD_RESOURCE.toLowerCase(), count: 200}],
             //cost: [{name: STONE_RESOURCE.toLowerCase(), count: 10}, {name: "gold", count: 200}],
         };
     } else {
         data = await getAssetDefRequest(assetDefId, getToken());
+        console.log(data);
     }
 
     return data;
@@ -83,12 +84,16 @@ export const createAssetDef = async (name, type, description, costs, image, rout
     return newAsetDefId;
 }
 
-export const updateAssetDef = async (assetDefId, name, type, description, costs, image, router) => {
-    let imageUrl;
-    if (DEBUG) {
-        imageUrl = MOCK_ASSET_DEF_URL;
-    } else {
-        imageUrl = await uploadAvatarRequest(image, getToken());
+export const updateAssetDef = async (assetDefId, name, type, description, costs, image, origImageUrl, router) => {
+    let imageUrl = origImageUrl;
+
+    console.log("New image:", image);
+    if (image != undefined) {
+        if (DEBUG) {
+            imageUrl = MOCK_ASSET_DEF_URL;
+        } else {
+            imageUrl = await uploadAvatarRequest(image, getToken());
+        }
     }
 
     let data;

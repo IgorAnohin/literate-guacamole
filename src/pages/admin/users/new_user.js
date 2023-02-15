@@ -26,7 +26,7 @@ export const NewUser = () => {
                 form.user_email.value,
                 form.user_password.value,
                 form.user_role.value,
-                form.user_avatar.value,
+                selectedFile,
                 history
             ).then((userToken) => {});
         }
@@ -67,7 +67,7 @@ export const NewUser = () => {
                 <Row>
                     <Col>
                         <Form.Group controlId="user_avatar" className="mb-3">
-                            <Form.Control ref={fileFormRef} type="file" onChange={onSelectFile} style={{opacity: 0, display: "none"}}/>
+                            <Form.Control ref={fileFormRef} required type="file" onChange={onSelectFile} style={{opacity: 0, display: "none"}}/>
                             {selectedFile &&
                             <div className={"d-flex align-items-center justify-content-center"}>
                                 <Image src={preview} onClick={() => fileFormRef.current.click()} style={{ width: "400px", height: "400px", cursor: "pointer", background: "#dedede" }}/>
@@ -82,6 +82,10 @@ export const NewUser = () => {
 
                                 </Card>
                             </div>}
+
+                            <Form.Control.Feedback type="invalid">
+                                Пожалуйста, задайте аватар
+                            </Form.Control.Feedback>
 
                         </Form.Group>
                     </Col>
@@ -133,7 +137,6 @@ export const NewUser = () => {
                             </Form.Group>
                         </Form.Group>
                     </Col>
-
                 </Row>
 
                 <Row>

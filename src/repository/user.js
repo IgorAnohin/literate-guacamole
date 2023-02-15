@@ -57,6 +57,7 @@ export const createUserRequest = async (username, email, password, role, avatarU
             'username': username,
             'password': password,
             'role': role,
+            'avatarUrl': avatarUrl,
         }
         const response = await axios.post(USERS, data, {
                 headers: {
@@ -78,17 +79,15 @@ export const deleteUserRequest = async (userId, token) => {
                 headers: {'Authorization': `Bearer ${token}`}
             },
         )
-        return response.data.id;
     } catch (err) {
         console.log(err);
-        return [];
+        alert(err.response.data.message);
     }
 }
 
-export const updateUserRequest = async (userId, updatedFieldName, newValue, token) => {
+export const updateUserRequest = async (userId, updatedData, token) => {
     try {
-        const data = {updatedFieldName: newValue}
-        const response = await axios.patch(`${USERS}/${userId}`, data, {
+        const response = await axios.patch(`${USERS}/${userId}`, updatedData, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,

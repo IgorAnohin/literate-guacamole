@@ -18,7 +18,7 @@ export const ResourcesList = ({changeAmountAvailable,  onlyDecrease = false}) =>
         text: 'Изображение',
         formatter: imageFormatter
     }, {
-        dataField: 'amount',
+        dataField: 'quantity',
         text: 'Количество',
     }];
 

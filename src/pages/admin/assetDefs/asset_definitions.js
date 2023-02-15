@@ -35,14 +35,20 @@ export const AssetDefinitions = () => {
         formatter: (cellContent, row, rowIndex) => {
             const assetDef = assetDefs[rowIndex];
             let valuesStr = "";
-            for (let i = 0; i < assetDef.cost.length; i++) {
+
+            const cost = assetDef.cost == undefined ? [] : assetDef.cost;
+
+            for (let i = 0; i < cost.length; i++) {
                 const costItem = assetDef.cost[i];
                 const costAsset = assetDefs.find((a) => a.id == costItem.id);
 
-                if (valuesStr.length != 0) {
-                    valuesStr += `, `
+                if (costItem.count > 0) {
+                    if (valuesStr.length != 0) {
+                        valuesStr += `, `
+                    }
+                    valuesStr += `${costAsset.name} - ${costItem.count}`
                 }
-                valuesStr += `${costAsset.name} - ${costItem.count}`
+
             }
             return valuesStr;
         }

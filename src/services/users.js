@@ -29,7 +29,7 @@ export const getUserRole = async () => {
 export const getUser = async (userId) => {
     let data
     if (DEBUG) {
-        data = {id: 1, name: "MyName1", image: MOCK_AVATAR_URL, email: "q@q.ru", role: BUILDER_ROLE, authDate: "08.11.2022 15:44"};
+        data = {id: 1, username: "MyName1", avatarUrl: MOCK_AVATAR_URL, email: "q@q.ru", role: BUILDER_ROLE, authDate: "08.11.2022 15:44"};
     } else {
         data = await getUserRequest(userId, getToken());
     }
@@ -93,14 +93,14 @@ export const deleteUser = async (userId, router) => {
 
 export const updateUser = async (userId, updatedData, newImage, oldImage, router) => {
     let newUserAvatar = oldImage;
-    if (newImage != "") {
+    if (newImage != undefined) {
         if (DEBUG) {
             newUserAvatar = MOCK_AVATAR_URL;
         } else {
             newUserAvatar = await uploadAvatarRequest(newImage, getToken());
         }
 
-        updatedData.avatar = newUserAvatar;
+        updatedData.avatarUrl = newUserAvatar;
     }
 
     if (DEBUG) {

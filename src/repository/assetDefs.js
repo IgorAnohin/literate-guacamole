@@ -41,6 +41,7 @@ export const createAssetDefRequest = async (name, type, description, imageUrl, c
             'name': name,
             'description': description,
             'imgOrigUrl': imageUrl,
+            'cost': costs,
         }
         const response = await axios.post(ASSET_DEFS, data, {
                 headers: {

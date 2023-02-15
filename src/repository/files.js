@@ -11,7 +11,6 @@ export const uploadAvatarRequest = async (image, token) => {
         const response = await axios.post(FILES, form, {
             headers: {
                 "Content-Type": "multipart/form-data",
-                "Content-Length": image.size,
                 'Authorization': `Bearer ${token}`,
             },
         })

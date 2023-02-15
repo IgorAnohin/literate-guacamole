@@ -6,7 +6,11 @@ import {
     ADMIN_RESOURCES_ROUTE,
     USERS_ROUTE,
     EDIT_USER_ROUTE,
-    ASSET_DEFINITIONS_ROUTE, NEW_ASSET_DEFINITIONS_ROUTE, EDIT_ASSET_DEFINITIONS_ROUTE
+    ASSET_DEFINITIONS_ROUTE,
+    NEW_ASSET_DEFINITIONS_ROUTE,
+    EDIT_ASSET_DEFINITIONS_ROUTE,
+    OWNER_RECRUITS_ROUTE,
+    OWNER_RESOURCES_ROUTE, OWNER_BUILDINGS_ROUTE, OWNER_SPELLS_ROUTE
 } from "../../constants";
 import React from "react";
 import {Nav, Navbar} from "react-bootstrap";
@@ -21,6 +25,10 @@ import {EditUser} from "./users/edit_user";
 import {AssetDefinitions} from "./assetDefs/asset_definitions";
 import {NewAssetDefinition} from "./assetDefs/new_asset_definition";
 import {EditAssetDefinition} from "./assetDefs/edit_asset_definition";
+import {RecruitsList} from "../../widgets/RecruitsList";
+import {ResourcesList} from "../../widgets/ResourcesList";
+import {BuildingsList} from "../../widgets/BuildingsList";
+import {SpellsList} from "../../widgets/SpellsList";
 
 
 const AdminHeader = ({setToken}) => {
@@ -38,8 +46,20 @@ const AdminHeader = ({setToken}) => {
                     <LinkContainer to={AUDIT_ROUTE}>
                         <Nav.Link>Сбор аудитных данных</Nav.Link>
                     </LinkContainer>
-                    <LinkContainer to={ADMIN_RESOURCES_ROUTE}>
-                        <Nav.Link>Активы замка</Nav.Link>
+                    {/*<LinkContainer to={ADMIN_RESOURCES_ROUTE}>*/}
+                    {/*    <Nav.Link>Активы замка</Nav.Link>*/}
+                    {/*</LinkContainer>*/}
+                    <LinkContainer to={OWNER_RECRUITS_ROUTE}>
+                        <Nav.Link>Рекруты</Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer to={OWNER_RESOURCES_ROUTE}>
+                        <Nav.Link>Ресурсы</Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer to={OWNER_SPELLS_ROUTE}>
+                        <Nav.Link>Заклинания</Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer to={OWNER_BUILDINGS_ROUTE}>
+                        <Nav.Link>Здания</Nav.Link>
                     </LinkContainer>
                     <LinkContainer to={ASSET_DEFINITIONS_ROUTE}>
                         <Nav.Link>Определения активов</Nav.Link>
@@ -82,8 +102,20 @@ export const Admin = ({setToken}) => {
                 <Route path={AUDIT_ROUTE}>
                     <Audit/>
                 </Route>
-                <Route path={ADMIN_RESOURCES_ROUTE}>
-                    <Resources/>
+                {/*<Route path={ADMIN_RESOURCES_ROUTE}>*/}
+                {/*    <Resources/>*/}
+                {/*</Route>*/}
+                <Route path={OWNER_RECRUITS_ROUTE}>
+                    <RecruitsList changeAmountAvailable={false} removeAvailable={false}/>
+                </Route>
+                <Route path={OWNER_RESOURCES_ROUTE}>
+                    <ResourcesList changeAmountAvailable={true} onlyDecrease={false}/>
+                </Route>
+                <Route path={OWNER_BUILDINGS_ROUTE}>
+                    <BuildingsList/>
+                </Route>
+                <Route path={OWNER_SPELLS_ROUTE}>
+                    <SpellsList changeAmountAvailable={false} removeAvailable={false}/>
                 </Route>
                 <Route path={EDIT_ASSET_DEFINITIONS_ROUTE(":assetDefinitionId")}>
                     <EditAssetDefinition/>

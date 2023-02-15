@@ -82,12 +82,15 @@ const EditUserForm = (params) => {
         if (form.checkValidity() === false) {
             event.stopPropagation();
         } else {
-            updateUser(user.id, {
+            const updatedData = {
                 email: form.user_email.value,
-                password: form.user_password.value,
                 role: form.user_role.value,
-            }, form.user_avatar.value, user.image, history).then((userToken) => {
-            });
+            }
+
+            if (form.user_password.value != "") {
+                updatedData["password"] = form.user_password.value;
+            }
+            updateUser(user.id, updatedData, selectedFile, user.avatarUrl, history).then((userToken) => {});
         }
 
         setValidated(true);
@@ -126,7 +129,7 @@ const EditUserForm = (params) => {
     }, [selectedFile])
 
     useEffect(() => {
-        setPreview(user.image);
+        setPreview(user.avatarUrl);
     }, [])
 
     return (
@@ -172,7 +175,7 @@ const EditUserForm = (params) => {
                                 <Form.Control
                                     required
                                     type="text"
-                                    defaultValue={user.name}
+                                    defaultValue={user.username}
                                     onChange={handleFieldChanges}
                                 />
                                 <Form.Control.Feedback type="invalid">

@@ -21,7 +21,7 @@ const ChangeConfirmation = ({showModal, hideModal, confirmModal, message}) => {
     return (
         <Modal show={showModal} onHide={hideModal}>
             <Modal.Header closeButton>
-                <Modal.Title>Delete Confirmation</Modal.Title>
+                <Modal.Title>Подтверждение изменения</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <div className="alert alert-info">{message}</div>
@@ -115,9 +115,12 @@ const EditAssetDefinitionForm = ({assetDefinition}) => {
             return;
         }
 
-        const costs = {}
+        const costs = []
         for (const resource of ALL_RESOURCES) {
-            costs[resource.toLowerCase()] = Number(form[`cost_${resource}`].value);
+            costs.push({
+                name: resource.toLowerCase(),
+                count: Number(form[`cost_${resource}`].value),
+            })
         }
 
         updateAssetDef(
@@ -127,6 +130,7 @@ const EditAssetDefinitionForm = ({assetDefinition}) => {
             form.asset_def_description.value,
             costs,
             selectedFile,
+            assetDefinition.imgOrigUrl,
             history
         ).then((userToken) => {
         });
@@ -160,7 +164,7 @@ const EditAssetDefinitionForm = ({assetDefinition}) => {
     }, [selectedFile])
 
     useEffect(() => {
-        setPreview(assetDefinition.image);
+        setPreview(assetDefinition.imgOrigUrl);
         setAssetDefType(assetDefinition.type);
     }, [])
 
@@ -225,6 +229,7 @@ const EditAssetDefinitionForm = ({assetDefinition}) => {
                                     as="textarea"
                                     rows="4"
                                     type="text"
+                                    defaultValue={assetDefinition.description}
                                 />
                             </Form.Group>
                             <Form.Group md="4" controlId="asset_def_type">
@@ -266,14 +271,14 @@ const EditAssetDefinitionForm = ({assetDefinition}) => {
                     </Col>
                     <Col>
                         <div className="d-grid gap-2">
-                            <Button type="submit" size="lg">Создать</Button>
+                            <Button type="submit" size="lg">Сохранить</Button>
                         </div>
                     </Col>
                 </Row>
             </Form>
             <ChangeConfirmation showModal={displayConfirmationModal} confirmModal={submitSave}
                                 hideModal={hideConfirmationModal}
-                                message="Вы уверены, что хотите удалить пользователя?"/>
+                                message="Вы уверены, что хотите изменить определение актива?"/>
         </Container>
     );
 }

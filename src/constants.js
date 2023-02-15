@@ -46,7 +46,7 @@ export const assetTypeToReadable = {
 }
 
 
-export const STONE_RESOURCE = "STONE";
+export const STONE_RESOURCE = "ORE";
 export const WOOD_RESOURCE = "WOOD";
 export const GOLD_RESOURCE = "GOLD";
 export const GEM_RESOURCE = "GEM";

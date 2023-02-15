@@ -9,8 +9,6 @@ const ChangeValueDialog = ({showModal, hideModal, confirmModal, message, maxValu
     const [validated, setValidated] = useState(false);
     const formRef = useRef();
 
-    console.log("Max value", maxValue);
-
     const handleSubmit = (event) => {
         const form = formRef.current;
         event.preventDefault();

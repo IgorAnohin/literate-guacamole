@@ -49,18 +49,28 @@ export const getResources = async () => {
     let data;
 
     if (DEBUG) {
-        data = {
-            resources: [
-                {id: 1, name: "Песок", amount: "12", image: MOCK_ASSET_URL},
-                {id: 2, name: "Капитолий", amount: "11", image: MOCK_ASSET_URL},
-                {id: 3, name: "Жмых", amount: "1", image: MOCK_ASSET_URL},
-            ]
-        };
+        data = [
+            {id: 1, name: "Песок", quantity: "12", image: MOCK_ASSET_URL},
+            {id: 2, name: "Капитолий", quantity: "11", image: MOCK_ASSET_URL},
+            {id: 3, name: "Жмых", quantity: "1", image: MOCK_ASSET_URL},
+        ];
     } else {
-        data = await getResourcesRequest(getToken());
+        const rawData = await getResourcesRequest(getToken());
+        console.log("Raw data:", rawData)
+        data = [];
+        for (const resource of rawData) {
+            data.push({
+                id: resource.id,
+                quantity: resource.quantity,
+                name: resource.assetDef.name,
+                image: resource.assetDef.imgOrigUrl,
+            })
+
+        }
+        console.log(data);
     }
 
-    return data.resources;
+    return data;
 }
 
 export const createAsset = async (assetDefId) => {
@@ -80,7 +90,14 @@ export const getRecruits = async () => {
             resources: [
                 {id: 1, name: "Крестьянин", fraction: "Орден Порядка", level: "1", amount: "12", image: MOCK_ASSET_URL},
                 {id: 2, name: "Михаил", fraction: "Лесной Союз", level: "2", amount: "11", image: MOCK_ASSET_URL},
-                {id: 3, name: "Гремлин-вредитель", fraction: "Академия волшебства", level: "3",  amount: "1", image: MOCK_ASSET_URL},
+                {
+                    id: 3,
+                    name: "Гремлин-вредитель",
+                    fraction: "Академия волшебства",
+                    level: "3",
+                    amount: "1",
+                    image: MOCK_ASSET_URL
+                },
             ]
         };
     } else {
