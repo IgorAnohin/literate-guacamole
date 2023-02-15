@@ -1,10 +1,9 @@
 import {Button, Col, Container, Image, Row} from "react-bootstrap";
 import React, {useEffect, useState} from "react";
-import {changeAssetAmount, createAsset, getRecruits, removeAsset} from "../../services/assets";
-import {WARRIOR_NEW_RECRUIT_ROUTE} from "../../constants";
+import {createAsset} from "../../services/assets";
 import BootstrapTable from "react-bootstrap-table-next";
 import {useHistory} from "react-router-dom";
-import {getRecruitAssetDefs, getSpellAssetDefs} from "../../services/assetDefs";
+import {getSpellAssetDefs} from "../../services/assetDefs";
 
 function imageFormatter(cell, row) {
     return <Container>
@@ -30,7 +29,7 @@ export const NewSpell = () => {
         dataField: 'name',
         text: 'Наименоавние',
     }, {
-        dataField: 'magic_school',
+        dataField: 'magicSchool',
         text: 'Школа магии',
     }, {
         dataField: 'level',

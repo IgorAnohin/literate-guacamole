@@ -27,7 +27,7 @@ export const RecruitsList = ({changeAmountAvailable, removeAvailable}) => {
         text: 'Изображение',
         formatter: imageFormatter
     }, {
-        dataField: 'amount',
+        dataField: 'quantity',
         text: 'Количество',
     }];
 

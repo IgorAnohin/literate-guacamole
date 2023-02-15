@@ -68,6 +68,8 @@ export class AssetsTable extends React.Component {
             selectedRow: null,
             displayEditModal: false,
         };
+
+        console.log(this.state.onlyDecrease);
     }
 
     selectRow = (row, isSelect, rowIndex) => {
@@ -84,7 +86,7 @@ export class AssetsTable extends React.Component {
 
     removeAsset = () => {
         removeAsset(this.state.selectedRow.id).then(r => {
-            window.location.reload(false);
+            // window.location.reload(false);
         })
     };
 
@@ -142,8 +144,8 @@ export class AssetsTable extends React.Component {
                     }}
                     hideModal={this.hideEditModal}
                     message="Укажите новое количество актива"
-                    maxValue={this.state.onlyDecrease && !!this.state.selectedRow ? this.state.selectedRow.amount : 100000}
-                    initialValue={!!this.state.selectedRow ? this.state.selectedRow.amount : 0}
+                    maxValue={this.state.onlyDecrease && !!this.state.selectedRow ? this.state.selectedRow.quantity : 100000}
+                    initialValue={!!this.state.selectedRow ? this.state.selectedRow.quantity : 0}
                 />
             </div>
         );

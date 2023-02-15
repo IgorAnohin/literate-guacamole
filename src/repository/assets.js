@@ -108,7 +108,3 @@ export const getBuildingByIdRequest = async (buildingId, token) => {
         return [];
     }
 }
-
-export const createNewBuildingRequest = async () => {
-
-}

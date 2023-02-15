@@ -14,7 +14,7 @@ export const SpellsList = ({changeAmountAvailable, removeAvailable}) => {
         dataField: 'name',
         text: 'Наименоавние',
     }, {
-        dataField: 'magic_school',
+        dataField: 'magicSchool',
         text: 'Школа магии',
     }, {
         dataField: 'level',

@@ -6,7 +6,7 @@ import {
     DEBUG, GEM_RESOURCE,
     GOLD_RESOURCE,
     RECRUIT_ASSET,
-    RESOURCE_ASSET,
+    RESOURCE_ASSET, SPELL_ASSET,
     STONE_RESOURCE
 } from "../constants";
 import {
@@ -118,53 +118,62 @@ export const getRecruitAssetDefs = async () => {
     let data;
 
     if (DEBUG) {
-        data = {
-            assetDefs: [
-                {id: 1, name: "Крестьянин", fraction: "Орден Порядка", level: "1", image: MOCK_ASSET_DEF_URL},
-                {id: 2, name: "Михаил", fraction: "Лесной Союз", level: "2",  image: MOCK_ASSET_DEF_URL},
-                {id: 3, name: "Гремлин-вредитель", fraction: "Академия волшебства", level: "3",  image: MOCK_ASSET_DEF_URL},
-            ]
-        };
+        data = [
+            {id: 1, name: "Крестьянин", fraction: "Орден Порядка", level: "1", image: MOCK_ASSET_DEF_URL},
+            {id: 2, name: "Михаил", fraction: "Лесной Союз", level: "2", image: MOCK_ASSET_DEF_URL},
+            {
+                id: 3,
+                name: "Гремлин-вредитель",
+                fraction: "Академия волшебства",
+                level: "3",
+                image: MOCK_ASSET_DEF_URL
+            },
+        ];
     } else {
-        data = await getAssetDefsRequest(getToken());
+        const rawData = await getAssetDefsRequest(getToken());
+        data = []
+        for (const resource of rawData) {
+            if (resource.type === RECRUIT_ASSET) {
+                data.push({
+                    id: resource.id,
+                    name: resource.name,
+                    fraction: resource.fraction,
+                    level: resource.level,
+                    image: resource.imgOrigUrl
+                });
+            }
+        }
     }
 
-    return data.assetDefs;
+    return data;
 }
 
 export const getSpellAssetDefs = async () => {
     let data;
 
     if (DEBUG) {
-        data = {
-            assetDefs: [
-                {id: 1, name: "Волшебная стрела", magic_school: "Огонь", level: "1", image: MOCK_ASSET_DEF_URL},
-                {id: 2, name: "Землетрясение", magic_school: "Земля", level: "1", image: MOCK_ASSET_DEF_URL},
-                {id: 3, name: "Цепная молния", magic_school: "Воздух", level: "1", image: MOCK_ASSET_DEF_URL},
-            ]
-        };
+        data = [
+            {id: 1, name: "Волшебная стрела", magicSchool: "Огонь", level: "1", image: MOCK_ASSET_DEF_URL},
+            {id: 2, name: "Землетрясение", magicSchool: "Земля", level: "1", image: MOCK_ASSET_DEF_URL},
+            {id: 3, name: "Цепная молния", magicSchool: "Воздух", level: "1", image: MOCK_ASSET_DEF_URL},
+        ];
     } else {
-        data = await getAssetDefsRequest(getToken());
+        const rawData = await getAssetDefsRequest(getToken());
+        data = []
+        for (const resource of rawData) {
+            if (resource.type === SPELL_ASSET) {
+                data.push({
+                    id: resource.id,
+                    name: resource.name,
+                    magicSchool: resource.magicSchool,
+                    level: resource.level,
+                    image: resource.imgOrigUrl
+                });
+            }
+        }
     }
 
-    return data.assetDefs;
-}
-
-export const getResourcesAssetDefs = async () => {
-    let data;
-
-    if (DEBUG) {
-        data = {
-            assetDefs: [
-                {id: 2, name: "Песок", type: RESOURCE_ASSET},
-                {id: 3, name: "золото", type: RESOURCE_ASSET},
-            ]
-        };
-    } else {
-        data = await getAssetDefsRequest(getToken());
-    }
-
-    return data.assetDefs;
+    return data;
 }
 
 export const getBuildingAssetDefs = async () => {

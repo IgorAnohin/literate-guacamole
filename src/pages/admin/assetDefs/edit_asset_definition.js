@@ -292,7 +292,7 @@ const getCountFromDefaultValues = (defaultValues, name) => {
     return  defaultValue.count;
 }
 
-const ResourcesGrid = ({availableResources, defaultValues}) => {
+export const ResourcesGrid = ({availableResources, defaultValues}) => {
     return <Container>
         <Row>
             <Col>

@@ -109,7 +109,7 @@ export const Admin = ({setToken}) => {
                     <RecruitsList changeAmountAvailable={false} removeAvailable={false}/>
                 </Route>
                 <Route path={OWNER_RESOURCES_ROUTE}>
-                    <ResourcesList changeAmountAvailable={true} onlyDecrease={false}/>
+                    <ResourcesList changeAmountAvailable={false}/>
                 </Route>
                 <Route path={OWNER_BUILDINGS_ROUTE}>
                     <BuildingsList/>

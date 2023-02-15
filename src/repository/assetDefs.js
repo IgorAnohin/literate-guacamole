@@ -42,6 +42,9 @@ export const createAssetDefRequest = async (name, type, description, imageUrl, c
             'description': description,
             'imgOrigUrl': imageUrl,
             'cost': costs,
+            'fraction': "", // or null
+            'magicSchool': "", // or null
+            'level': 1, // or null
         }
         const response = await axios.post(ASSET_DEFS, data, {
                 headers: {
@@ -65,6 +68,9 @@ export const updateAssetDefRequest = async (assetDefId, name, type, description,
             'description': description,
             'imgOrigUrl': imageUrl,
             'cost': costs,
+            'fraction': "", // or null
+            'magicSchool': "", // or null
+            'level': 1, // or null
         }
         const response = await axios.patch(`${ASSET_DEFS}/${assetDefId}`, data, {
                 headers: {

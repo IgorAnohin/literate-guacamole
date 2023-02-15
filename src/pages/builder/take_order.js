@@ -2,8 +2,9 @@ import React, {useEffect, useState} from "react";
 import {useHistory, useParams} from "react-router-dom";
 import {acceptBuildingOrder, dismissBuildingOrder, getBuildingOrderById} from "../../services/building_orders";
 import {Button, Card, Col, Container, Form, Image, Row} from "react-bootstrap";
-import {HOME_ROUTE} from "../../constants";
+import {HOME_ROUTE, RECRUIT_ASSET_RESOURCES} from "../../constants";
 import {Resource} from "../../widgets/ResourceWidget";
+import {ResourcesGrid} from "../admin/assetDefs/edit_asset_definition";
 
 export const TakeOrder = () => {
 
@@ -34,28 +35,7 @@ export const TakeOrder = () => {
                     <Image src={order.building.imgOrigUrl} rounded/>
                 </Col>
                 <Col>
-                    <Container>
-                        <Row>
-                            <Col>
-                                <Resource text={1000}
-                                          icon={"https://cdn.iconscout.com/icon/free/png-256/stone-12-449919.png"}/>
-                            </Col>
-                            <Col>
-                                <Resource text={2000}
-                                          icon={"https://toppng.com/uploads/preview/gold-icon-png-11552723744f0vj8surrx.png"}/>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <Resource text={3000}
-                                          icon={"https://cdn-icons-png.flaticon.com/512/2701/2701763.png"}/>
-                            </Col>
-                            <Col>
-                                <Resource text={4000}
-                                          icon={"https://cdn-icons-png.flaticon.com/512/222/222436.png"}/>
-                            </Col>
-                        </Row>
-                    </Container>
+                    <ResourcesGrid availableResources={[]} defaultValues={order.building.cost}/>
                 </Col>
             </Row>
 

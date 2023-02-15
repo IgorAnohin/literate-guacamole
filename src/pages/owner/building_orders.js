@@ -83,6 +83,8 @@ class BuildingsTable extends React.Component {
 
 
     render() {
+        console.log(this.state.gridData);
+
         return <div>
             <BootstrapTable
                 keyField="id"
@@ -101,14 +103,14 @@ class BuildingsTable extends React.Component {
 
             <Row>
                 <Col>
-                    {!!this.state.selectedRow && this.state.selectedRow.ordinal != 1 &&
+                    {!!this.state.selectedRow && this.state.selectedRow.ordinal != 1 && this.state.selectedRow.status == "Создан" &&
                     <div className="d-grid gap-2">
                         <Button size="lg" onClick={this.increasePriority}>Повысить приоритет</Button>
                     </div>
                     }
                 </Col>
                 <Col>
-                    {!!this.state.selectedRow && this.state.selectedRow.ordinal != this.state.maxOrder &&
+                    {!!this.state.selectedRow && this.state.selectedRow.ordinal != this.state.maxOrder && this.state.selectedRow.status == "Создан" &&
                     <div className="d-grid gap-2">
                         <Button size="lg" onClick={this.decreasePriority}>Понизить приоритет</Button>
                     </div>

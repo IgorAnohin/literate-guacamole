@@ -56,7 +56,6 @@ export const getResources = async () => {
         ];
     } else {
         const rawData = await getResourcesRequest(getToken());
-        console.log("Raw data:", rawData)
         data = [];
         for (const resource of rawData) {
             data.push({
@@ -86,43 +85,62 @@ export const getRecruits = async () => {
     let data;
 
     if (DEBUG) {
-        data = {
-            resources: [
-                {id: 1, name: "Крестьянин", fraction: "Орден Порядка", level: "1", amount: "12", image: MOCK_ASSET_URL},
-                {id: 2, name: "Михаил", fraction: "Лесной Союз", level: "2", amount: "11", image: MOCK_ASSET_URL},
-                {
-                    id: 3,
-                    name: "Гремлин-вредитель",
-                    fraction: "Академия волшебства",
-                    level: "3",
-                    amount: "1",
-                    image: MOCK_ASSET_URL
-                },
-            ]
-        };
+        data = [
+            {id: 1, name: "Крестьянин", fraction: "Орден Порядка", level: "1", quantity: "12", image: MOCK_ASSET_URL},
+            {id: 2, name: "Михаил", fraction: "Лесной Союз", level: "2", quantity: "11", image: MOCK_ASSET_URL},
+            {
+                id: 3,
+                name: "Гремлин-вредитель",
+                fraction: "Академия волшебства",
+                level: "3",
+                quantity: "1",
+                image: MOCK_ASSET_URL
+            },
+        ];
     } else {
-        data = await getRecruitsRequest(getToken());
+        const rawData = await getRecruitsRequest(getToken());
+        data = [];
+        for (const resource of rawData) {
+            data.push({
+                id: resource.id,
+                quantity: resource.quantity,
+                name: resource.assetDef.name,
+                image: resource.assetDef.imgOrigUrl,
+            })
+
+        }
     }
 
-    return data.resources;
+    return data;
 }
 
 export const getSpells = async () => {
     let data;
 
     if (DEBUG) {
-        data = {
-            resources: [
-                {id: 1, name: "Волшебная стрела", magic_school: "Огонь", level: "1", image: MOCK_ASSET_URL},
-                {id: 2, name: "Землетрясение", magic_school: "Земля", level: "1", image: MOCK_ASSET_URL},
-                {id: 3, name: "Цепная молния", magic_school: "Воздух", level: "1", image: MOCK_ASSET_URL},
-            ]
-        };
+        data = [
+            {id: 1, name: "Волшебная стрела", magicSchool: "Огонь", level: "1", image: MOCK_ASSET_URL},
+            {id: 2, name: "Землетрясение", magicSchool: "Земля", level: "1", image: MOCK_ASSET_URL},
+            {id: 3, name: "Цепная молния", magicSchool: "Воздух", level: "1", image: MOCK_ASSET_URL},
+        ];
     } else {
-        data = await getSpellsRequest(getToken());
+        const rawData = await getSpellsRequest(getToken());
+        data = [];
+        for (const resource of rawData) {
+            data.push({
+                id: resource.id,
+                name: resource.assetDef.name,
+                image: resource.assetDef.imgOrigUrl,
+                magicSchool: resource.assetDef.imgOrigUrl,
+                level: resource.assetDef.level,
+            })
+
+        }
+        console.log("Raw data:", rawData);
+        console.log("Parsed data:", data);
     }
 
-    return data.resources;
+    return data;
 }
 
 export const getBuildings = async () => {

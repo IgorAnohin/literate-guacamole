@@ -1,8 +1,8 @@
 import {BUILDING_STATUS_IN_CREATED, buildingStatusToReadable, DEBUG} from "../constants";
 import {
     changeBuildingOrderStateRequest,
-    createBuildingOrderRequest,
-    getBuildingOrdersRequest
+    createBuildingOrderRequest, decreaseBuildingOrderPriorityRequest,
+    getBuildingOrdersRequest, increaseBuildingOrderPriorityRequest
 } from "../repository/building_orders";
 import {getToken} from "./auth";
 import {getBuildingByIdRequest} from "../repository/assets";
@@ -56,9 +56,19 @@ export const getBuildingOrderById = async (orderId) => {
 }
 
 export const increaseBuildingOrderPriority = async (orderId) => {
+    if (DEBUG) {
+        // do nothing
+    } else {
+        await increaseBuildingOrderPriorityRequest(orderId, getToken());
+    }
 }
 
 export const decreaseBuildingOrderPriority = async (orderId) => {
+    if (DEBUG) {
+        // do nothing
+    } else {
+        await decreaseBuildingOrderPriorityRequest(orderId, getToken());
+    }
 }
 
 export const dismissBuildingOrder = async (orderId) => {
