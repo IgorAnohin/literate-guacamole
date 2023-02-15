@@ -1,4 +1,4 @@
-import {ASSETS, BUILD_ORDERS, BUILD_ORDERS_CHANGE_STATUS, BUILD_ORDERS_CREATE, LOGIN_URL} from "./api_paths";
+import {ASSET_DEFS, BUILD_ORDERS, BUILD_ORDERS_CHANGE_STATUS, BUILD_ORDERS_CREATE, LOGIN_URL} from "./api_paths";
 import axios from "axios";
 
 export const getBuildingOrdersRequest = async (token) => {

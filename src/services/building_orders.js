@@ -40,7 +40,6 @@ export const createBuildingOrder = async (toBeginningQueue, buildingId, comment,
 export const getBuildingOrderById = async (orderId) => {
     const orders = await getBuildingOrders();
 
-
     let order = null;
     for (let i = 0; i < orders.length; i++) {
         console.log(orders[i].id, orderId, orders[i].id === orderId);
@@ -61,7 +60,6 @@ export const increaseBuildingOrderPriority = async (orderId) => {
 
 export const decreaseBuildingOrderPriority = async (orderId) => {
 }
-
 
 export const dismissBuildingOrder = async (orderId) => {
     await changeBuildingOrderStateRequest("REFUSED", orderId, getToken());

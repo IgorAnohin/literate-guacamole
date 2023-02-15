@@ -49,12 +49,27 @@ export const getUsersRequest = async (token) => {
     }
 }
 
-export const uploadAvatarRequest = async (image, token) => {
-    // returns image URL
-}
-
-export const createUserRequest = async (email, password, role, avatarUrl, token) => {
+export const createUserRequest = async (username, email, password, role, avatarUrl, token) => {
     // returns new user ID
+    try {
+        const data = {
+            'email': email,
+            'username': username,
+            'password': password,
+            'role': role,
+        }
+        const response = await axios.post(USERS, data, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                }
+            },
+        )
+        return response.data.id;
+    } catch (err) {
+        console.log(err);
+        return [];
+    }
 }
 
 export const deleteUserRequest = async (userId, token) => {

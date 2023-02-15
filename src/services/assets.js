@@ -65,7 +65,6 @@ export const getResources = async () => {
     return data.resources;
 }
 
-
 export const createAsset = async (assetDefId) => {
     let data;
 
@@ -74,7 +73,6 @@ export const createAsset = async (assetDefId) => {
         data = await createAssetRequest(assetDefId, getToken());
     }
 }
-
 
 export const getRecruits = async () => {
     let data;
@@ -94,7 +92,6 @@ export const getRecruits = async () => {
     return data.resources;
 }
 
-
 export const getSpells = async () => {
     let data;
 
@@ -112,7 +109,6 @@ export const getSpells = async () => {
 
     return data.resources;
 }
-
 
 export const getBuildings = async () => {
     let data;

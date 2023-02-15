@@ -12,10 +12,13 @@ export const BUILD_ORDERS_CREATE = `${_API_URL}/build-orders/create-new`
 
 export const BUILD_ORDERS_CHANGE_STATUS = (orderId) => `${_API_URL}/build-orders/${orderId}/set-status`
 
-export const ASSETS = `${_API_URL}/asset-defs`
+export const ASSET_DEFS = `${_API_URL}/asset-defs`
+
+export const ASSETS = `${_API_URL}/assets`
 
 export const AUDIT = `${_API_URL}/audit`
 
 export const USERS = `${_API_URL}/users`
+export const FILES = `${_API_URL}/files`
 export const GET_USER = (userId) => `${USERS}/${userId}`;
 

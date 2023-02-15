@@ -20,7 +20,7 @@ export const AdminUsers = () => {
         dataField: 'role',
         text: 'Роль',
     }, {
-        dataField: 'last_enter',
+        dataField: 'authDate',
         text: 'Последний вход',
     }];
 

@@ -1,6 +1,5 @@
-import {ASSETS, BASE_URL, BUILD_ORDERS} from "./api_paths";
+import {ASSET_DEFS, BASE_URL, BUILD_ORDERS} from "./api_paths";
 import axios from 'axios';
-
 
 export const getResourcesRequest = async (token) => {
 
@@ -26,10 +25,9 @@ export const createAssetRequest = async (assetId, token) => {
 
 }
 
-
 export const getBuildingsRequest = async (token) => {
     try {
-        const response = await axios.get(ASSETS, {
+        const response = await axios.get(ASSET_DEFS, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
@@ -45,8 +43,8 @@ export const getBuildingsRequest = async (token) => {
 
 export const getBuildingByIdRequest = async (buildingId, token) => {
     try {
-        console.log(`Request ${ASSETS}/${buildingId}, token ${token}`);
-        const response = await axios.get(`${ASSETS}/${buildingId}`, {
+        console.log(`Request ${ASSET_DEFS}/${buildingId}, token ${token}`);
+        const response = await axios.get(`${ASSET_DEFS}/${buildingId}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
@@ -58,7 +56,6 @@ export const getBuildingByIdRequest = async (buildingId, token) => {
         console.log(err);
         return [];
     }
-
 }
 
 export const createNewBuildingRequest = async () => {

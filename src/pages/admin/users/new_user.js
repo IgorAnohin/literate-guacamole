@@ -21,8 +21,14 @@ export const NewUser = () => {
         if (form.checkValidity() === false) {
             event.stopPropagation();
         } else {
-            createUser(form.user_email.value, form.user_password.value, form.user_role.value, form.user_avatar.value, history).then((userToken) => {
-            });
+            createUser(
+                form.user_name.value,
+                form.user_email.value,
+                form.user_password.value,
+                form.user_role.value,
+                form.user_avatar.value,
+                history
+            ).then((userToken) => {});
         }
 
         setValidated(true);

@@ -1,6 +1,5 @@
 import {LOGIN_URL, LOGOUT_URL} from './api_paths';
 
-
 export const loginRequest = async (name, password) => {
     try {
         const response = await fetch(LOGIN_URL, {
@@ -20,7 +19,6 @@ export const loginRequest = async (name, password) => {
         return null;
     }
 };
-
 
 export const logoutRequest = async (token) => {
     try {

@@ -1,8 +1,16 @@
 import {getBuildingsRequest, getResourcesRequest} from "../repository/assets";
 import {getToken} from "./auth";
-import {BUILDER_ROLE, BUILDING_ASSET, DEBUG, RECRUIT_ASSET, RESOURCE_ASSET, STONE_RESOURCE} from "../constants";
+import {
+    BUILDER_ROLE,
+    BUILDING_ASSET,
+    DEBUG, GEM_RESOURCE,
+    GOLD_RESOURCE,
+    RECRUIT_ASSET,
+    RESOURCE_ASSET,
+    STONE_RESOURCE
+} from "../constants";
 import {createAssetDefRequest, getAssetDefRequest, getAssetDefsRequest} from "../repository/assetDefs";
-import {createUserRequest, getUserRequest, uploadAvatarRequest} from "../repository/user";
+import {uploadAvatarRequest} from "../repository/files";
 
 
 const MOCK_ASSET_DEF_URL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKsn55rXnt0jZLwjkk8CotD0LG0IEZgil3S4gXx15Q-Q&s";
@@ -12,20 +20,18 @@ export const getAssetDefs = async () => {
     let data;
 
     if (DEBUG) {
-        data = {
-            assetDefs: [
-                {id: 1, name: "Капитолий", type: BUILDING_ASSET, cost: [{id: 2, count: 100}, {id: 3, count: 200}]},
-                {id: 2, name: "Песок", type: RESOURCE_ASSET, cost: []},
-                {id: 3, name: "золото", type: RESOURCE_ASSET, cost: []},
-            ]
-        };
+        data = [
+            // {id: 1, name: "Капитолий", type: BUILDING_ASSET, cost: [{name: GOLD_RESOURCE, count: 100}, {name: GEM_RESOURCE, count: 200}]},
+            {id: 1, name: "Капитолий", type: BUILDING_ASSET, cost: [{id: 2, count: 100}, {id: 3, count: 200}]},
+            {id: 2, name: "Песок", type: RESOURCE_ASSET, cost: []},
+            {id: 3, name: "золото", type: RESOURCE_ASSET, cost: []},
+        ];
     } else {
         data = await getAssetDefsRequest(getToken());
     }
 
-    return data.assetDefs;
+    return data;
 }
-
 
 export const getAssetDef = async (assetDefId) => {
     let data
@@ -36,7 +42,8 @@ export const getAssetDef = async (assetDefId) => {
             description: "Test description",
             image: MOCK_ASSET_DEF_URL,
             type: BUILDING_ASSET,
-            cost: [{name: STONE_RESOURCE.toLowerCase(), count: 10}, {name: "gold", count: 200}]
+            cost: [{name: STONE_RESOURCE.toLowerCase(), count: 10}, {name: GOLD_RESOURCE.toLowerCase(), count: 200}],
+            //cost: [{name: STONE_RESOURCE.toLowerCase(), count: 10}, {name: "gold", count: 200}],
         };
     } else {
         data = await getAssetDefRequest(assetDefId, getToken());
@@ -44,7 +51,6 @@ export const getAssetDef = async (assetDefId) => {
 
     return data;
 }
-
 
 export const createAssetDef = async (name, type, description, costs, image, router) => {
     let imageUrl;
@@ -72,7 +78,6 @@ export const createAssetDef = async (name, type, description, costs, image, rout
     return newAsetDefId;
 }
 
-
 export const updateAssetDef = async (assetDefId, name, type, description, costs, image, router) => {
     let imageUrl;
     if (DEBUG) {
@@ -99,7 +104,6 @@ export const updateAssetDef = async (assetDefId, name, type, description, costs,
     return newAsetDefId;
 }
 
-
 export const getRecruitAssetDefs = async () => {
     let data;
 
@@ -118,7 +122,6 @@ export const getRecruitAssetDefs = async () => {
     return data.assetDefs;
 }
 
-
 export const getSpellAssetDefs = async () => {
     let data;
 
@@ -136,7 +139,6 @@ export const getSpellAssetDefs = async () => {
 
     return data.assetDefs;
 }
-
 
 export const getResourcesAssetDefs = async () => {
     let data;

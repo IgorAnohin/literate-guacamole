@@ -1,4 +1,4 @@
-export const DEBUG = true;
+export const DEBUG = false;
 
 export const ADMIN_ROLE = "admin";
 export const OWNER_ROLE = "owner";
@@ -8,7 +8,12 @@ export const WARRIOR_ROLE = "warrior";
 export const WIZARD_ROLE = "wizard";
 
 export const ROLES = [
-    ADMIN_ROLE, OWNER_ROLE, BUILDER_ROLE, WARRIOR_ROLE, PAYMASTER_ROLE, WIZARD_ROLE
+    ADMIN_ROLE,
+    OWNER_ROLE,
+    BUILDER_ROLE,
+    WARRIOR_ROLE,
+    PAYMASTER_ROLE,
+    WIZARD_ROLE,
 ];
 
 export const roleToReadable = {
