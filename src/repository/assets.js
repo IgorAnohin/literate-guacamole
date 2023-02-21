@@ -1,6 +1,6 @@
 import {ASSET_DEFS, ASSETS, BASE_URL, BUILD_ORDERS} from "./api_paths";
 import axios from 'axios';
-import {RECRUIT_ASSET, RESOURCE_ASSET, SPELL_ASSET} from "../constants";
+import {BUILDING_ASSET, RECRUIT_ASSET, RESOURCE_ASSET, SPELL_ASSET} from "../constants";
 
 const getAssetsRequest = async (token) => {
     try {
@@ -28,6 +28,11 @@ export const getRecruitsRequest = async (token) => {
 export const getSpellsRequest = async (token) => {
     return (await getAssetsRequest(token))
         .filter((asset) => { return asset.assetDef.type == SPELL_ASSET })
+}
+
+export const getBuildingsRequest = async (token) => {
+    return (await getAssetsRequest(token))
+        .filter((asset) => { return asset.assetDef.type == BUILDING_ASSET })
 }
 
 export const changeAssetAmountRequest = async (assetId, newAmount, token) => {
@@ -73,38 +78,5 @@ export const createAssetRequest = async (assetDefId, token) => {
     } catch (err) {
         console.log(err);
         return null;
-    }
-}
-
-export const getBuildingsRequest = async (token) => {
-    try {
-        const response = await axios.get(ASSET_DEFS, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                }
-            },
-        )
-        return response.data;
-    } catch (err) {
-        console.log(err);
-        return [];
-    }
-}
-
-export const getBuildingByIdRequest = async (buildingId, token) => {
-    try {
-        console.log(`Request ${ASSET_DEFS}/${buildingId}, token ${token}`);
-        const response = await axios.get(`${ASSET_DEFS}/${buildingId}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                }
-            },
-        )
-        return response.data;
-    } catch (err) {
-        console.log(err);
-        return [];
     }
 }

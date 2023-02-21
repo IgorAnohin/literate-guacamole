@@ -1,4 +1,9 @@
-import {BUILDING_STATUS_IN_CREATED, buildingStatusToReadable, DEBUG} from "../constants";
+import {
+    CREATED_BUILDING_ORDER_STATUS,
+    buildingStatusToReadable,
+    DEBUG, FINISHED_BUILDING_ORDER_STATUS,
+    IN_PROGRESS_BUILDING_ORDER_STATUS, REFUSED_BUILDING_ORDER_STATUS
+} from "../constants";
 import {
     changeBuildingOrderStateRequest,
     createBuildingOrderRequest, decreaseBuildingOrderPriorityRequest,
@@ -6,14 +11,15 @@ import {
 } from "../repository/building_orders";
 import {getToken} from "./auth";
 import {getBuildingByIdRequest} from "../repository/assets";
+import {getBuildingAssetDefByIdRequest} from "../repository/assetDefs";
 
 export const getBuildingOrders = async () => {
     if (DEBUG) {
         return [
-            {id: 1, name: "Капитолий", ordinal: 1, status: BUILDING_STATUS_IN_CREATED, comment: "123"},
-            {id: 2, name: "Капитолий 2", ordinal: 2, status: BUILDING_STATUS_IN_CREATED, comment: "@@@"},
-            {id: 3, name: "Капитолий 3", ordinal: 3, status: BUILDING_STATUS_IN_CREATED, comment: "333"},
-            {id: 4, name: "Капитолий 4", ordinal: 4, status: BUILDING_STATUS_IN_CREATED, comment: "321"},
+            {id: 1, name: "Капитолий", ordinal: 1, status: CREATED_BUILDING_ORDER_STATUS, comment: "123"},
+            {id: 2, name: "Капитолий 2", ordinal: 2, status: CREATED_BUILDING_ORDER_STATUS, comment: "@@@"},
+            {id: 3, name: "Капитолий 3", ordinal: 3, status: CREATED_BUILDING_ORDER_STATUS, comment: "333"},
+            {id: 4, name: "Капитолий 4", ordinal: 4, status: CREATED_BUILDING_ORDER_STATUS, comment: "321"},
         ];
     } else {
         const data = await getBuildingOrdersRequest(getToken());
@@ -48,7 +54,7 @@ export const getBuildingOrderById = async (orderId) => {
         }
     }
 
-    const building = await getBuildingByIdRequest(order.assetDef.id, getToken());
+    const building = await getBuildingAssetDefByIdRequest(order.assetDef.id, getToken());
     return {
         order: order,
         building: building,
@@ -72,9 +78,13 @@ export const decreaseBuildingOrderPriority = async (orderId) => {
 }
 
 export const dismissBuildingOrder = async (orderId) => {
-    await changeBuildingOrderStateRequest("REFUSED", orderId, getToken());
+    await changeBuildingOrderStateRequest(REFUSED_BUILDING_ORDER_STATUS, orderId, getToken());
 }
 
 export const acceptBuildingOrder = async (orderId) => {
-    await changeBuildingOrderStateRequest("IN_PROGRESS", orderId, getToken());
+    await changeBuildingOrderStateRequest(IN_PROGRESS_BUILDING_ORDER_STATUS, orderId, getToken());
+}
+
+export const finishBuildingOrder = async (orderId) => {
+    await changeBuildingOrderStateRequest(FINISHED_BUILDING_ORDER_STATUS, orderId, getToken());
 }

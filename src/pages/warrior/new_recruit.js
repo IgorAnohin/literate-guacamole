@@ -21,7 +21,7 @@ export const NewRecruit = () => {
     const history = useHistory();
 
     useEffect(() => {
-        getRecruitAssetDefs().then((data) => setData(data))
+        getRecruitAssetDefs().then(setData)
     }, [])
 
     const columns = [{
@@ -34,7 +34,7 @@ export const NewRecruit = () => {
         dataField: 'level',
         text: 'Уровень',
     }, {
-        dataField: 'image',
+        dataField: 'imgOrigUrl',
         text: 'Изображение',
         formatter: imageFormatter
     }];

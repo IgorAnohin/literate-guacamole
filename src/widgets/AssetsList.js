@@ -2,6 +2,7 @@ import React, {useRef, useState} from "react";
 import {changeAssetAmount, removeAsset} from "../services/assets";
 import BootstrapTable from "react-bootstrap-table-next";
 import {Button, Col, Form, Modal, Row} from "react-bootstrap";
+import {toast} from "react-toastify";
 
 
 const ChangeValueDialog = ({showModal, hideModal, confirmModal, message, maxValue, initialValue}) => {
@@ -15,6 +16,11 @@ const ChangeValueDialog = ({showModal, hideModal, confirmModal, message, maxValu
 
         if (form.checkValidity() === false) {
             event.stopPropagation();
+            if (maxValue == initialValue) {
+                toast.error("Неправильное значение. Вы можете только уменьшать количество, не уводя его в отрицательные значения");
+            } else {
+                toast.error("Неправильное значение. Значение не может быть отрицательным");
+            }
         } else {
             confirmModal(form.newValue.value);
         }
@@ -25,7 +31,7 @@ const ChangeValueDialog = ({showModal, hideModal, confirmModal, message, maxValu
     return (
         <Modal show={showModal} onHide={hideModal}>
             <Modal.Header closeButton>
-                <Modal.Title>Delete Confirmation</Modal.Title>
+                <Modal.Title>Подтверждение изменений</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <div className="alert alert-info">{message}</div>

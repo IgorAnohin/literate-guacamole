@@ -1,6 +1,4 @@
-
-import {useHistory} from "react-router-dom";
-import {Card, Col, Row} from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
 import React from "react";
 import {
     OWNER_BUILDING_ORDERS_ROUTE, OWNER_BUILDINGS_ROUTE,
@@ -8,74 +6,38 @@ import {
     OWNER_RESOURCES_ROUTE,
     OWNER_SPELLS_ROUTE
 } from "../../constants";
-import {Building, PersonBadge, CollectionFill} from 'react-bootstrap-icons';
+import {PageCardWidget} from "../../widgets/PageCardWidget";
 
 
 export const OwnerHome = () => {
-    const history = useHistory();
 
     return (
-        <Row xs={1} md={3} className="g-3">
-            <Col>
-                <Card onClick={() => {
-                    history.push(OWNER_BUILDING_ORDERS_ROUTE)
-                }} style={{cursor: "pointer"}}>
-                    <Building className="card-img-top" size="200" style={{textAlign: "center"}}/>
-                    <Card.Body>
-                        <Card.Title style={{textAlign: "center"}}>
-                            Строительство
-                        </Card.Title>
-                    </Card.Body>
-                </Card>
-            </Col>
-            <Col>
-                <Card onClick={() => {
-                    history.push(OWNER_RECRUITS_ROUTE)
-                }} style={{cursor: "pointer"}}>
-                    <PersonBadge className="card-img-top" size="200" style={{textAlign: "center"}}/>
-                    <Card.Body>
-                        <Card.Title style={{textAlign: "center"}}>
-                            Рекруты
-                        </Card.Title>
-                    </Card.Body>
-                </Card>
-            </Col>
-            <Col>
-                <Card onClick={() => {
-                    history.push(OWNER_RESOURCES_ROUTE)
-                }} style={{cursor: "pointer"}}>
-                    <CollectionFill className="card-img-top" size="200" style={{textAlign: "center"}}/>
-                    <Card.Body>
-                        <Card.Title style={{textAlign: "center"}}>
-                            Ресурсы
-                        </Card.Title>
-                    </Card.Body>
-                </Card>
-            </Col>
-            <Col>
-                <Card onClick={() => {
-                    history.push(OWNER_SPELLS_ROUTE)
-                }} style={{cursor: "pointer"}}>
-                    <CollectionFill className="card-img-top" size="200" style={{textAlign: "center"}}/>
-                    <Card.Body>
-                        <Card.Title style={{textAlign: "center"}}>
-                            Заклинания
-                        </Card.Title>
-                    </Card.Body>
-                </Card>
-            </Col>
-            <Col>
-                <Card onClick={() => {
-                    history.push(OWNER_BUILDINGS_ROUTE)
-                }} style={{cursor: "pointer"}}>
-                    <CollectionFill className="card-img-top" size="200" style={{textAlign: "center"}}/>
-                    <Card.Body>
-                        <Card.Title style={{textAlign: "center"}}>
-                            Здания
-                        </Card.Title>
-                    </Card.Body>
-                </Card>
-            </Col>
-        </Row>
+        <div>
+            <Row xs={1} md={3} className="g-3">
+                <Col>
+                    <PageCardWidget pageRoute={OWNER_BUILDING_ORDERS_ROUTE} imageSrc="/build_orders.png"
+                                    text="Строительство"/>
+                </Col>
+                <Col>
+                    <PageCardWidget pageRoute={OWNER_RECRUITS_ROUTE} imageSrc="/recruits.png"
+                                    text="Рекруты"/>
+                </Col>
+                <Col>
+                    <PageCardWidget pageRoute={OWNER_RESOURCES_ROUTE} imageSrc="/resources.png"
+                                    text="Ресурсы"/>
+                </Col>
+            </Row>
+            <div style={{height: "20px"}}/>
+            <Row xs={1} md={2} className="g-3">
+                <Col>
+                    <PageCardWidget pageRoute={OWNER_SPELLS_ROUTE} imageSrc="/spells.png"
+                                    text="Заклинания"/>
+                </Col>
+                <Col>
+                    <PageCardWidget pageRoute={OWNER_BUILDINGS_ROUTE} imageSrc="/buildings.png"
+                                    text="Здания"/>
+                </Col>
+            </Row>
+        </div>
     );
 }

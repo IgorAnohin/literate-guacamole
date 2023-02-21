@@ -12,7 +12,7 @@ import {
 import {
     createAssetDefRequest,
     getAssetDefRequest,
-    getAssetDefsRequest,
+    getAssetDefsRequest, getBuildingAssetDefsRequest, getRecruitAssetDefsRequest, getSpellAssetDefsRequest,
     updateAssetDefRequest
 } from "../repository/assetDefs";
 import {uploadAvatarRequest} from "../repository/files";
@@ -130,19 +130,7 @@ export const getRecruitAssetDefs = async () => {
             },
         ];
     } else {
-        const rawData = await getAssetDefsRequest(getToken());
-        data = []
-        for (const resource of rawData) {
-            if (resource.type === RECRUIT_ASSET) {
-                data.push({
-                    id: resource.id,
-                    name: resource.name,
-                    fraction: resource.fraction,
-                    level: resource.level,
-                    image: resource.imgOrigUrl
-                });
-            }
-        }
+        data = await getRecruitAssetDefsRequest(getToken());
     }
 
     return data;
@@ -158,19 +146,8 @@ export const getSpellAssetDefs = async () => {
             {id: 3, name: "Цепная молния", magicSchool: "Воздух", level: "1", image: MOCK_ASSET_DEF_URL},
         ];
     } else {
-        const rawData = await getAssetDefsRequest(getToken());
-        data = []
-        for (const resource of rawData) {
-            if (resource.type === SPELL_ASSET) {
-                data.push({
-                    id: resource.id,
-                    name: resource.name,
-                    magicSchool: resource.magicSchool,
-                    level: resource.level,
-                    image: resource.imgOrigUrl
-                });
-            }
-        }
+        data = await getSpellAssetDefsRequest(getToken());
+        console.log("Spells:", data);
     }
 
     return data;
@@ -205,8 +182,8 @@ export const getBuildingAssetDefs = async () => {
             },
         ];
     } else {
-        data = await getAssetDefsRequest(getToken());
+        data = await getBuildingAssetDefsRequest(getToken());
     }
 
-    return data.filter((element) => element.type == BUILDING_ASSET)
+    return data;
 }

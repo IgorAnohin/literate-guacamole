@@ -4,6 +4,7 @@ import {createAsset} from "../../services/assets";
 import BootstrapTable from "react-bootstrap-table-next";
 import {useHistory} from "react-router-dom";
 import {getSpellAssetDefs} from "../../services/assetDefs";
+import {EARTH_MAGIC_SCHOOL, FIRE_MAGIC_SCHOOL, WATER_MAGIC_SCHOOL} from "../../constants";
 
 function imageFormatter(cell, row) {
     return <Container>
@@ -16,11 +17,34 @@ function imageFormatter(cell, row) {
 }
 
 
+function magicSchoolToImage(magicSchool) {
+    if (magicSchool == FIRE_MAGIC_SCHOOL) {
+        return "/fire_school.png";
+    } else if (magicSchool == EARTH_MAGIC_SCHOOL) {
+        return "/earth_school.png";
+    } else if (magicSchool == WATER_MAGIC_SCHOOL) {
+        return "/water_school.png";
+    } else {
+        return "/wing_school.png";
+    }
+}
+
+function magicSchoolImage(cell, row) {
+    return <Container>
+        <Row className="justify-content-md-center">
+            <Col xs lg="6">
+                <Image src={magicSchoolToImage(cell)} height={100} width={200}/>
+            </Col>
+        </Row>
+    </Container>;
+}
+
+
 export const NewSpell = () => {
     const [data, setData] = useState(null);
 
     useEffect(() => {
-        getSpellAssetDefs().then((data) => setData(data))
+        getSpellAssetDefs().then(setData)
     }, [])
 
     const history = useHistory();
@@ -31,11 +55,12 @@ export const NewSpell = () => {
     }, {
         dataField: 'magicSchool',
         text: 'Школа магии',
+        formatter: magicSchoolImage
     }, {
         dataField: 'level',
         text: 'Уровень',
     }, {
-        dataField: 'image',
+        dataField: 'imgOrigUrl',
         text: 'Изображение',
         formatter: imageFormatter
     }];

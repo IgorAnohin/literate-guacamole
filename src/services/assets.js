@@ -5,7 +5,7 @@ import {
     getResourcesRequest, getSpellsRequest, removeAssetRequest
 } from "../repository/assets";
 import {getToken} from "./auth";
-import {BUILDING_ASSET, DEBUG} from "../constants";
+import {BUILDING_ASSET, DEBUG, EARTH_MAGIC_SCHOOL, FIRE_MAGIC_SCHOOL} from "../constants";
 
 const MOCK_ASSET_URL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKsn55rXnt0jZLwjkk8CotD0LG0IEZgil3S4gXx15Q-Q&s";
 
@@ -119,9 +119,9 @@ export const getSpells = async () => {
 
     if (DEBUG) {
         data = [
-            {id: 1, name: "Волшебная стрела", magicSchool: "Огонь", level: "1", image: MOCK_ASSET_URL},
-            {id: 2, name: "Землетрясение", magicSchool: "Земля", level: "1", image: MOCK_ASSET_URL},
-            {id: 3, name: "Цепная молния", magicSchool: "Воздух", level: "1", image: MOCK_ASSET_URL},
+            {id: 1, name: "Волшебная стрела", magicSchool: EARTH_MAGIC_SCHOOL, level: "1", image: MOCK_ASSET_URL},
+            {id: 2, name: "Землетрясение", magicSchool: FIRE_MAGIC_SCHOOL, level: "1", image: MOCK_ASSET_URL},
+            {id: 3, name: "Цепная молния", magicSchool: FIRE_MAGIC_SCHOOL, level: "1", image: MOCK_ASSET_URL},
         ];
     } else {
         const rawData = await getSpellsRequest(getToken());
@@ -131,7 +131,7 @@ export const getSpells = async () => {
                 id: resource.id,
                 name: resource.assetDef.name,
                 image: resource.assetDef.imgOrigUrl,
-                magicSchool: resource.assetDef.imgOrigUrl,
+                magicSchool: resource.assetDef.magicSchool,
                 level: resource.assetDef.level,
             })
 
@@ -172,8 +172,18 @@ export const getBuildings = async () => {
             },
         ];
     } else {
-        data = await getBuildingsRequest(getToken());
+        const rawData = await getBuildingsRequest(getToken());
+        data = [];
+        for (const resource of rawData) {
+            data.push({
+                id: resource.id,
+                name: resource.assetDef.name,
+                image: resource.assetDef.imgOrigUrl,
+                description: resource.assetDef.description,
+            })
+
+        }
     }
 
-    return data.filter((element) => element.type == BUILDING_ASSET)
+    return data;
 }
