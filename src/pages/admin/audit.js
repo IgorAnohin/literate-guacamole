@@ -7,7 +7,7 @@ import {BUILDING_ASSET, RECRUIT_ASSET, RESOURCE_ASSET, SPELL_ASSET} from "../../
 
 
 var spell_checked = false;
-var recrut_checked = false;
+var recruit_checked = false;
 var building_checked = false;
 var resources_checked = false;
 
@@ -30,14 +30,14 @@ const Resource = ({id, name, icon}) => {
                                 id={id}
                                 onChange={(e) => {
 
-                                    if (id == "resources") {
-                                        spell_checked = !spell_checked;
-                                    } else if (id == "recruts") {
-                                        recrut_checked = !recrut_checked;
-                                    } else if (id == "spells") {
-                                        building_checked = !building_checked;
-                                    } else if (id == "buildings") {
+                                    if (id == RESOURCE_ASSET) {
                                         resources_checked = !resources_checked;
+                                    } else if (id == RECRUIT_ASSET) {
+                                        recruit_checked = !recruit_checked;
+                                    } else if (id == SPELL_ASSET) {
+                                        spell_checked = !spell_checked;
+                                    } else if (id == BUILDING_ASSET) {
+                                        building_checked = !building_checked;
                                     }
 
                                 }}
@@ -77,20 +77,20 @@ export const Audit = () => {
         } else {
 
             const assetsTypes = [];
-            console.log(spell_checked)
-            if (spell_checked) {
+            console.log(resources_checked);
+            if (resources_checked) {
                 assetsTypes.push(RESOURCE_ASSET);
             }
-            console.log(recrut_checked)
-            if (recrut_checked) {
+            console.log(recruit_checked);
+            if (recruit_checked) {
                 assetsTypes.push(RECRUIT_ASSET);
             }
-            console.log(building_checked)
-            if (building_checked) {
+            console.log(spell_checked);
+            if (spell_checked) {
                 assetsTypes.push(SPELL_ASSET);
             }
-            console.log(resources_checked)
-            if (resources_checked) {
+            console.log(building_checked);
+            if (building_checked) {
                 assetsTypes.push(BUILDING_ASSET);
             }
 
@@ -139,18 +139,18 @@ export const Audit = () => {
                     </div>
                     <Row>
                         <Col>
-                            <Resource id="resources" name="Ресурсы" icon={<SdCardFill/>}/>
+                            <Resource id={RESOURCE_ASSET} name="Ресурсы" icon={<SdCardFill/>}/>
                         </Col>
                         <Col>
-                            <Resource id="recruts" name="Рекруты" icon={<PersonBadge/>}/>
+                            <Resource id={RECRUIT_ASSET} name="Рекруты" icon={<PersonBadge/>}/>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                            <Resource id="spells" name="Заклинания" icon={<BookHalf/>}/>
+                            <Resource id={SPELL_ASSET} name="Заклинания" icon={<BookHalf/>}/>
                         </Col>
                         <Col>
-                            <Resource id="buildings" name="Здания" icon={<Building/>}/>
+                            <Resource id={BUILDING_ASSET} name="Здания" icon={<Building/>}/>
                         </Col>
                     </Row>
                 </Form.Group>
