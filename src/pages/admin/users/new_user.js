@@ -2,11 +2,11 @@ import React, {useEffect, useRef, useState} from "react";
 import {Button, Card, Col, Container, Form, Image, Modal, Row} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
 import {ROLES, roleToReadable} from "../../../constants";
-import {createUser} from "../../../services/users";
+import {createUser, MOCK_AVATAR_URL} from "../../../services/users";
 
 export const NewUser = () => {
 
-    const [preview, setPreview] = useState()
+    const [preview, setPreview] = useState(MOCK_AVATAR_URL);
     const [selectedFile, setSelectedFile] = useState()
     const [validated, setValidated] = useState(false);
     const [isSelectValid, validateSelect] = useState(false);
@@ -50,7 +50,6 @@ export const NewUser = () => {
 
     useEffect(() => {
         if (!selectedFile) {
-            setPreview(undefined)
             return
         }
 
@@ -67,13 +66,13 @@ export const NewUser = () => {
                 <Row>
                     <Col>
                         <Form.Group controlId="user_avatar" className="mb-3">
-                            <Form.Control ref={fileFormRef} required type="file" onChange={onSelectFile} style={{opacity: 0, display: "none"}}/>
-                            {selectedFile &&
+                            <Form.Control ref={fileFormRef} type="file" onChange={onSelectFile} style={{opacity: 0, display: "none"}}/>
+                            {preview &&
                             <div className={"d-flex align-items-center justify-content-center"}>
                                 <Image src={preview} onClick={() => fileFormRef.current.click()} style={{ width: "400px", height: "400px", cursor: "pointer", background: "#dedede" }}/>
                             </div>}
 
-                            {!selectedFile &&
+                            {!preview &&
                             <div className={"d-flex align-items-center justify-content-center"}>
                                 <Card style={{ width: "400px", height: "400px", cursor: "pointer", background: "#dedede" }} onClick={() => fileFormRef.current.click()}>
                                     <div className={"border d-flex align-items-center justify-content-center"} style={{height: "400px"}}>

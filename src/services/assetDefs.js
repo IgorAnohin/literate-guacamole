@@ -18,7 +18,7 @@ import {
 import {uploadAvatarRequest} from "../repository/files";
 
 
-const MOCK_ASSET_DEF_URL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKsn55rXnt0jZLwjkk8CotD0LG0IEZgil3S4gXx15Q-Q&s";
+export const DEFAULT_ASSET_DEF_URL = "https://cdn-icons-png.flaticon.com/512/1728/1728869.png";
 
 
 export const getAssetDefs = async () => {
@@ -45,7 +45,7 @@ export const getAssetDef = async (assetDefId) => {
             id: 1,
             name: "Капитолий",
             description: "Test description",
-            imgOrigUrl: MOCK_ASSET_DEF_URL,
+            imgOrigUrl: DEFAULT_ASSET_DEF_URL,
             type: BUILDING_ASSET,
             cost: [{name: STONE_RESOURCE.toLowerCase(), count: 10}, {name: GOLD_RESOURCE.toLowerCase(), count: 200}],
             //cost: [{name: STONE_RESOURCE.toLowerCase(), count: 10}, {name: "gold", count: 200}],
@@ -59,11 +59,13 @@ export const getAssetDef = async (assetDefId) => {
 }
 
 export const createAssetDef = async (name, type, description, costs, level, magic_school, fraction, image, router) => {
-    let imageUrl;
-    if (DEBUG) {
-        imageUrl = MOCK_ASSET_DEF_URL;
-    } else {
-        imageUrl = await uploadAvatarRequest(image, getToken());
+    let imageUrl = DEFAULT_ASSET_DEF_URL;
+    if (image != undefined) {
+        if (DEBUG) {
+            imageUrl = DEFAULT_ASSET_DEF_URL;
+        } else {
+            imageUrl = await uploadAvatarRequest(image, getToken());
+        }
     }
 
     let data;
@@ -90,7 +92,7 @@ export const updateAssetDef = async (assetDefId, name, type, description, costs,
     console.log("New image:", image);
     if (image != undefined) {
         if (DEBUG) {
-            imageUrl = MOCK_ASSET_DEF_URL;
+            imageUrl = DEFAULT_ASSET_DEF_URL;
         } else {
             imageUrl = await uploadAvatarRequest(image, getToken());
         }
@@ -119,14 +121,14 @@ export const getRecruitAssetDefs = async () => {
 
     if (DEBUG) {
         data = [
-            {id: 1, name: "Крестьянин", fraction: "Орден Порядка", level: "1", image: MOCK_ASSET_DEF_URL},
-            {id: 2, name: "Михаил", fraction: "Лесной Союз", level: "2", image: MOCK_ASSET_DEF_URL},
+            {id: 1, name: "Крестьянин", fraction: "Орден Порядка", level: "1", image: DEFAULT_ASSET_DEF_URL},
+            {id: 2, name: "Михаил", fraction: "Лесной Союз", level: "2", image: DEFAULT_ASSET_DEF_URL},
             {
                 id: 3,
                 name: "Гремлин-вредитель",
                 fraction: "Академия волшебства",
                 level: "3",
-                image: MOCK_ASSET_DEF_URL
+                image: DEFAULT_ASSET_DEF_URL
             },
         ];
     } else {
@@ -141,9 +143,9 @@ export const getSpellAssetDefs = async () => {
 
     if (DEBUG) {
         data = [
-            {id: 1, name: "Волшебная стрела", magicSchool: "Огонь", level: "1", image: MOCK_ASSET_DEF_URL},
-            {id: 2, name: "Землетрясение", magicSchool: "Земля", level: "1", image: MOCK_ASSET_DEF_URL},
-            {id: 3, name: "Цепная молния", magicSchool: "Воздух", level: "1", image: MOCK_ASSET_DEF_URL},
+            {id: 1, name: "Волшебная стрела", magicSchool: "Огонь", level: "1", image: DEFAULT_ASSET_DEF_URL},
+            {id: 2, name: "Землетрясение", magicSchool: "Земля", level: "1", image: DEFAULT_ASSET_DEF_URL},
+            {id: 3, name: "Цепная молния", magicSchool: "Воздух", level: "1", image: DEFAULT_ASSET_DEF_URL},
         ];
     } else {
         data = await getSpellAssetDefsRequest(getToken());

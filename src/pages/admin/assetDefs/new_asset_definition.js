@@ -15,12 +15,12 @@ import {
     STONE_RESOURCE,
     WOOD_RESOURCE
 } from "../../../constants";
-import {createAssetDef} from "../../../services/assetDefs";
+import {createAssetDef, DEFAULT_ASSET_DEF_URL} from "../../../services/assetDefs";
 import {Resource} from "../../../widgets/ResourceWidget";
 
 export const NewAssetDefinition = () => {
 
-    const [preview, setPreview] = useState()
+    const [preview, setPreview] = useState(DEFAULT_ASSET_DEF_URL);
     const [selectedFile, setSelectedFile] = useState()
     const [validated, setValidated] = useState(false);
     const [isSelectValid, validateSelect] = useState(false);
@@ -114,7 +114,6 @@ export const NewAssetDefinition = () => {
 
     useEffect(() => {
         if (!selectedFile) {
-            setPreview(undefined)
             return
         }
 
@@ -132,20 +131,18 @@ export const NewAssetDefinition = () => {
                     <Col>
                         <Form.Group controlId="asset_def_image" className="mb-3">
                             <Form.Control
-                                required
                                 ref={fileFormRef} type="file" onChange={onSelectFile}
                                 style={{opacity: 0, display: "none"}}/>
-                            {selectedFile &&
+                            {preview &&
                             <div className={"d-flex align-items-center justify-content-center"}>
                                 <Image src={preview} onClick={() => fileFormRef.current.click()} style={{
                                     width: "400px",
                                     height: "400px",
                                     cursor: "pointer",
-                                    background: "#dedede"
                                 }}/>
                             </div>}
 
-                            {!selectedFile &&
+                            {!preview &&
                             <div className={"d-flex align-items-center justify-content-center"}>
                                 <Card
                                     style={{width: "400px", height: "400px", cursor: "pointer", background: "#dedede"}}

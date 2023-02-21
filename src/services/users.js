@@ -8,7 +8,7 @@ import {
 import {getToken} from "./auth";
 import {uploadAvatarRequest} from "../repository/files";
 
-const MOCK_AVATAR_URL = "https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg";
+export const MOCK_AVATAR_URL = "https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg";
 
 export const getUserRole = async () => {
     let data
@@ -54,11 +54,13 @@ export const getUsers = async () => {
 }
 
 export const createUser = async (username, email, password, role, avatar, router) => {
-    let avatarUrl;
-    if (DEBUG) {
-        avatarUrl = MOCK_AVATAR_URL;
-    } else {
-        avatarUrl = await uploadAvatarRequest(avatar, getToken());
+    let avatarUrl = MOCK_AVATAR_URL;
+    if (avatar != undefined) {
+        if (DEBUG) {
+            avatarUrl = MOCK_AVATAR_URL;
+        } else {
+            avatarUrl = await uploadAvatarRequest(avatar, getToken());
+        }
     }
 
     console.log(username, email, password, role, avatar, avatarUrl);
