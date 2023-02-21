@@ -46,6 +46,23 @@ export const assetTypeToReadable = {
 }
 
 
+export const FIRE_MAGIC_SCHOOL = "FIRE_MAGIC_SCHOOL";
+export const EARTH_MAGIC_SCHOOL = "EARTH_MAGIC_SCHOOL";
+export const WATER_MAGIC_SCHOOL = "WATER_MAGIC_SCHOOL";
+export const WIND_MAGIC_SCHOOL = "WIND_MAGIC_SCHOOL";
+
+export const MAGIC_SCHOOLS = [
+    FIRE_MAGIC_SCHOOL, EARTH_MAGIC_SCHOOL, WATER_MAGIC_SCHOOL, WIND_MAGIC_SCHOOL
+]
+
+export const magicSchoolToReadable = {
+    [FIRE_MAGIC_SCHOOL]: "Огонь",
+    [EARTH_MAGIC_SCHOOL]: "Земля",
+    [WATER_MAGIC_SCHOOL]: "Вода",
+    [WIND_MAGIC_SCHOOL]: "Воздух",
+}
+
+
 export const STONE_RESOURCE = "ORE";
 export const WOOD_RESOURCE = "WOOD";
 export const GOLD_RESOURCE = "GOLD";

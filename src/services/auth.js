@@ -11,16 +11,14 @@ export const login = async (email, password) => {
         userData = await loginRequest(email, password);
     }
 
-    const userToken = userData.jwt;
-
-    if (userToken == null) {
-        console.log("error");
+    if (userData == null) {
+        return null;
     } else {
+        const userToken = userData.jwt;
         console.log(`New user token ${userToken}`);
         localStorage.setItem(USER_JWT_TOKEN_KEY, userToken);
+        return userToken;
     }
-
-    return userToken;
 }
 
 export const logout = async () => {

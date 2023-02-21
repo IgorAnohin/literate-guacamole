@@ -6,7 +6,7 @@ import {
     ASSETS_FOR_CREATION,
     assetTypeToReadable,
     BUILDING_ASSET,
-    BUILDING_ASSET_RESOURCES, CRYSTAL_RESOURCE, GEM_RESOURCE, GOLD_RESOURCE,
+    BUILDING_ASSET_RESOURCES, CRYSTAL_RESOURCE, GEM_RESOURCE, GOLD_RESOURCE, MAGIC_SCHOOLS, magicSchoolToReadable,
     MERCURY_RESOURCE,
     RECRUIT_ASSET,
     RECRUIT_ASSET_RESOURCES,
@@ -24,6 +24,7 @@ export const NewAssetDefinition = () => {
     const [selectedFile, setSelectedFile] = useState()
     const [validated, setValidated] = useState(false);
     const [isSelectValid, validateSelect] = useState(false);
+    const [isSelectMagicSchoolValid, validateMagicSchoolSelect] = useState(false);
     const [assetDefType, setAssetDefType] = useState(ASSETS_FOR_CREATION[0]);
 
     const history = useHistory();
@@ -40,7 +41,7 @@ export const NewAssetDefinition = () => {
 
             const notAvailableResources = ALL_RESOURCES.filter(x => !availableResources.includes(x));
 
-            let oneOfAvailableNotZero = false;
+            let oneOfAvailableNotZero = availableResources.length == 0;
             for (const resource of availableResources) {
                 if (form[`cost_${resource}`].value != 0) {
                     oneOfAvailableNotZero = true;
@@ -70,12 +71,24 @@ export const NewAssetDefinition = () => {
             }
 
             console.log("Costs", costs)
+            let level = 0;
+            if (form.asset_def_spell_level != undefined) {
+                level = Number(form.asset_def_spell_level.value);
+            } else if (form.asset_def_recruit_level != undefined) {
+                level = Number(form.asset_def_recruit_level.value);
+            }
+
+            const magic_school = form.asset_def_spell_magic_school != undefined ? form.asset_def_spell_magic_school.value : null;
+            const fraction = form.asset_def_recruit_fraction != undefined ? form.asset_def_recruit_fraction.value : null;
 
             createAssetDef(
                 form.asset_def_name.value,
                 form.asset_def_type.value,
                 form.asset_def_description.value,
                 costs,
+                level,
+                magic_school,
+                fraction,
                 selectedFile,
                 history
             ).then((userToken) => {
@@ -199,11 +212,17 @@ export const NewAssetDefinition = () => {
                 {assetDefType === SPELL_ASSET && <div>
                     <Form.Group md="4" controlId="asset_def_spell_magic_school">
                         <Form.Label>Школа магии</Form.Label>
-                        <Form.Control required/>
+                        <Form.Select isValid={isSelectMagicSchoolValid} onChange={(event) => {
+                            validateMagicSchoolSelect(MAGIC_SCHOOLS.includes(event.target.value));
+                        }} size="lg" aria-label="Default select example"
+                        >
+                            {MAGIC_SCHOOLS.map((magicSchool) => <option
+                                value={magicSchool}>{magicSchoolToReadable[magicSchool]}</option>)}
+                        </Form.Select>
                     </Form.Group>
                     <Form.Group md="4" controlId="asset_def_spell_level">
                         <Form.Label>Уровень</Form.Label>
-                        <Form.Control required type="number" min={0} defaultValue={0}/>
+                        <Form.Control required type="number" min={1} defaultValue={1}/>
                     </Form.Group>
                     <ResourcesGrid availableResources={SPELL_ASSET_RESOURCES}/>
                 </div>}
@@ -214,7 +233,7 @@ export const NewAssetDefinition = () => {
                     </Form.Group>
                     <Form.Group md="4" controlId="asset_def_recruit_level">
                         <Form.Label>Уровень</Form.Label>
-                        <Form.Control required type="number" min={0} defaultValue={0}/>
+                        <Form.Control required type="number" min={1} defaultValue={1}/>
                     </Form.Group>
                     <ResourcesGrid availableResources={RECRUIT_ASSET_RESOURCES}/>
                 </div>}

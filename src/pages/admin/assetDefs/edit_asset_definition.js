@@ -6,7 +6,7 @@ import {
     ASSETS_FOR_CREATION,
     assetTypeToReadable,
     BUILDING_ASSET,
-    BUILDING_ASSET_RESOURCES, CRYSTAL_RESOURCE, GEM_RESOURCE, GOLD_RESOURCE,
+    BUILDING_ASSET_RESOURCES, CRYSTAL_RESOURCE, GEM_RESOURCE, GOLD_RESOURCE, MAGIC_SCHOOLS, magicSchoolToReadable,
     MERCURY_RESOURCE,
     RECRUIT_ASSET,
     RECRUIT_ASSET_RESOURCES,
@@ -62,6 +62,7 @@ const EditAssetDefinitionForm = ({assetDefinition}) => {
     const [selectedFile, setSelectedFile] = useState()
     const [validated, setValidated] = useState(false);
     const [isSelectValid, validateSelect] = useState(false);
+    const [isSelectMagicSchoolValid, validateMagicSchoolSelect] = useState(false);
     const [assetDefType, setAssetDefType] = useState(ASSETS_FOR_CREATION[0]);
     const [displayConfirmationModal, setDisplayConfirmationModal] = useState(false);
 
@@ -87,14 +88,13 @@ const EditAssetDefinitionForm = ({assetDefinition}) => {
     };
 
 
-
     const submitSave = (event) => {
         const form = formRef.current;
         const availableResources = assetDefType == BUILDING_ASSET ? BUILDING_ASSET_RESOURCES : assetDefType == SPELL_ASSET ? SPELL_ASSET_RESOURCES : RECRUIT_ASSET_RESOURCES;
 
         const notAvailableResources = ALL_RESOURCES.filter(x => !availableResources.includes(x));
 
-        let oneOfAvailableNotZero = false;
+        let oneOfAvailableNotZero = availableResources.length == 0;
         for (const resource of availableResources) {
             if (form[`cost_${resource}`].value != 0) {
                 oneOfAvailableNotZero = true;
@@ -123,12 +123,26 @@ const EditAssetDefinitionForm = ({assetDefinition}) => {
             })
         }
 
+
+        let level = 0;
+        if (form.asset_def_spell_level != undefined) {
+            level = Number(form.asset_def_spell_level.value);
+        } else if (form.asset_def_recruit_level != undefined) {
+            level = Number(form.asset_def_recruit_level.value);
+        }
+
+        const magic_school = form.asset_def_spell_magic_school != undefined ? form.asset_def_spell_magic_school.value : null;
+        const fraction = form.asset_def_recruit_fraction != undefined ? form.asset_def_recruit_fraction.value : null;
+
         updateAssetDef(
             assetDefinition.id,
             form.asset_def_name.value,
             form.asset_def_type.value,
             form.asset_def_description.value,
             costs,
+            level,
+            magic_school,
+            fraction,
             selectedFile,
             assetDefinition.imgOrigUrl,
             history
@@ -171,7 +185,7 @@ const EditAssetDefinitionForm = ({assetDefinition}) => {
     return (
         <Container>
             <h1 className="header">Редактирование определения актива</h1>
-            <Form ref={formRef}  noValidate validated={validated} onSubmit={handleSubmit}>
+            <Form ref={formRef} noValidate validated={validated} onSubmit={handleSubmit}>
                 <Row>
                     <Col>
                         <Form.Group controlId="asset_def_image" className="mb-3">
@@ -237,7 +251,7 @@ const EditAssetDefinitionForm = ({assetDefinition}) => {
                                 <Form.Select isValid={isSelectValid} onChange={(event) => {
                                     validateSelect(ASSETS_FOR_CREATION.includes(event.target.value));
                                     setAssetDefType(event.target.value);
-                                }} size="lg" aria-label="Default select example"
+                                }} size="lg" aria-label="Default select example" value={assetDefType}
                                 >
                                     {ASSETS_FOR_CREATION.map((role) => <option
                                         value={role}>{assetTypeToReadable[role]}</option>)}
@@ -252,12 +266,37 @@ const EditAssetDefinitionForm = ({assetDefinition}) => {
 
                 </Row>
 
-                {assetDefType === BUILDING_ASSET &&
-                <ResourcesGrid availableResources={BUILDING_ASSET_RESOURCES} defaultValues={assetDefinition.cost}/>}
-                {assetDefType === SPELL_ASSET &&
-                <ResourcesGrid availableResources={SPELL_ASSET_RESOURCES} defaultValues={assetDefinition.cost}/>}
-                {assetDefType === RECRUIT_ASSET &&
-                <ResourcesGrid availableResources={RECRUIT_ASSET_RESOURCES} defaultValues={assetDefinition.cost}/>}
+                {assetDefType === BUILDING_ASSET && <div>
+                    <ResourcesGrid availableResources={BUILDING_ASSET_RESOURCES} defaultValues={assetDefinition.cost}/>
+                </div>}
+                {assetDefType === SPELL_ASSET && <div>
+                    <Form.Group md="4" controlId="asset_def_spell_magic_school">
+                        <Form.Label>Школа магии</Form.Label>
+                        <Form.Select isValid={isSelectMagicSchoolValid} onChange={(event) => {
+                            validateMagicSchoolSelect(MAGIC_SCHOOLS.includes(event.target.value));
+                        }} size="lg" aria-label="Default select example" defaultValue={assetDefinition.magicSchool}
+                        >
+                            {MAGIC_SCHOOLS.map((magicSchool) => <option
+                                value={magicSchool}>{magicSchoolToReadable[magicSchool]}</option>)}
+                        </Form.Select>
+                    </Form.Group>
+                    <Form.Group md="4" controlId="asset_def_spell_level">
+                        <Form.Label>Уровень</Form.Label>
+                        <Form.Control required type="number" min={1} defaultValue={assetDefinition.level}/>
+                    </Form.Group>
+                    <ResourcesGrid availableResources={SPELL_ASSET_RESOURCES} defaultValues={assetDefinition.cost}/>
+                </div>}
+                {assetDefType === RECRUIT_ASSET && <div>
+                    <Form.Group md="4" controlId="asset_def_recruit_fraction">
+                        <Form.Label>Фракция</Form.Label>
+                        <Form.Control required defaultValue={assetDefinition.fraction}/>
+                    </Form.Group>
+                    <Form.Group md="4" controlId="asset_def_recruit_level">
+                        <Form.Label>Уровень</Form.Label>
+                        <Form.Control required type="number" min={1} defaultValue={assetDefinition.level}/>
+                    </Form.Group>
+                    <ResourcesGrid availableResources={RECRUIT_ASSET_RESOURCES} defaultValues={assetDefinition.cost}/>
+                </div>}
 
                 <div style={{height: "30px"}}/>
 
@@ -284,12 +323,12 @@ const EditAssetDefinitionForm = ({assetDefinition}) => {
 }
 
 const getCountFromDefaultValues = (defaultValues, name) => {
-    const defaultValue = defaultValues.find(v=>v.name == name.toLowerCase());
+    const defaultValue = defaultValues.find(v => v.name == name.toLowerCase());
     if (defaultValue === undefined) {
         return 0;
     }
 
-    return  defaultValue.count;
+    return defaultValue.count;
 }
 
 export const ResourcesGrid = ({availableResources, defaultValues}) => {

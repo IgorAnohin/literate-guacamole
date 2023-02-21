@@ -8,6 +8,10 @@ import {
     Redirect,
 } from "react-router-dom";
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 import {LoginPage} from "./pages/login";
 import {HomePage} from "./pages/home";
 import {getToken} from "./services/auth";
@@ -18,18 +22,21 @@ export const App = () => {
     console.log("Token:", token)
 
     return (
-        <Router>
-            <Switch>
-                {token != null && <Redirect from="/login" to="/"/>}
-                <Route path="/login">
-                    <LoginPage setToken={setToken}/>
-                </Route>
-                {token == null && <Redirect to="/login"/>}
-                <Route path="/home">
-                    <HomePage setToken={setToken}/>
-                </Route>
-                <Redirect from="/" to="/home"/>}
-            </Switch>
-        </Router>
+        <div>
+            <Router>
+                <Switch>
+                    {token != null && <Redirect from="/login" to="/"/>}
+                    <Route path="/login">
+                        <LoginPage setToken={setToken}/>
+                    </Route>
+                    {token == null && <Redirect to="/login"/>}
+                    <Route path="/home">
+                        <HomePage setToken={setToken}/>
+                    </Route>
+                    <Redirect from="/" to="/home"/>}
+                </Switch>
+                <ToastContainer />
+            </Router>
+        </div>
     );
 }

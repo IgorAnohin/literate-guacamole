@@ -58,7 +58,7 @@ export const getAssetDef = async (assetDefId) => {
     return data;
 }
 
-export const createAssetDef = async (name, type, description, costs, image, router) => {
+export const createAssetDef = async (name, type, description, costs, level, magic_school, fraction, image, router) => {
     let imageUrl;
     if (DEBUG) {
         imageUrl = MOCK_ASSET_DEF_URL;
@@ -70,7 +70,7 @@ export const createAssetDef = async (name, type, description, costs, image, rout
     if (DEBUG) {
         data = "123";
     } else {
-        data = await createAssetDefRequest(name, type, description, imageUrl, costs, getToken());
+        data = await createAssetDefRequest(name, type, description, imageUrl, costs, level, magic_school, fraction, getToken());
     }
 
     const newAsetDefId = data;
@@ -84,7 +84,7 @@ export const createAssetDef = async (name, type, description, costs, image, rout
     return newAsetDefId;
 }
 
-export const updateAssetDef = async (assetDefId, name, type, description, costs, image, origImageUrl, router) => {
+export const updateAssetDef = async (assetDefId, name, type, description, costs, level, magic_school, fraction, image, origImageUrl, router) => {
     let imageUrl = origImageUrl;
 
     console.log("New image:", image);
@@ -100,7 +100,7 @@ export const updateAssetDef = async (assetDefId, name, type, description, costs,
     if (DEBUG) {
         data = "123";
     } else {
-        data = await updateAssetDefRequest(assetDefId, name, type, description, imageUrl, costs, getToken());
+        data = await updateAssetDefRequest(assetDefId, name, type, description, imageUrl, costs, level, magic_school, fraction, getToken());
     }
 
     const newAsetDefId = data;

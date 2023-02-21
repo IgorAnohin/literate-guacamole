@@ -33,7 +33,7 @@ export const getAssetDefRequest = async (assetDefId, token) => {
     }
 }
 
-export const createAssetDefRequest = async (name, type, description, imageUrl, costs, token) => {
+export const createAssetDefRequest = async (name, type, description, imageUrl, costs, level, magic_school, fraction, token) => {
     try {
         const data = {
             'type': type,
@@ -42,9 +42,9 @@ export const createAssetDefRequest = async (name, type, description, imageUrl, c
             'description': description,
             'imgOrigUrl': imageUrl,
             'cost': costs,
-            'fraction': "", // or null
-            'magicSchool': "", // or null
-            'level': 1, // or null
+            'fraction': fraction, // or null
+            'magicSchool': magic_school, // or null
+            'level': level, // or null
         }
         const response = await axios.post(ASSET_DEFS, data, {
                 headers: {
@@ -60,7 +60,7 @@ export const createAssetDefRequest = async (name, type, description, imageUrl, c
     }
 }
 
-export const updateAssetDefRequest = async (assetDefId, name, type, description, imageUrl, costs, token) => {
+export const updateAssetDefRequest = async (assetDefId, name, type, description, imageUrl, costs, level, magic_school, fraction, token) => {
     try {
         const data = {
             'type': type,
@@ -68,9 +68,9 @@ export const updateAssetDefRequest = async (assetDefId, name, type, description,
             'description': description,
             'imgOrigUrl': imageUrl,
             'cost': costs,
-            'fraction': "", // or null
-            'magicSchool': "", // or null
-            'level': 1, // or null
+            'fraction': fraction, // or null
+            'magicSchool': magic_school, // or null
+            'level': level, // or null
         }
         const response = await axios.patch(`${ASSET_DEFS}/${assetDefId}`, data, {
                 headers: {

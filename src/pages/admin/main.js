@@ -46,9 +46,9 @@ const AdminHeader = ({setToken}) => {
                     <LinkContainer to={AUDIT_ROUTE}>
                         <Nav.Link>Сбор аудитных данных</Nav.Link>
                     </LinkContainer>
-                    {/*<LinkContainer to={ADMIN_RESOURCES_ROUTE}>*/}
-                    {/*    <Nav.Link>Активы замка</Nav.Link>*/}
-                    {/*</LinkContainer>*/}
+                    <LinkContainer to={ASSET_DEFINITIONS_ROUTE}>
+                        <Nav.Link>Определения активов</Nav.Link>
+                    </LinkContainer>
                     <LinkContainer to={OWNER_RECRUITS_ROUTE}>
                         <Nav.Link>Рекруты</Nav.Link>
                     </LinkContainer>
@@ -60,9 +60,6 @@ const AdminHeader = ({setToken}) => {
                     </LinkContainer>
                     <LinkContainer to={OWNER_BUILDINGS_ROUTE}>
                         <Nav.Link>Здания</Nav.Link>
-                    </LinkContainer>
-                    <LinkContainer to={ASSET_DEFINITIONS_ROUTE}>
-                        <Nav.Link>Определения активов</Nav.Link>
                     </LinkContainer>
                 </Nav>
                 (Администратор)
