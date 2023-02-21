@@ -42,6 +42,8 @@ export const removeAsset = async (assetId) => {
         await removeAssetRequest(assetId, getToken());
     }
 
+    window.location.reload(false);
+
     return true;
 }
 
