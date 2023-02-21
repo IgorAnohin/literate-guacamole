@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {useHistory, useParams} from "react-router-dom";
 import {acceptBuildingOrder, dismissBuildingOrder, getBuildingOrderById} from "../../services/building_orders";
-import {Button, Card, Col, Container, Form, Image, Row} from "react-bootstrap";
-import {HOME_ROUTE, RECRUIT_ASSET_RESOURCES} from "../../constants";
-import {Resource} from "../../widgets/ResourceWidget";
+import {Button, Card, Col, Container, Image, Row} from "react-bootstrap";
+import {HOME_ROUTE} from "../../constants";
 import {ResourcesGrid} from "../admin/assetDefs/edit_asset_definition";
 
 export const TakeOrder = () => {

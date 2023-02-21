@@ -1,14 +1,12 @@
 import {
     BUILDER_TAKE_ORDER_ROUTE, buildingStatusToReadable,
-    CREATED_BUILDING_ORDER_STATUS,
-    HOME_ROUTE, IN_PROGRESS_BUILDING_ORDER_STATUS,
-    OWNER_NEW_BUILDING_ORDER_ROUTE
+    IN_PROGRESS_BUILDING_ORDER_STATUS,
 } from "../../constants";
 import BootstrapTable from "react-bootstrap-table-next";
 import React, {useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
 import {Button} from "react-bootstrap";
-import {dismissBuildingOrder, finishBuildingOrder, getBuildingOrders} from "../../services/building_orders";
+import {finishBuildingOrder, getBuildingOrders} from "../../services/building_orders";
 
 export const Orders = () => {
     const history = useHistory();
