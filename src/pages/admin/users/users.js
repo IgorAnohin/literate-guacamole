@@ -11,7 +11,7 @@ export const AdminUsers = () => {
     const history = useHistory();
 
     const columns = [{
-        dataField: 'name',
+        dataField: 'username',
         text: 'Пользователь',
     }, {
         dataField: 'email',
