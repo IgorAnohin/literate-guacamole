@@ -67,6 +67,8 @@ export const increaseBuildingOrderPriority = async (orderId) => {
     } else {
         await increaseBuildingOrderPriorityRequest(orderId, getToken());
     }
+
+    window.location.reload(false);
 }
 
 export const decreaseBuildingOrderPriority = async (orderId) => {
@@ -75,6 +77,8 @@ export const decreaseBuildingOrderPriority = async (orderId) => {
     } else {
         await decreaseBuildingOrderPriorityRequest(orderId, getToken());
     }
+
+    window.location.reload(false);
 }
 
 export const dismissBuildingOrder = async (orderId) => {

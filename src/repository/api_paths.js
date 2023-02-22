@@ -12,6 +12,10 @@ export const BUILD_ORDERS_CREATE = `${_API_URL}/build-orders/create-new`
 
 export const BUILD_ORDERS_CHANGE_STATUS = (orderId) => `${_API_URL}/build-orders/${orderId}/set-status`
 
+export const BUILD_ORDERS_INCREASE_PRIORITY = (orderId) => `${_API_URL}/build-orders/${orderId}/increase-priority`
+
+export const BUILD_ORDERS_DECREASE_PRIORITY = (orderId) => `${_API_URL}/build-orders/${orderId}/decrease-priority`
+
 export const ASSET_DEFS = `${_API_URL}/asset-defs`
 
 export const ASSETS = `${_API_URL}/assets`
