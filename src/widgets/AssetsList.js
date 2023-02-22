@@ -19,7 +19,7 @@ const ChangeValueDialog = ({showModal, hideModal, confirmModal, message, maxValu
             if (maxValue == initialValue) {
                 toast.error("Неправильное значение. Вы можете только уменьшать количество, не уводя его в отрицательные значения");
             } else {
-                toast.error("Неправильное значение. Значение не может быть отрицательным");
+                toast.error("Неправильное значение. Значение не может быть отрицательным или быть больше 100000");
             }
         } else {
             confirmModal(form.newValue.value);

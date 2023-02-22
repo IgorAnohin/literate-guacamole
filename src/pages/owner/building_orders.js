@@ -1,5 +1,9 @@
 import {Button, Col, Row} from "react-bootstrap";
-import {OWNER_NEW_BUILDING_ORDER_ROUTE} from "../../constants";
+import {
+    buildingStatusToReadable,
+    IN_PROGRESS_BUILDING_ORDER_STATUS,
+    OWNER_NEW_BUILDING_ORDER_ROUTE
+} from "../../constants";
 import BootstrapTable from "react-bootstrap-table-next";
 import React, {useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
@@ -85,6 +89,10 @@ class BuildingsTable extends React.Component {
     render() {
         console.log(this.state.gridData);
 
+        const inProgressBuildingOrderId = this.state.gridData.find((order) => buildingStatusToReadable[IN_PROGRESS_BUILDING_ORDER_STATUS] == order.status);
+        const firstId = inProgressBuildingOrderId == undefined ? 1 : 2;
+        console.log("First", firstId);
+
         return <div>
             <BootstrapTable
                 keyField="id"
@@ -103,7 +111,7 @@ class BuildingsTable extends React.Component {
 
             <Row>
                 <Col>
-                    {!!this.state.selectedRow && this.state.selectedRow.ordinal != 1 && this.state.selectedRow.status == "Создан" &&
+                    {!!this.state.selectedRow && this.state.selectedRow.ordinal > firstId && this.state.selectedRow.status == "Создан" &&
                     <div className="d-grid gap-2">
                         <Button size="lg" onClick={this.increasePriority}>Повысить приоритет</Button>
                     </div>

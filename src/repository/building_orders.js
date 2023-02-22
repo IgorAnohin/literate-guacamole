@@ -56,10 +56,10 @@ export const changeBuildingOrderStateRequest = async (newStatus, orderId, token)
                 }
             },
         )
-        return response.data;
+        return true;
     } catch (err) {
         console.log(err);
-        return [];
+        return false;
     }
 }
 

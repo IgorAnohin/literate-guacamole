@@ -12,6 +12,7 @@ import {
 import {getToken} from "./auth";
 import {getBuildingByIdRequest} from "../repository/assets";
 import {getBuildingAssetDefByIdRequest} from "../repository/assetDefs";
+import {toast} from "react-toastify";
 
 export const getBuildingOrders = async () => {
     if (DEBUG) {
@@ -86,7 +87,10 @@ export const dismissBuildingOrder = async (orderId) => {
 }
 
 export const acceptBuildingOrder = async (orderId) => {
-    await changeBuildingOrderStateRequest(IN_PROGRESS_BUILDING_ORDER_STATUS, orderId, getToken());
+    const success = await changeBuildingOrderStateRequest(IN_PROGRESS_BUILDING_ORDER_STATUS, orderId, getToken());
+    if (!success) {
+        toast.error("Недостаточно ресурсов для постройки. Попробуйте позже");
+    }
 }
 
 export const finishBuildingOrder = async (orderId) => {
