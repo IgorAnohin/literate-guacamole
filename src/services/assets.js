@@ -107,6 +107,8 @@ export const getRecruits = async () => {
                 id: resource.id,
                 quantity: resource.quantity,
                 name: resource.assetDef.name,
+                level: resource.assetDef.level,
+                fraction: resource.assetDef.fraction,
                 image: resource.assetDef.imgOrigUrl,
             })
 
