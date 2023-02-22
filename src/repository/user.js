@@ -1,5 +1,6 @@
 import axios from "axios";
 import {GET_ROLE, GET_USER, USERS} from "./api_paths";
+import {toast} from "react-toastify";
 
 export const getRoleRequest = async (token) => {
     try {
@@ -81,7 +82,7 @@ export const deleteUserRequest = async (userId, token) => {
         )
     } catch (err) {
         console.log(err);
-        alert(err.response.data.message);
+        toast.error(err.response.data.message);
     }
 }
 
